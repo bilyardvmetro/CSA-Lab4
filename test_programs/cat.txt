@@ -1,30 +1,26 @@
 .data
-in_addr: 0x09
-out_addr: 0x10
+in_addr:    .word 0x01
+out_addr:   .word 0x02
 
-.text
-_start:
-	; тут косвенная, тк нам надо прочитать с адреса, который лежит по адресу метки in_addr
-	lhi r1, in_addr			; in_addr[31..12] -> r1[31..12]
-	lli r1, in_addr			; in_addr[11..0] -> r1[11..0]
-	lw r1, r1				; mem[in_addr] -> r1
+.code
+	lui s1, %hi(in_addr)	    ; in_addr[31..12] -> s1[31..12]
+	ori s1, s1, %lo(in_addr)	; in_addr[11..0] -> s1[11..0]
+	lw s1, s1				    ; mem[in_addr] -> s1
+
+	lui s2, %hi(out_addr)		; out_addr[31..12] -> s2[31..12]
+	ori s2, s2, %lo(out_addr)   ; out_addr[11..0] -> s2[11..0]
+	lw s2, s2				    ; mem[out_addr] -> s2
 	
-	; тут косвенная, тк нам надо прочитать с адреса, который лежит по адресу метки out_addr
-	lhi r2, out_addr		; out_addr[31..12] -> r2[31..12]
-	lli r2, out_addr		; out_addr[11..0] -> r2[11..0]
-	lw r2, r2				; mem[out_addr] -> r2
-	
-	lw r3, r1				; mem[mem[in_addr]] -> r3. Загрузили длины строки (счетчик) в r3
-	mv r4, r3				; r3 -> r4
+	lw s3, s1				    ; mem[s1] -> s3. Загрузили длины строки (счетчик) в s3
 	
 loop:
-	addi r4, r4, -1			; r4-1 -> r4
-	beq end					; if Z=0 goto end
+	addi s3, s3, -1			; s3-1 -> s3
+	beq s3, r0, end			; if s3 == 0 go to end
 	
-	lw r3, r1				; mem[mem[in_addr]] -> r3. Символ в r3
-	sw r2, r3				; r3 -> mem[mem[out_addr]]. Вывести символ
+	lw s4, s1				; mem[s1] -> s4. Символ в s4
+	sw s2, s4				; s4 -> mem[s2]. Вывести символ
 	
-	jmp loop
+	jal r0, loop
 
 end:
 	halt

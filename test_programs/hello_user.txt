@@ -1,78 +1,91 @@
 .data
-in_addr: 0x09
-out_addr: 0x10
-ask_buf: [18, 'W', 'h', 'a', 't', ' ', 'i', 's', ' ', 'y', 'o', 'u', 'r', ' ', 'n', 'a', 'm', 'e', '?']
-out_buf: [7, 'H', 'e', 'l', 'l', 'o', ',', ' ']
-name: [0, '']
+in_addr:    .word 0x01
+out_addr:   .word 0x02
+question:   .byte 18, 'What is your name'
+buf:        .byte 7, 'Hello, '
 
-.text
-_start:
-	; тут косвенная, тк нам надо прочитать с адреса, который лежит по адресу метки in_addr
-	lhi r1, in_addr			; in_addr[31..12] -> r1[31..12]
-	lli r1, in_addr			; in_addr[11..0] -> r1[11..0]
-	lw r1, r1				; mem[in_addr] -> r1
-	
-	; тут косвенная, тк нам надо прочитать с адреса, который лежит по адресу метки out_addr
-	lhi r2, out_addr		; out_addr[31..12] -> r2[31..12]
-	lli r2, out_addr		; out_addr[11..0] -> r2[11..0]
-	lw r2, r2				; mem[out_addr] -> r2
-	
-	; тут косвенная, тк нам надо прочитать с адреса, который лежит по адресу метки out_addr
-	lhi r5, ask_buf		; out_addr[31..12] -> r2[31..12]
-	lli r5, ask_buf		; out_addr[11..0] -> r2[11..0]
-	
-	; тут косвенная, тк нам надо прочитать с адреса, который лежит по адресу метки out_addr
-	lhi r6, out_buf		; out_addr[31..12] -> r2[31..12]
-	lli r6, out_buf		; out_addr[11..0] -> r2[11..0]
-	
-	lhi r7, name		; out_addr[31..12] -> r2[31..12]
-	lli r7, name		; out_addr[11..0] -> r2[11..0]
-	
-	lw r3, r5				; mem[mem[in_addr]] -> r3. Загрузили длины строки (счетчик) в r3
-	mv r4, r3				; r3 -> r4
-	
-ask_loop:
-	addi r4, r4, -1			; r4-1 -> r4
-	beq end					; if Z=0 goto end
-	
-	lw r3, r5				; mem[mem[in_addr]] -> r3. Символ в r3
-	sw r2, r3				; r3 -> mem[mem[out_addr]]. Вывести символ
-	
-	jmp ask_loop
-	
-	
-	загрузить поинтер на буфер
-	прибавить 1 (в первый индекс потом длину запишем)
-	считываем символы до \n
-	параллельно считаем длину строки
-	записываем длину в первый индекс
-	
-	
-	lw r3, r7				; mem[mem[in_addr]] -> r3. Загрузили длины строки (счетчик) в r3
-	mv r4, r7				; r3 -> r4
+; s1 - in ptr
+; s2 - out ptr
+; s3 - question ptr
+; s4 - buf str ptr
+; s5 - buf ptr
+; s6 - buf len
+; s7 - name counter
+; s8 - name char
 
-in_loop:
-	addi r4, r4, -1			; r4-1 -> r4
-	beq end					; if Z=0 goto end
-	
-	lw r3, r7				; mem[mem[in_addr]] -> r3. Символ в r3
-	sw r7, r3				; r3 -> mem[mem[out_addr]]. Вывести символ
-	
-	jmp in_loop
+.code
+    ; load in ptr
+	lui s1, %hi(in_addr)
+	ori s1, s1, %lo(in_addr)
+	lw s1, s1
+
+	; load out ptr
+	lui s2, %hi(out_addr)
+	ori s2, s2, %lo(out_addr)
+	lw s2, s2
+
+	; load question ptr
+	lui s3, %hi(question)
+    ori s3, s3, %lo(question)
+
+    ; load buf ptr
+    lui s4, %hi(buf)
+    ori s4, s4, %lo(buf)
+
+    addi s5, s4, 0      ; s4 -> s5
+
+    lb s6, s4           ; 7 -> s6
+    addi s4, s4, 1      ; s4++
+    add s4, s4, s6      ; s4 += 7
+
+    lw s7, s1
+
+get_name:
+    addi s7, s7, -1
+    beq s7, r0, output
+
+    lw s8, s1
+    sb s8, s4
+    addi s6, s6, 1
+    sb s5, s6
+
+    jal r0, get_name
+
+output:
+    addi a0, s4, 0
+    addi a1, s2, 0
+    jal ra, print_pstr
+
+    addi a0, s5, 0
+    addi a1, s2, 0
+    jal ra, print_pstr
+
+    jal r0, end
+
+; t0 - str ptr
+; t1 - str len
+; t2 - str char
+; t6 - out ptr
+
+print_pstr:
+    addi t0, a0, 0
+    addi t6, a1, 0
+
+    lw t1, t0
+    addi t0, t0, 1
+
+loop:
+    addi t1, t1, -1
+    beq t1, r0, ret
+
+    lb t2, t0
+    sw t2, t6
+
+    jal r0, loop
+
+ret:
+    jalr r0, ra, 0
 
 end:
-	; тут косвенная, тк нам надо прочитать с адреса, который лежит по адресу метки out_addr
-	lhi r1, out_addr		; out_addr[31..12] -> r1[31..12]
-	lli r1, out_addr		; out_addr[11..0] -> r1[11..0]
-	lw r1, r1				; mem[out_addr] -> r1
-	
-	
-	lw r3, r7				; mem[mem[in_addr]] -> r3. Загрузили длины строки (счетчик) в r3
-	mv r4, r7				; r3 -> r4
-	
-greeting_loop:
-	sw r2, r3				; r3 -> mem[mem[out_addr]]. Вывести символ
-	
-
 	halt
 	
