@@ -1,24 +1,24 @@
 .data
-in_addr:    .word 0x01
-out_addr:   .word 0x02
+    in_addr:    0
+    out_addr:   1
 
 .code
-	lui s1, %hi(in_addr)	    ; in_addr[31..12] -> s1[31..12]
-	ori s1, s1, %lo(in_addr)	; in_addr[11..0] -> s1[11..0]
-	lw s1, s1				    ; mem[in_addr] -> s1
+	lui s1, in_addr	        ; in_addr[31..12] -> s1[31..12]
+	ori s1, s1, in_addr	    ; in_addr[11..0] -> s1[11..0]
+	lw s1, s1, 0			; mem[in_addr] -> s1
 
-	lui s2, %hi(out_addr)		; out_addr[31..12] -> s2[31..12]
-	ori s2, s2, %lo(out_addr)   ; out_addr[11..0] -> s2[11..0]
-	lw s2, s2				    ; mem[out_addr] -> s2
+	lui s2, out_addr		; out_addr[31..12] -> s2[31..12]
+	ori s2, s2, out_addr    ; out_addr[11..0] -> s2[11..0]
+	lw s2, s2, 0			; mem[out_addr] -> s2
 	
-	lw s3, s1				    ; mem[s1] -> s3. Загрузили длины строки (счетчик) в s3
+	lw s3, s1, 0			; mem[s1] -> s3. Загрузили длины строки (счетчик) в s3
 	
 loop:
 	addi s3, s3, -1			; s3-1 -> s3
 	beq s3, r0, end			; if s3 == 0 go to end
 	
-	lw s4, s1				; mem[s1] -> s4. Символ в s4
-	sw s2, s4				; s4 -> mem[s2]. Вывести символ
+	lw s4, s1, 0			; mem[s1] -> s4. Символ в s4
+	sw s2, s4, 0			; s4 -> mem[s2]. Вывести символ
 	
 	jal r0, loop
 

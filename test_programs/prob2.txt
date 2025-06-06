@@ -1,0 +1,39 @@
+; Найти разность между суммой квадратов и квадратом суммы первых ста натуральных чисел.
+.data
+    out_addr:   1
+
+.code
+
+; s1 - 100
+; a0 - current num
+; t0 - curr sq
+
+; s2 - sq_sum
+; s3 - sum_sq
+; s4 - res
+; t1 - out
+
+    addi s1, s1, 100
+    addi a0, a0, 1
+
+    lui t1, out_addr
+    ori t1, t1, out_addr
+    lw t1, t1
+
+loop:
+    beq a0, s1, calc
+
+    add s2, s2, a0      ; sum += a0
+
+    mul t0, a0, a0      ; a0^2
+    add s3, s3, t0      ; s3 += a0^2
+
+    addi a0, a0, 1      ; a0++
+
+calc:
+    mul s2, s2, s2      ; sum = sum^2
+
+    sub s4, s2, s3
+    sw s4, t1
+
+    halt
