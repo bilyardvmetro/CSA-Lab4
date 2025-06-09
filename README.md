@@ -103,8 +103,8 @@
 
 .code
     %macro load_str_ptr(address)
-        lui bp, address
-        ori bp, bp, address
+        lui bp, %hi(address)
+        ori bp, bp, %lo(address)
     %endmacro
 
     %macro load_and_add(rd, rs, offset, value)
@@ -443,6 +443,29 @@
 \* - Если подать регистр r0 как аргумент rd, адрес возврата не будет сохранен.
 
 ### Потактовый цикл исполнения инструкций
+
+| Инструкция                  | Кол-во тактов | Потактовое выполнение |
+|-----------------------------|:-------------:|-----------------------|
+| `lui <rd>, <k>`             |       2       |                       |
+| `sw <rs2>, <rs1>, <offset>` |       3       |                       |
+| `lw <rd>, <rs1>, <offset>`  |       3       |                       |
+| `addi <rd>, <rs1>, <k>`*    |       2       |                       |
+| `add <rd>, <rs1>, <rs2>`    |       1       |                       |
+| `sub <rd>, <rs1>, <rs2>`    |       1       |                       |
+| `mul <rd>, <rs1>, <rs2>`    |       1       |                       |
+| `mulh <rd>, <rs1>, <rs2>`   |       1       |                       |
+| `div <rd>, <rs1>, <rs2>`    |       1       |                       |
+| `ori <rd>, <rs1>, <k>`      |       2       |                       |
+| `and <rd>, <rs1>, <rs2>`    |       1       |                       |
+| `or <rd>, <rs1>, <rs2>`     |       1       |                       |
+| `xor <rd>, <rs1>, <rs2>`    |       1       |                       |
+| `jal <rd>, <k>`*            |       2       |                       |
+| `jalr <rd>, <rs1>, <k>`*    |       2       |                       |
+| `halt`                      |       1       |                       |
+| `beq <rs1>, <rs2>, <k>`     |       3       |                       |
+| `bne <rs1>, <rs2>, <k>`     |       3       |                       |
+| `bgt <rs1>, <rs2>, <k>`     |       3       |                       |
+| `ble <rs1>, <rs2>, <k>`     |       3       |                       |
 
 ### Микрокоманды
 
