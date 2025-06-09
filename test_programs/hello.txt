@@ -4,16 +4,16 @@
     buf:        11, "hello world"
 
 .code
-	lui bp, in_addr
-    ori bp, bp, in_addr
+    lui bp, %hi(in_addr)
+    ori bp, bp, %lo(in_addr)
     lw bp, bp, 0
 
-	lui s2, out_addr
-    ori s2, s2, out_addr
+    lui s2, %hi(out_addr)
+    ori s2, s2, %lo(out_addr)
     lw s2, s2, 0
-	
-	lw s3, bp, 0
-	addi bp, bp, 1
+
+    lw s3, bp, 0
+    addi bp, bp, 1
 	
 loop:
 	addi s3, s3, -1			; s3-1 -> s3

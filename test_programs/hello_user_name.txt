@@ -18,17 +18,17 @@
 
 .code
     ; load in ptr
-	lui s1, in_addr
-	ori s1, s1, in_addr
-	lw s1, s1, 0
+    lui s1, in_addr
+    ori s1, s1, in_addr
+    lw s1, s1, 0
 
-	; load out ptr
-	lui s2, out_addr
-	ori s2, s2, out_addr
-	lw s2, s2, 0
+    ; load out ptr
+    lui s2, out_addr
+    ori s2, s2, out_addr
+    lw s2, s2, 0
 
-	; load question ptr
-	lui s3, question
+    ; load question ptr
+    lui s3, question
     ori s3, s3, question
 
     ; load buf ptr
@@ -93,5 +93,5 @@ ret:
     jalr r0, ra, 0
 
 end:
-	halt
+    halt
 	
