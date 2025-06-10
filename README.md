@@ -21,10 +21,10 @@
 
 <instruction> ::=
                "lui" <register> "," { <label> | <string> | <number> }
-               | "sw" <register> "," <register> "," { <label> | <string> | <number> } [ <comment> ]
-               | "lw" <register> "," <register> "," { <label> | <string> | <number> } [ <comment> ]
                | "addi" <register> "," <register> "," { <label> | <string> | <number> } [ <comment> ]
                | "ori" <register> "," <register> "," { <label> | <string> | <number> } [ <comment> ]
+               | "sw" <register> "," <register> "," { <label> | <number> } [ <comment> ]
+               | "lw" <register> "," <register> "," { <label> | <number> } [ <comment> ]
                | "add" <register> "," <register> "," <register> [ <comment> ]
                | "sub" <register> "," <register> "," <register> [ <comment> ]
                | "mul" <register> "," <register> "," <register> [ <comment> ]
@@ -280,9 +280,9 @@
 
 #### Immediate type (I-type) команды
 
-|  type  | destination register | operation | source register 1 | immediate value / offset |
-|:------:|:--------------------:|:---------:|:-----------------:|:------------------------:|
-| 7 bits |        5 bits        |  3 bits   |      5 bits       |         12 bits          |
+|  type  | destination register | operation | source register 1 | immediate value/offset \[0-11\] bits |
+|:------:|:--------------------:|:---------:|:-----------------:|:------------------------------------:|
+| 7 bits |        5 bits        |  3 bits   |      5 bits       |               12 bits                |
 
 `type = 0100000`
 
@@ -323,9 +323,9 @@
 
 #### Upper type (U-type) команды
 
-|  type  | destination register | immediate value |
-|:------:|:--------------------:|:---------------:|
-| 7 bits |        5 bits        |     20 bits     |
+|  type  | destination register | immediate value \[12-31\] bits |
+|:------:|:--------------------:|:------------------------------:|
+| 7 bits |        5 bits        |            20 bits             |
 
 `type = 0000100`
 
@@ -335,9 +335,9 @@
 
 #### Jump type (J-type) команды
 
-|  type  | destination register | immediate value |
-|:------:|:--------------------:|:---------------:|
-| 7 bits |        5 bits        |     20 bits     |
+|  type  | destination register | immediate value \[0-19\] bits | 
+|:------:|:--------------------:|:-----------------------------:|
+| 7 bits |        5 bits        |            20 bits            |
 
 `type = 0000010`
 
@@ -475,6 +475,45 @@
 
 ### Микрокоманды
 
+| Микрокоманда        | Описание                                                                                 |
+|---------------------|------------------------------------------------------------------------------------------|
+| `latch_ir         ` | Прочитать команду из памяти команд и защелкнуть ее операцию в `IR`                       |
+| `latch_ops        ` | Защелкнуть операнды команды из `Instruction Decoder`                                     |
+| `sel_mpc_inc_one  ` | Управляющий сигнал для выбора 1 в качестве инкремента для `MPC`                          |
+| `sel_mpc_inc_two  ` | Управляющий сигнал для выбора 2 в качестве инкремента для `MPC`                          |
+| `sel_mpc_increment` | Управляющий сигнал для выбора инкремента `MPC`                                           |
+| `sel_mpc_operation` | Управляющий сигнал для выбора записи операции из `IR` в `MPC`                            |
+| `sel_mpc_zero     ` | Управляющий сигнал для выбора записи 0 в `MPC`                                           |
+| `latch_mpc        ` | Защелкнуть значение в `MPC`                                                              |
+| ` latch_reg0 `      | Защелкнуть значение в регистр `r0`                                                       |
+| ` latch_reg1 `      | Защелкнуть значение в регистр `r1`                                                       |
+| ...                 | ...                                                                                      |
+| `latch_reg30 `      | Защелкнуть значение в регистр `r30`                                                      |
+| `latch_reg31 `      | Защелкнуть значение в регистр `r31`                                                      |
+| `sel_left_reg  `    | Управляющий сигнал для выбора регистра на левый выход `Register File`                    |
+| `sel_right_reg `    | Управляющий сигнал для выбора регистра на правый выход `Register File`                   |
+| `sel_data_src_alu`  | Управляющий сигнал для выбора результата из `ALU` для записи в `Register File`           |
+| `sel_data_src_mem`  | Управляющий сигнал для выбора данных из памяти данных для записи в `Register File`       |
+| `sel_data_src_cu `  | Управляющий сигнал для выбора данных из `Control Unit` для записи в `Register File`      |
+| `sel_pc_inc      `  | Управляющий сигнал для выбора инкремента `PC`                                            |
+| `sel_pc_alu      `  | Управляющий сигнал для выбора записи в `PC` результата из `ALU`                          |
+| `sel_alu_r_inc   `  | Управляющий сигнал для выбора подачи единицы на правый вход `ALU`                        |
+| `sel_alu_r_rf    `  | Управляющий сигнал для выбора подачи правого выхода `Register File` на правый вход `ALU` |
+| `sel_alu_l_pc    `  | Управляющий сигнал для выбора подачи `PC` на левый вход `ALU`                            |
+| `sel_alu_l_rf    `  | Управляющий сигнал для выбора подачи левого выхода `Register File` на левый вход `ALU`   |
+| `alu_add         `  | Выполнить сложение в `ALU`                                                               |
+| `alu_sub         `  | Выполнить вычитание в `ALU`                                                              |
+| `alu_mul         `  | Выполнить умножение в `ALU`                                                              |
+| `alu_div         `  | Выполнить деление в `ALU`                                                                |
+| `alu_and         `  | Выполнить логическое И в `ALU`                                                           |
+| `alu_or          `  | Выполнить логическое ИЛИ в `ALU`                                                         |
+| `alu_xor         `  | Выполнить исключающее ИЛИ в `ALU`                                                        |
+| `alu_rshift_32`     | Выполнить логический сдвиг вправо на 32 в `ALU` (для выполнения инструкции `mulh`)       |
+| `latch_pc        `  | Защелкнуть значение в `PC`                                                               |
+| `write_data_mem  `  | Прочитать ячейку из памяти данных                                                        |
+| `read_data_mem   `  | Записать данные в ячейку памяти данных                                                   |
+| `halt            `  | Остановить процессор                                                                     |
+
 ## Транслятор
 
 Интерфейс командной строки: translator.go <input_file> <target_code_file> <target_data_file> Реализовано в
@@ -519,6 +558,7 @@
 - Instruction memory
 - IO Controller
 - Program Counter (PC)
+- Sign Extender для расширения знака `imm/offset` значений
 
 Сигналы:
 
