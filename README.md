@@ -20,11 +20,11 @@
 <code_section> ::= "." "code" { <instruction> | <macro_definition> | <macro_invocation> }
 
 <instruction> ::=
-               "lui" <register> "," { <label> | <string> | <number> }
-               | "addi" <register> "," <register> "," { <label> | <string> | <number> } [ <comment> ]
-               | "ori" <register> "," <register> "," { <label> | <string> | <number> } [ <comment> ]
-               | "sw" <register> "," <register> "," { <label> | <number> } [ <comment> ]
-               | "lw" <register> "," <register> "," { <label> | <number> } [ <comment> ]
+               "lui" <register> "," { <string> | <number> }
+               | "addi" <register> "," <register> "," { <string> | <number> } [ <comment> ]
+               | "ori" <register> "," <register> "," { <string> | <number> } [ <comment> ]
+               | "sw" <register> "," <register> "," { <number> } [ <comment> ]
+               | "lw" <register> "," <register> "," { <number> } [ <comment> ]
                | "add" <register> "," <register> "," <register> [ <comment> ]
                | "sub" <register> "," <register> "," <register> [ <comment> ]
                | "mul" <register> "," <register> "," <register> [ <comment> ]
@@ -98,24 +98,22 @@
 #### Пример макроса
 
 ```asm
+%macro load_str_ptr(address)
+    lui bp, %hi(address)
+    ori bp, bp, %lo(address)
+%endmacro
+
+%macro load_and_add(rd, rs, offset, value)
+    lw rd, rs, offset
+    addi rd, rd, value
+%endmacro
+    
 .data
     message: "Hello, world!"
 
 .code
-    %macro load_str_ptr(address)
-        lui bp, %hi(address)
-        ori bp, bp, %lo(address)
-    %endmacro
-
-    %macro load_and_add(rd, rs, offset, value)
-        lw rd, rs, offset
-        addi rd, rd, value
-    %endmacro
-
     load_str_ptr(message) ; Вызов макроса load_str_ptr с аргументом message
-
     load_and_add(s1, s2, 0, 5) ; Вызов макроса load_and_add с несколькими аргументами
-
     halt
 ```
 
