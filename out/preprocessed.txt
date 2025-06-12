@@ -1,0 +1,52 @@
+.data
+in_addr:    0
+out_addr:   1
+question:   18, "What is your name"
+buf:        6, "Hello "
+.code
+lui s1, %hi(in_addr)
+ori s1, s1, %lo(in_addr)
+lw s1, s1, 0
+lui s2, %hi(out_addr)
+ori s2, s2, %lo(out_addr)
+lw s2, s2, 0
+lui s3, %hi(question)
+ori s3, s3, %lo(question)
+lui s4, %hi(buf)
+ori s4, s4, %lo(buf)
+addi s5, s4, 0
+lw s6, s4, 0
+addi s4, s4, 1
+add s4, s4, s6
+lw s7, s1, 0
+get_name:
+addi s7, s7, -1
+beq s7, r0, output
+lw s8, s1, 0
+sw s8, s4, 0
+addi s6, s6, 1
+sw s6, s5, 0
+jal r0, get_name
+output:
+addi a0, s3, 0
+addi a1, s2, 0
+jal ra, print_pstr
+addi a0, s5, 0
+addi a1, s2, 0
+jal ra, print_pstr
+jal r0, end
+print_pstr:
+addi t0, a0, 0
+addi t6, a1, 0
+lw t1, t0, 0
+addi t0, t0, 1
+loop:
+addi t1, t1, -1
+beq t1, r0, ret
+lw t2, t0, 0
+sw t2, t6, 0
+jal r0, loop
+ret:
+jalr r0, ra, 0
+end:
+halt

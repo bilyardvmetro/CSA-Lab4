@@ -14,15 +14,15 @@
 ; t2 - arr ptr
 
 .code
-    lui t2, arr
-    ori t2, t2, arr
+    lui t2, %hi(arr)
+    ori t2, t2, %lo(arr)
 
-    lui t0, in
-    ori t0, t0, in
+    lui t0, %hi(in)
+    ori t0, t0, %lo(in)
     lw t0, t0, 0
 
-    lui t1, out
-    ori t1, t1, out
+    lui t1, %hi(out)
+    ori t1, t1, %lo(out)
     lw t1, t1, 0
 
     lw s0, t0, 0

@@ -16,9 +16,9 @@
     addi s1, s1, 100
     addi a0, a0, 1
 
-    lui t1, out_addr
-    ori t1, t1, out_addr
-    lw t1, t1
+    lui t1, %hi(out_addr)
+    ori t1, t1, %lo(out_addr)
+    lw t1, t1, 0
 
 loop:
     beq a0, s1, calc
@@ -30,10 +30,12 @@ loop:
 
     addi a0, a0, 1      ; a0++
 
+    jal r0, loop
+
 calc:
     mul s2, s2, s2      ; sum = sum^2
 
     sub s4, s2, s3
-    sw s4, t1
+    sw s4, t1, 0
 
     halt

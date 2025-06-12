@@ -93,19 +93,19 @@
 - `.org <address>` - задать начальный адрес секции
 - `.data` - создает секцию памяти данных
 - `.code` - создает секцию памяти команд
-- `%macro <macros definition> %endmacro` - пара директив задающие пользовательскую макрооперацию
+- `%macro <macro definition> %endmacro` - пара директив задающие пользовательскую макрооперацию
 
 #### Пример макроса
 
 ```asm
 %macro load_str_ptr(address)
-    lui bp, %hi(address)
-    ori bp, bp, %lo(address)
+    lui bp, %hi(%1)
+    ori bp, bp, %lo(%1)
 %endmacro
 
 %macro load_and_add(rd, rs, offset, value)
-    lw rd, rs, offset
-    addi rd, rd, value
+    lw %1, %2, %3
+    addi %1, %1, %4
 %endmacro
     
 .data
