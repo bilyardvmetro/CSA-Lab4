@@ -62,8 +62,8 @@ var jalrRegex = regexp.MustCompile(`(?i)^(jalr)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]
 var branchRegex = regexp.MustCompile(`(?i)^(beq|bne|bgt|ble)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
 
 var memDumpFile = makeMemDumpFile("out/memory_dump.txt")
-var dataMemory = makeMemoryFile("out/data_memory.txt")
-var instructionMemory = makeMemoryFile("out/instruction_memory.txt")
+var dataMemory *os.File
+var instructionMemory *os.File
 
 func makeMemDumpFile(filename string) *os.File {
 	dir := filepath.Dir(filename)
@@ -657,24 +657,38 @@ func writeSymTableToMemDump(tables SymbolTables) {
 	fmt.Fprintln(memDumpFile, "dataMem    0: IN_BUF\ndataMem    1: OUT_BUF")
 }
 
-func main() {
-	//// os.Args - это слайс строк, содержащий аргументы командной строки.
-	//// os.Args[0] - это имя самой программы.
-	//// os.Args[1] - первый аргумент, os.Args[2] - второй и так далее.
-	//
-	//args := os.Args
-	//
-	//// Проверяем количество аргументов
-	//if len(args) != 4 {
-	//	fmt.Println("Использование: translator.go <input_file> <target_code_file> <target_data_file>")
-	//	os.Exit(1) // Выходим с кодом ошибки
-	//}
-	//
-	//inputFile := args[1]
-	//targetCodeFile := args[2]
-	//targetDataFile := args[3]
+func write(lines []string, file string) {
+	out, _ := os.Create(file)
+	defer out.Close()
+	w := bufio.NewWriter(out)
+	defer w.Flush()
 
-	lines := readLines("test_programs/hello_user_name.txt")
+	for _, line := range lines {
+		fmt.Fprintf(w, "%s\n", line)
+	}
+}
+
+func main() {
+	// os.Args - это слайс строк, содержащий аргументы командной строки.
+	// os.Args[0] - это имя самой программы.
+	// os.Args[1] - первый аргумент, os.Args[2] - второй и так далее.
+
+	args := os.Args
+
+	// Проверяем количество аргументов
+	if len(args) != 4 {
+		fmt.Println("Использование: translator.go <input_file> <target_code_file> <target_data_file>")
+		os.Exit(1) // Выходим с кодом ошибки
+	}
+
+	inputFile := args[1]
+	targetCodeFile := args[2]
+	targetDataFile := args[3]
+
+	dataMemory = makeMemoryFile(targetDataFile)
+	instructionMemory = makeMemoryFile(targetCodeFile)
+
+	lines := readLines(inputFile)
 	cleaned := cleanComments(lines)
 	expanded, _ := expandMacros(cleaned)
 	write(expanded, "out/preprocessed.txt")
@@ -696,15 +710,4 @@ func main() {
 	}
 
 	ConvertProgramToBinary(instructions)
-}
-
-func write(lines []string, file string) {
-	out, _ := os.Create(file)
-	defer out.Close()
-	w := bufio.NewWriter(out)
-	defer w.Flush()
-
-	for _, line := range lines {
-		fmt.Fprintf(w, "%s\n", line)
-	}
 }
