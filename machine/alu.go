@@ -3,8 +3,8 @@ package main
 import "math"
 
 const (
-	MAX_NUM int = 1<<31 - 1
-	MIN_NUM int = -1 << 31
+	MaxNum int = 1<<31 - 1
+	MinNum int = -1 << 31
 )
 
 type ALU struct {
@@ -45,10 +45,10 @@ func (alu *ALU) performOperation(signal Signal) {
 }
 
 func (alu *ALU) handleOverflow() {
-	if alu.aluResult > MAX_NUM {
-		alu.aluResult %= MAX_NUM
-	} else if alu.aluResult < MAX_NUM {
-		alu.aluResult %= int(math.Abs(float64(MIN_NUM)))
+	if alu.aluResult > MaxNum {
+		alu.aluResult %= MaxNum
+	} else if alu.aluResult < MaxNum {
+		alu.aluResult %= int(math.Abs(float64(MinNum)))
 	}
 }
 
