@@ -1,6 +1,6 @@
-package main
+package isa
 
-var registerMap = map[string]string{
+var RegisterMap = map[string]string{
 	"r0":  "00000",
 	"ra":  "00001",
 	"sp":  "00010",
@@ -70,7 +70,7 @@ const (
 )
 
 // instruction: [type, operation, op extension]
-var instructionMap = map[string][3]string{
+var InstructionMap = map[string][3]string{
 	// R-Type
 	ADD:  {"1000000", "001", "0000001"},
 	SUB:  {"1000000", "001", "0000010"},

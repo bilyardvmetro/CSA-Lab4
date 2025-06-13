@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"example.com/CSA-Lab4/isa"
 	"fmt"
 	"log"
 	"os"
@@ -61,7 +62,7 @@ var jalRegex = regexp.MustCompile(`(?i)^(jal)\s+([a-zA-Z0-9_]+),\s*(\w+)$`)
 var jalrRegex = regexp.MustCompile(`(?i)^(jalr)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
 var branchRegex = regexp.MustCompile(`(?i)^(beq|bne|bgt|ble)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
 
-var memDumpFile = makeMemDumpFile("out/memory_dump.txt")
+var memDumpFile = makeMemDumpFile("../out/memory_dump.txt")
 var dataMemory *os.File
 var instructionMemory *os.File
 
@@ -109,15 +110,15 @@ func writeToMemory(file *os.File, address int, val int) {
 }
 
 func makeBinaryRTypeInstruction(tokens []string) string {
-	operationEntries := instructionMap[tokens[0]]
+	operationEntries := isa.InstructionMap[tokens[0]]
 
 	instructionType := operationEntries[0]
 	operationCode := operationEntries[1]
 	opExtension := operationEntries[2]
 
-	rd := registerMap[tokens[1]]
-	rs1 := registerMap[tokens[2]]
-	rs2 := registerMap[tokens[3]]
+	rd := isa.RegisterMap[tokens[1]]
+	rs1 := isa.RegisterMap[tokens[2]]
+	rs2 := isa.RegisterMap[tokens[3]]
 
 	return fmt.Sprintf("%s%s%s%s%s%s", instructionType, rd, operationCode, rs1, rs2, opExtension)
 }
@@ -127,14 +128,14 @@ func makeBinaryITypeInstruction(tokens []string) string {
 	rs1 := "11111"
 	var imm int64 = 4095
 
-	operationEntries := instructionMap[tokens[0]]
+	operationEntries := isa.InstructionMap[tokens[0]]
 
 	instructionType := operationEntries[0]
 	operationCode := operationEntries[1]
 
-	if tokens[0] != HALT {
-		rd = registerMap[tokens[1]]
-		rs1 = registerMap[tokens[2]]
+	if tokens[0] != isa.HALT {
+		rd = isa.RegisterMap[tokens[1]]
+		rs1 = isa.RegisterMap[tokens[2]]
 		var err error
 
 		imm, err = strconv.ParseInt(tokens[3], 10, 32)
@@ -148,19 +149,19 @@ func makeBinaryITypeInstruction(tokens []string) string {
 }
 
 func makeBinarySBTypeInstructions(tokens []string) string {
-	operationEntries := instructionMap[tokens[0]]
+	operationEntries := isa.InstructionMap[tokens[0]]
 
 	instructionType := operationEntries[0]
 	operationCode := operationEntries[1]
 
 	var rs1, rs2 string
 
-	if tokens[0] == SW {
-		rs2 = registerMap[tokens[1]]
-		rs1 = registerMap[tokens[2]]
+	if tokens[0] == isa.SW {
+		rs2 = isa.RegisterMap[tokens[1]]
+		rs1 = isa.RegisterMap[tokens[2]]
 	} else {
-		rs1 = registerMap[tokens[1]]
-		rs2 = registerMap[tokens[2]]
+		rs1 = isa.RegisterMap[tokens[1]]
+		rs2 = isa.RegisterMap[tokens[2]]
 	}
 
 	imm, err := strconv.ParseInt(tokens[3], 10, 32)
@@ -175,10 +176,10 @@ func makeBinarySBTypeInstructions(tokens []string) string {
 }
 
 func makeBinaryUJTypeInstruction(tokens []string) string {
-	operationEntries := instructionMap[tokens[0]]
+	operationEntries := isa.InstructionMap[tokens[0]]
 
 	instructionType := operationEntries[0]
-	rd := registerMap[tokens[1]]
+	rd := isa.RegisterMap[tokens[1]]
 
 	imm, err := strconv.ParseInt(tokens[2], 10, 32)
 	if err != nil {
@@ -187,10 +188,10 @@ func makeBinaryUJTypeInstruction(tokens []string) string {
 
 	var immBinaryStr string
 	switch tokens[0] {
-	case JAL:
+	case isa.JAL:
 		imm = imm & 0x000FFFFF
 		immBinaryStr = fmt.Sprintf("%020b", imm)
-	case LUI:
+	case isa.LUI:
 		immBinaryStr = fmt.Sprintf("%020b", imm)
 		if len(immBinaryStr) > 20 {
 			log.Fatal("Imm is too large")
@@ -624,13 +625,13 @@ func ConvertProgramToBinary(instructions []Instruction) {
 		var binaryInstruction string
 
 		switch tokens[0] {
-		case ADD, SUB, MUL, MULH, DIV, AND, OR, XOR:
+		case isa.ADD, isa.SUB, isa.MUL, isa.MULH, isa.DIV, isa.AND, isa.OR, isa.XOR:
 			binaryInstruction = makeBinaryRTypeInstruction(tokens)
-		case LW, ORI, ADDI, JALR, HALT:
+		case isa.LW, isa.ORI, isa.ADDI, isa.JALR, isa.HALT:
 			binaryInstruction = makeBinaryITypeInstruction(tokens)
-		case SW, BEQ, BNE, BGT, BLE:
+		case isa.SW, isa.BEQ, isa.BNE, isa.BGT, isa.BLE:
 			binaryInstruction = makeBinarySBTypeInstructions(tokens)
-		case LUI, JAL:
+		case isa.LUI, isa.JAL:
 			binaryInstruction = makeBinaryUJTypeInstruction(tokens)
 		default:
 			fmt.Printf("Неизвестная инструкция: %s\n", tokens)
@@ -691,7 +692,7 @@ func main() {
 	lines := readLines(inputFile)
 	cleaned := cleanComments(lines)
 	expanded, _ := expandMacros(cleaned)
-	write(expanded, "out/preprocessed.txt")
+	write(expanded, "../out/preprocessed.txt")
 
 	// Первый проход: строим таблицы символов и промежуточное представление кода с адресами
 	symbolTables, codeLines, err := ProcessAssemblyCode(expanded)
