@@ -64,6 +64,10 @@ type MicroProgramMemoryTemplate struct {
 	memory [][]Signal
 }
 
+func (receiver *MicroProgramMemoryTemplate) getMicroprogramByIndex(index int) []Signal {
+	return receiver.memory[index]
+}
+
 var MicroProgramMemory = MicroProgramMemoryTemplate{
 	memory: [][]Signal{
 		//0 Instruction Fetch
