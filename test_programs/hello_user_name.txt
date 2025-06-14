@@ -1,69 +1,75 @@
 .data
     in_addr:    0
     out_addr:   1
-    question:   18, "What is your name?"
-    buf:        6, "Hello "
+    
+    question_l: 18
+    question:   "What is your name?"
+    
+    buf_l:      7
+    buf:        "Hello "
 
 ; s1 - in ptr
 ; s2 - out ptr
 
 ; s3 - question ptr
 
-; s4 - buf str ptr
+; bp - buf str ptr
 ; s5 - buf len ptr
 ; s6 - buf len
 
-; s7 - name counter
+; s7 - name len
 ; s8 - name char
 
 .code
-    ; load in ptr
     lui s1, %hi(in_addr)
-    ori s1, s1, %lo(in_addr)
+    addi s1, s1, %lo(in_addr)
     lw s1, s1, 0
 
-    ; load out ptr
     lui s2, %hi(out_addr)
-    ori s2, s2, %lo(out_addr)
+    addi s2, s2, %lo(out_addr)
     lw s2, s2, 0
 
-    ; load question ptr
     lui s3, %hi(question)
-    ori s3, s3, %lo(question)
+    addi s3, s3, %lo(question)
 
-    ; load buf ptr
-    lui s4, %hi(buf)
-    ori s4, s4, %lo(buf)
+    lui bp, %hi(buf)
+    addi bp, bp, %lo(buf)
 
-    addi s5, s4, 0      ; s4 -> s5
+    addi s5, bp, -1     ; bp-1 (buf_l address) -> s5
 
-    lw s6, s4, 0        ; 7 -> s6
-    addi s4, s4, 1      ; s4++
-    add s4, s4, s6      ; s4 += 7
+    lw s6, s5, -1       ; buf_l -> s6
+    add bp, bp, s6      ; bp += 6
 
     lw s7, s1, 0
 
 get_name:
-    addi s7, s7, -1
     beq s7, r0, output
 
-    lw s8, s1, 0       ; mem[s1] -> s8 from in
-    sw s8, s4, 0       ; s8 -> mem[s4] to buf
+    lw s8, s1, 0        ; s8 <- mem[s1] from in
+    sw s8, bp, 0        ; s8 -> mem[s4] to buf
+    addi s7, s7, -1     ; name len--
+    addi bp, bp, 1      ; buf str ptr++
 
-    addi s6, s6, 1     ; buf len ++
-    sw s6, s5, 0       ; s6 -> mem[s5]
+    addi s6, s6, 1      ; buf len ++
+    sw s6, s5, 0        ; s6 -> mem[s5]
 
     jal r0, get_name
 
 ; теперь имя лежит целиком в buf и выглядит как n, "Hello, <name>", где n - длина строки
 
 output:
+    addi s8, r0, 33     ; '!' char
+    sw s8, bp, 0
+    sub bp, bp, s6      ; bring buf str ptr back
+
     addi a0, s3, 0
     addi a1, s2, 0
     jal ra, print_pstr
 
-    addi a0, s5, 0
-    addi a1, s2, 0
+    addi s8, r0, 10     ; '\n' char
+    sw s8, s2
+
+    addi a0, bp, 0
     jal ra, print_pstr
 
     jal r0, end
@@ -77,15 +83,14 @@ print_pstr:
     addi t0, a0, 0
     addi t6, a1, 0
 
-    lw t1, t0, 0
-    addi t0, t0, 1
+    lw t1, t0, -1
 
 loop:
-    addi t1, t1, -1
     beq t1, r0, ret
 
     lw t2, t0, 0
     sw t2, t6, 0
+    addi t1, t1, -1
 
     jal r0, loop
 

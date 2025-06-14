@@ -15,47 +15,47 @@
 
 .code
     lui t2, %hi(arr)
-    ori t2, t2, %lo(arr)
+    addi t2, t2, %lo(arr)
 
     lui t0, %hi(in)
-    ori t0, t0, %lo(in)
+    addi t0, t0, %lo(in)
     lw t0, t0, 0
 
     lui t1, %hi(out)
-    ori t1, t1, %lo(out)
+    addi t1, t1, %lo(out)
     lw t1, t1, 0
 
     lw s0, t0, 0
     add s1, r0, s0
 
 get_arr:
-    addi s1, s1, -1
     beq r0, s1, stop
 
     lw a0, t0, 0
     sw a0, t2, 0
+    addi s1, s1, -1
 
     addi t2, t2, 1
     jal r0, get_arr
 
 stop:
-    sub t2, t2, s0
-    addi t2, t2, -1         ; return arr_pointer to initial state
+    sub t2, t2, s0          ; return arr_pointer to initial state
 
 ; a1 - next el
 ; s2 - i
 ; a2 - j
 
 bubble_sort:
-    add s2, s2, r0          ; s2 = i
+    add s2, s2, r0          ; s2 = i = 0
 
 outer_loop:
-    add a2, a2, r0          ; a2 = j
+    add a2, a2, r0          ; a2 = j = 0
     sub a3, s0, s2          ; n - i
     addi a3, a3, -1         ; n - i - 1 -- кол-во сравнений
     ble a3, r0, exit_outer  ; if a3 <= 0 -> exit
 
 inner_loop:
+    addi t2, t2, a2         ; ptr + j
     lw a0, t2, 0            ; a0 = arr[j]
     lw a1, t2, 1            ; a1 = arr[j+1]
     blt a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap

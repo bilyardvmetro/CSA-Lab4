@@ -5,15 +5,15 @@
 
 .code
     lui s1, %hi(num1)
-    ori s1, s1, %lo(num1)
+    addi s1, s1, %lo(num1)
     lw s1, s1, 0
 
     lui s2, %hi(num2)
-    ori s2, s2, %lo(num2)
+    addi s2, s2, %lo(num2)
     lw s2, s2, 0
 
     lui t0, %hi(res)
-    ori t0, t0, %lo(res)
+    addi t0, t0, %lo(res)
 
     mul s3, s1, s2
     mulh s4, s1, s2

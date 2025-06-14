@@ -2,8 +2,10 @@ package main
 
 import (
 	"bufio"
+	"encoding/binary"
 	"example.com/CSA-Lab4/isa"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -48,10 +50,11 @@ type Instruction struct {
 	Line                  string
 }
 
-//type Data struct {
-//	DataMemAddress       int
-//	BinaryRepresentation int32
-//}
+// DataEntry представляет собой пару адрес-данные.
+type DataEntry struct {
+	Address uint32
+	Data    uint32
+}
 
 // Регулярные выражения для %hi и %lo
 var hiRegex = regexp.MustCompile(`%hi\((\w+)\)`)
@@ -62,7 +65,7 @@ var jalRegex = regexp.MustCompile(`(?i)^(jal)\s+([a-zA-Z0-9_]+),\s*(\w+)$`)
 var jalrRegex = regexp.MustCompile(`(?i)^(jalr)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
 var branchRegex = regexp.MustCompile(`(?i)^(beq|bne|bgt|ble)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
 
-var memDumpFile = makeMemDumpFile("../out/memory_dump.txt")
+var memDumpFile *os.File
 var dataMemory *os.File
 var instructionMemory *os.File
 
@@ -107,6 +110,68 @@ func makeMemoryFile(filename string) *os.File {
 
 func writeToMemory(file *os.File, address int, val int) {
 	fmt.Fprintf(file, "%032b:    %032b\n", address, val)
+}
+
+// writeDataEntriesToBinaryFile записывает срез DataEntry в бинарный файл.
+// Каждый адрес и данные записываются как 32-битные беззнаковые целые числа.
+func writeDataEntryToBinaryFile(file *os.File, entry DataEntry) error {
+	// Используем LittleEndian, как было указано в предыдущем контексте.
+	// Если порядок байтов отличается, измените на binary.BigEndian.
+	byteOrder := binary.LittleEndian
+
+	// Записываем адрес (uint32)
+	err := binary.Write(file, byteOrder, entry.Address)
+	if err != nil {
+		return fmt.Errorf("ошибка записи адреса %d: %v", entry.Address, err)
+	}
+	// Записываем данные (uint32)
+	err = binary.Write(file, byteOrder, entry.Data)
+	if err != nil {
+		return fmt.Errorf("ошибка записи данных %d: %v", entry.Data, err)
+	}
+
+	return nil
+}
+
+// readDataEntriesFromBinaryFile читает DataEntry из бинарного файла.
+func readDataEntriesFromBinaryFile(fileName string) ([]DataEntry, error) {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return nil, fmt.Errorf("Не удалось открыть файл %s: %v", fileName, err)
+	}
+	defer file.Close()
+
+	// Используем тот же порядок байтов, что и при записи.
+	byteOrder := binary.LittleEndian
+	var entries []DataEntry
+
+	for {
+		var address uint32
+		var data uint32
+
+		// Читаем 32-битный адрес
+		err := binary.Read(file, byteOrder, &address)
+		if err != nil {
+			if err == io.EOF {
+				break // Достигнут конец файла
+			}
+			return nil, fmt.Errorf("ошибка чтения адреса: %v", err)
+		}
+
+		// Читаем 32-битные данные
+		err = binary.Read(file, byteOrder, &data)
+		if err != nil {
+			if err == io.EOF {
+				// Это может произойти, если файл обрезан посередине пары.
+				return nil, fmt.Errorf("неожиданный конец файла после чтения адреса. Файл может быть поврежден")
+			}
+			return nil, fmt.Errorf("ошибка чтения данных: %v", err)
+		}
+
+		entries = append(entries, DataEntry{Address: address, Data: data})
+	}
+
+	return entries, nil
 }
 
 func makeBinaryRTypeInstruction(tokens []string) string {
@@ -337,7 +402,7 @@ func ProcessAssemblyCode(inputLines []string) (SymbolTables, []CodeLine, error) 
 	dataDirectiveRegex := regexp.MustCompile(`^\.data$`)
 	codeDirectiveRegex := regexp.MustCompile(`^\.code$`)
 	labelDefinitionRegex := regexp.MustCompile(`^(\w+):$`)
-	dataValueRegex := regexp.MustCompile(`^(\w+):\s*((\d+)(,\s*)?(".*")?)$`) // num, "string" | num | "string"
+	dataValueRegex := regexp.MustCompile(`^(\w+):\s*(\d+|".*")$`) // num | "string"
 
 	for lineNumber, line := range inputLines {
 		isInstruction := false
@@ -552,7 +617,7 @@ func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([
 		expandedLine = hiRegex.ReplaceAllStringFunc(expandedLine, func(match string) string {
 			symbolName := hiRegex.FindStringSubmatch(match)[1]
 			if addr, ok := symbolTables.DataSymbols[symbolName]; ok {
-				return fmt.Sprintf("%d", addr>>12)
+				return fmt.Sprintf("%d", (addr+0x800)>>12) // коррекция для компенсации расширения знака imm
 			}
 			return match
 		})
@@ -640,6 +705,13 @@ func ConvertProgramToBinary(instructions []Instruction) {
 		binRepresent, _ := strconv.ParseUint(binaryInstruction, 2, 32)
 
 		writeToMemory(instructionMemory, instruction.InstructionMemAddress, int(binRepresent))
+		//err := writeDataEntryToBinaryFile(instructionMemory, DataEntry{
+		//	uint32(instruction.InstructionMemAddress),
+		//	uint32(binRepresent),
+		//})
+		//if err != nil {
+		//	log.Fatal(err)
+		//}
 		writeInstructionToMemDump(memDumpFile, instruction.InstructionMemAddress, uint32(binRepresent), instruction.Line)
 	}
 }
@@ -686,13 +758,20 @@ func main() {
 	targetCodeFile := args[2]
 	targetDataFile := args[3]
 
-	dataMemory = makeMemoryFile(targetDataFile)
-	instructionMemory = makeMemoryFile(targetCodeFile)
+	filename := filepath.Base(inputFile)
+	filenameClean := strings.TrimSuffix(filename, filepath.Ext(inputFile))
+	filenameDir := "/" + filenameClean + "/"
+	//fmt.Println(filenameDir)
+
+	memDumpFile = makeMemDumpFile("../out/" + filenameDir + filenameClean + "_MemoryDump.txt")
+
+	dataMemory = makeMemoryFile("../out/" + filenameDir + filepath.Base(targetDataFile))
+	instructionMemory = makeMemoryFile("../out/" + filenameDir + filepath.Base(targetCodeFile))
 
 	lines := readLines(inputFile)
 	cleaned := cleanComments(lines)
 	expanded, _ := expandMacros(cleaned)
-	write(expanded, "../out/preprocessed.txt")
+	write(expanded, "../out/"+filenameDir+filenameClean+"_Preprocessed.txt")
 
 	// Первый проход: строим таблицы символов и промежуточное представление кода с адресами
 	symbolTables, codeLines, err := ProcessAssemblyCode(expanded)
@@ -711,4 +790,9 @@ func main() {
 	}
 
 	ConvertProgramToBinary(instructions)
+
+	//entries, _ := readDataEntriesFromBinaryFile(targetCodeFile)
+	//for _, entry := range entries {
+	//	fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
+	//}
 }
