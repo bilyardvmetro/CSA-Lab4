@@ -108,9 +108,9 @@ func makeMemoryFile(filename string) *os.File {
 	return file
 }
 
-func writeToMemory(file *os.File, address int, val int) {
-	fmt.Fprintf(file, "%032b:    %032b\n", address, val)
-}
+//func writeToMemory(file *os.File, address int, val int) {
+//	fmt.Fprintf(file, "%032b:    %032b\n", address, val)
+//}
 
 // writeDataEntriesToBinaryFile записывает срез DataEntry в бинарный файл.
 // Каждый адрес и данные записываются как 32-битные беззнаковые целые числа.
@@ -137,7 +137,7 @@ func writeDataEntryToBinaryFile(file *os.File, entry DataEntry) error {
 func readDataEntriesFromBinaryFile(fileName string) ([]DataEntry, error) {
 	file, err := os.Open(fileName)
 	if err != nil {
-		return nil, fmt.Errorf("Не удалось открыть файл %s: %v", fileName, err)
+		return nil, fmt.Errorf("не удалось открыть файл %s: %v", fileName, err)
 	}
 	defer file.Close()
 
@@ -392,7 +392,7 @@ func ProcessAssemblyCode(inputLines []string) (SymbolTables, []CodeLine, error) 
 	}
 	var codeLines []CodeLine // Промежуточное представление кода для второго прохода
 
-	currentAddressData := 2 // Текущий адрес в памяти данных (по словам)
+	currentAddressData := 0 // Текущий адрес в памяти данных (по словам)
 	currentAddressCode := 0 // Текущий адрес в памяти команд (по словам)
 	currentSection := UnknownSection
 	nextOrgAddress := -1 // Адрес, заданный последней .org
@@ -475,43 +475,20 @@ func ProcessAssemblyCode(inputLines []string) (SymbolTables, []CodeLine, error) 
 				var dataSize int
 				var dataVal interface{}
 
-				parts := strings.Split(valuePart, ",")
-				if len(parts) == 1 { // Либо число, либо строка
-					trimmedPart := strings.TrimSpace(parts[0])
-					if strings.HasPrefix(trimmedPart, "\"") && strings.HasSuffix(trimmedPart, "\"") {
-						// Это строка
-						strVal := strings.Trim(trimmedPart, `"`)
-						dataVal = strVal
-						dataSize = len(strVal) // Каждый символ - 1 слово
-					} else {
-						// Это число
-						numVal, err := strconv.Atoi(trimmedPart)
-						if err != nil {
-							return SymbolTables{}, nil, fmt.Errorf("строка %d: неверное значение данных для '%s': '%s'", lineNumber+1, varName, trimmedPart)
-						}
-						dataVal = numVal
-						dataSize = 1 // Одно число - 1 слово
-					}
-				} else if len(parts) == 2 { // Число и строка
-					numStr := strings.TrimSpace(parts[0])
-					strPart := strings.TrimSpace(parts[1])
-
-					numVal, err := strconv.Atoi(numStr)
-					if err != nil {
-						return SymbolTables{}, nil, fmt.Errorf("строка %d: неверное числовое значение в '%s': '%s'", lineNumber+1, varName, numStr)
-					}
-					if !strings.HasPrefix(strPart, "\"") || !strings.HasSuffix(strPart, "\"") {
-						return SymbolTables{}, nil, fmt.Errorf("строка %d: ожидалась строка в двойных кавычках после запятой для '%s', получено '%s'", lineNumber+1, varName, strPart)
-					}
-					strVal := strings.Trim(strPart, `"`)
-
-					dataVal = struct {
-						Num int
-						Str string
-					}{Num: numVal, Str: strVal}
-					dataSize = 1 + len(strVal) // Число (1 слово) + строка (len(strVal) слов)
+				trimmedPart := strings.TrimSpace(valuePart)
+				if strings.HasPrefix(trimmedPart, "\"") && strings.HasSuffix(trimmedPart, "\"") {
+					// Это строка
+					strVal := strings.Trim(trimmedPart, `"`)
+					dataVal = strVal
+					dataSize = len(strVal) // Каждый символ - 1 слово
 				} else {
-					return SymbolTables{}, nil, fmt.Errorf("строка %d: неверный формат данных для '%s': '%s'. Ожидалось 'число' или '\"строка\"' или 'число, \"строка\"'", lineNumber+1, varName, valuePart)
+					// Это число
+					numVal, err := strconv.Atoi(trimmedPart)
+					if err != nil {
+						return SymbolTables{}, nil, fmt.Errorf("строка %d: неверное значение данных для '%s': '%s'", lineNumber+1, varName, trimmedPart)
+					}
+					dataVal = numVal
+					dataSize = 1 // Одно число - 1 слово
 				}
 
 				symbolTables.DataSymbols[varName] = currentAddressData
@@ -570,8 +547,8 @@ func ProcessAssemblyCode(inputLines []string) (SymbolTables, []CodeLine, error) 
 func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([]Instruction, error) {
 	var instructions []Instruction
 
-	writeToMemory(dataMemory, 0, 0)
-	writeToMemory(dataMemory, 1, 0)
+	//writeToMemory(dataMemory, 0, 0)
+	//writeToMemory(dataMemory, 1, 0)
 
 	for _, codeLine := range processedCodeLines {
 		line := codeLine.OriginalLine
@@ -581,22 +558,20 @@ func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([
 			switch v := codeLine.DataValue.(type) {
 			case int:
 				writeDataToMemDump(memDumpFile, codeLine.Address, v)
-				writeToMemory(dataMemory, codeLine.Address, v)
+				//writeToMemory(dataMemory, codeLine.Address, v)
+				err := writeDataEntryToBinaryFile(dataMemory, DataEntry{uint32(codeLine.Address), uint32(v)})
+				if err != nil {
+					return nil, err
+				}
 			case string:
 				// Каждый символ строки
 				for i, char := range v {
 					writeDataToMemDump(memDumpFile, codeLine.Address+i, int(char))
-					writeToMemory(dataMemory, codeLine.Address+i, int(char))
-				}
-			case struct {
-				Num int
-				Str string
-			}:
-				writeDataToMemDump(memDumpFile, codeLine.Address, v.Num)
-				writeToMemory(dataMemory, codeLine.Address, v.Num)
-				for i, char := range v.Str {
-					writeDataToMemDump(memDumpFile, codeLine.Address+1+i, int(char))
-					writeToMemory(dataMemory, codeLine.Address+1+i, int(char))
+					//writeToMemory(dataMemory, codeLine.Address+i, int(char))
+					err := writeDataEntryToBinaryFile(dataMemory, DataEntry{uint32(codeLine.Address + i), uint32(char)})
+					if err != nil {
+						return nil, err
+					}
 				}
 			}
 			continue
@@ -704,14 +679,14 @@ func ConvertProgramToBinary(instructions []Instruction) {
 
 		binRepresent, _ := strconv.ParseUint(binaryInstruction, 2, 32)
 
-		writeToMemory(instructionMemory, instruction.InstructionMemAddress, int(binRepresent))
-		//err := writeDataEntryToBinaryFile(instructionMemory, DataEntry{
-		//	uint32(instruction.InstructionMemAddress),
-		//	uint32(binRepresent),
-		//})
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
+		//writeToMemory(instructionMemory, instruction.InstructionMemAddress, int(binRepresent))
+		err := writeDataEntryToBinaryFile(instructionMemory, DataEntry{
+			uint32(instruction.InstructionMemAddress),
+			uint32(binRepresent),
+		})
+		if err != nil {
+			log.Fatal(err)
+		}
 		writeInstructionToMemDump(memDumpFile, instruction.InstructionMemAddress, uint32(binRepresent), instruction.Line)
 	}
 }
@@ -727,7 +702,7 @@ func writeSymTableToMemDump(tables SymbolTables) {
 		fmt.Fprintf(memDumpFile, "    %s: %d\n", symbol, address)
 	}
 	fmt.Fprintln(memDumpFile, "--------------------------------------------------------")
-	fmt.Fprintln(memDumpFile, "dataMem    0: IN_BUF\ndataMem    1: OUT_BUF")
+	//fmt.Fprintln(memDumpFile, "dataMem    0: IN_BUF\ndataMem    1: OUT_BUF")
 }
 
 func write(lines []string, file string) {
@@ -761,7 +736,6 @@ func main() {
 	filename := filepath.Base(inputFile)
 	filenameClean := strings.TrimSuffix(filename, filepath.Ext(inputFile))
 	filenameDir := "/" + filenameClean + "/"
-	//fmt.Println(filenameDir)
 
 	memDumpFile = makeMemDumpFile("../out/" + filenameDir + filenameClean + "_MemoryDump.txt")
 
@@ -791,8 +765,13 @@ func main() {
 
 	ConvertProgramToBinary(instructions)
 
-	//entries, _ := readDataEntriesFromBinaryFile(targetCodeFile)
-	//for _, entry := range entries {
-	//	fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
-	//}
+	entries, _ := readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetCodeFile))
+	for _, entry := range entries {
+		fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
+	}
+
+	entries, _ = readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetDataFile))
+	for _, entry := range entries {
+		fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
+	}
 }

@@ -55,10 +55,10 @@ outer_loop:
     ble a3, r0, exit_outer  ; if a3 <= 0 -> exit
 
 inner_loop:
-    addi t2, t2, a2         ; ptr + j
+    add t2, t2, a2         ; ptr + j
     lw a0, t2, 0            ; a0 = arr[j]
     lw a1, t2, 1            ; a1 = arr[j+1]
-    blt a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
+    ble a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
 
     ; swap arr[j] and arr[j+1]
     sw a1, t2, 0
@@ -66,11 +66,11 @@ inner_loop:
 
 skip_swap:
     addi a2, a2, 1          ; j++
-    blt a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
+    ble a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
 
-exit_outer
+exit_outer:
     addi s2, s2, 1          ; i++
-    blt s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
+    ble s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
 
 end:
     halt

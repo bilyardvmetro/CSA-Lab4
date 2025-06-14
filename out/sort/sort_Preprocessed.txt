@@ -1,0 +1,46 @@
+.data
+in:     0
+out:    1
+arr:    65536
+.code
+lui t2, %hi(arr)
+addi t2, t2, %lo(arr)
+lui t0, %hi(in)
+addi t0, t0, %lo(in)
+lw t0, t0, 0
+lui t1, %hi(out)
+addi t1, t1, %lo(out)
+lw t1, t1, 0
+lw s0, t0, 0
+add s1, r0, s0
+get_arr:
+beq r0, s1, stop
+lw a0, t0, 0
+sw a0, t2, 0
+addi s1, s1, -1
+addi t2, t2, 1
+jal r0, get_arr
+stop:
+sub t2, t2, s0
+bubble_sort:
+add s2, s2, r0
+outer_loop:
+add a2, a2, r0
+sub a3, s0, s2
+addi a3, a3, -1
+ble a3, r0, exit_outer
+inner_loop:
+add t2, t2, a2
+lw a0, t2, 0
+lw a1, t2, 1
+ble a0, a1, skip_swap
+sw a1, t2, 0
+sw a0, t2, 1
+skip_swap:
+addi a2, a2, 1
+ble a2, a3, inner_loop
+exit_outer:
+addi s2, s2, 1
+ble s2, s0, outer_loop
+end:
+halt

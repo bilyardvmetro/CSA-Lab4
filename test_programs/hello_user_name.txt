@@ -67,7 +67,7 @@ output:
     jal ra, print_pstr
 
     addi s8, r0, 10     ; '\n' char
-    sw s8, s2
+    sw s8, s2, 0
 
     addi a0, bp, 0
     jal ra, print_pstr
