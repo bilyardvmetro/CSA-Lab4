@@ -8,14 +8,21 @@ const (
 )
 
 type ALU struct {
-	registerFile RegisterFile
-	aluSignal    Signal
-	aluResult    int
-	nz           int
+	//registerFile RegisterFile
+	aluSignal Signal
+	rightIn   int
+	leftIn    int
+	aluResult int
+	nz        int
 }
 
-func (alu *ALU) init(rf RegisterFile) ALU {
-	return ALU{registerFile: rf, aluResult: 0, nz: 0}
+// TODO: убрать rf если он не понадобится
+func makeALU(rf RegisterFile) ALU {
+	return ALU{
+		//registerFile: rf,
+		aluResult: 0,
+		nz:        0,
+	}
 }
 func (alu *ALU) selectOperation(signal Signal) {
 	alu.aluSignal = signal
@@ -25,21 +32,21 @@ func (alu *ALU) selectOperation(signal Signal) {
 func (alu *ALU) performOperation(signal Signal) {
 	switch signal {
 	case alu_add:
-		alu.aluResult = alu.registerFile.leftOut + alu.registerFile.rightOut
+		alu.aluResult = alu.leftIn + alu.rightIn
 	case alu_sub:
-		alu.aluResult = alu.registerFile.leftOut - alu.registerFile.rightOut
+		alu.aluResult = alu.leftIn - alu.rightIn
 	case alu_mul:
-		alu.aluResult = alu.registerFile.leftOut * alu.registerFile.rightOut
+		alu.aluResult = alu.leftIn * alu.rightIn
 	case alu_mulh:
-		alu.aluResult = (alu.registerFile.leftOut * alu.registerFile.rightOut) >> 32
+		alu.aluResult = (alu.leftIn * alu.rightIn) >> 32
 	case alu_div:
-		alu.aluResult = alu.registerFile.leftOut / alu.registerFile.rightOut
+		alu.aluResult = alu.leftIn / alu.rightIn
 	case alu_and:
-		alu.aluResult = alu.registerFile.leftOut & alu.registerFile.rightOut
+		alu.aluResult = alu.leftIn & alu.rightIn
 	case alu_or:
-		alu.aluResult = alu.registerFile.leftOut | alu.registerFile.rightOut
+		alu.aluResult = alu.leftIn | alu.rightIn
 	case alu_xor:
-		alu.aluResult = alu.registerFile.leftOut ^ alu.registerFile.rightOut
+		alu.aluResult = alu.leftIn ^ alu.rightIn
 	}
 	alu.handleOverflow()
 }

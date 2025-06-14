@@ -9,16 +9,17 @@ const MaxMemorySize = 65535
 
 type DataMemory struct {
 	ioController IOController
-	cells        []int
 	regFile      RegisterFile
+	cells        []int
 	memoryOut    int
 }
 
-func (dataMem *DataMemory) init(cells map[int]int, rf RegisterFile, controller IOController) DataMemory {
+func makeDataMem(cells map[int]int, rf RegisterFile, controller IOController) DataMemory {
 	initialData := make([]int, MaxMemorySize)
 	initialData[0] = 0
 	initialData[1] = 0
 
+	// TODO: не уверен тут по индексам
 	for addr, data := range cells {
 		if addr > 1 { // without .org code start at address 2
 			initialData[addr+2] = data
@@ -76,7 +77,7 @@ type InstructionMemory struct {
 	cells []string
 }
 
-func (insMem *InstructionMemory) init(cells map[int]string) InstructionMemory {
+func makeInstructionMem(cells map[int]string) InstructionMemory {
 	initialData := make([]string, MaxMemorySize)
 
 	for address, instruction := range cells {

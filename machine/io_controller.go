@@ -10,7 +10,7 @@ type IOController struct {
 	outBuf []int
 }
 
-func (controller *IOController) init(input string) IOController {
+func makeIOController(input string) IOController {
 	if input == "" {
 		return IOController{
 			inBuf:  nil,

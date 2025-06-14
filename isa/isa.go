@@ -1,4 +1,4 @@
-package isa
+package main
 
 var RegisterMap = map[string]string{
 	"r0":  "00000",

@@ -8,7 +8,7 @@ type RegisterFile struct {
 	rightOut    int
 }
 
-func (rf *RegisterFile) init() RegisterFile {
+func makeRegFile() RegisterFile {
 	return RegisterFile{
 		registers:   make([]int, 32),
 		muxLeftOut:  sel_left_reg0,
@@ -18,13 +18,13 @@ func (rf *RegisterFile) init() RegisterFile {
 	}
 }
 
-func (rf *RegisterFile) setLeftReg(selector Signal) {
+func (rf *RegisterFile) setLeftRegMux(selector Signal) {
 	rf.muxLeftOut = selector
 	index := int(selector - sel_left_reg0)
 	rf.leftOut = rf.registers[index]
 }
 
-func (rf *RegisterFile) setRightReg(selector Signal) {
+func (rf *RegisterFile) setRightRegMux(selector Signal) {
 	rf.muxRightOut = selector
 	index := int(selector - sel_right_reg0)
 	rf.rightOut = rf.registers[index]
