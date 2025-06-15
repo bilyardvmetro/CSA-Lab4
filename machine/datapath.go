@@ -7,7 +7,6 @@ type DataPath struct {
 	instructionMem InstructionMemory
 	regFile        RegisterFile
 	alu            ALU
-	ioController   IOController
 
 	aluRightSelector Signal
 	aluLeftSelector  Signal
@@ -20,22 +19,23 @@ type DataPath struct {
 	immFromCU string
 }
 
-func makeDataPath(instructions map[int]string, data map[int]int, inputStream string) DataPath {
+func makeDataPath(instructions []DataEntry, data []DataEntry, inputStream string) DataPath {
 	rf := makeRegFile()
-	alu := makeALU(rf)
-	ioController := makeIOController(inputStream)
+	alu := makeALU()
 	insMem := makeInstructionMem(instructions)
-	dataMem := makeDataMem(data, rf, ioController)
+	dataMem, err := makeDataMem(data, inputStream)
+	if err != nil {
+		panic(err)
+	}
 
 	return DataPath{
 		dataMem:            dataMem,
 		instructionMem:     insMem,
 		regFile:            rf,
 		alu:                alu,
-		ioController:       ioController,
 		aluRightSelector:   sel_alu_r_rf,
 		aluLeftSelector:    sel_alu_l_rf,
-		pc:                 0,
+		pc:                 int(instructions[0].Address),
 		pcMuxSelector:      sel_pc_inc,
 		dataSrcMuxSelector: sel_data_src_alu,
 		immFromCU:          "",
@@ -108,4 +108,15 @@ func (d *DataPath) selectAluLeft(selector Signal) {
 	case sel_alu_l_pc:
 		d.alu.leftIn = d.pc
 	}
+}
+
+func (d *DataPath) handleReadSignal() error {
+	d.dataMem.addressBus = d.regFile.leftOut
+	return d.dataMem.performReadSignal()
+}
+
+func (d *DataPath) handleWriteSignal() error {
+	d.dataMem.addressBus = d.regFile.leftOut
+	d.dataMem.dataBus = d.regFile.rightOut
+	return d.dataMem.performWriteSignal()
 }

@@ -2,74 +2,74 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 )
 
 const MaxMemorySize = 65535
+const mmioIn = 0
+const mmioOut = 1
 
 type DataMemory struct {
 	ioController IOController
-	regFile      RegisterFile
 	cells        []int
-	memoryOut    int
+
+	dataBus    int
+	addressBus int
+	memoryOut  int
 }
 
-func makeDataMem(cells map[int]int, rf RegisterFile, controller IOController) DataMemory {
+func makeDataMem(cells []DataEntry, inputStream string) (DataMemory, error) {
 	initialData := make([]int, MaxMemorySize)
-	initialData[0] = 0
-	initialData[1] = 0
+	initialData[mmioIn] = 0
+	initialData[mmioOut] = 0
 
-	// TODO: не уверен тут по индексам
-	for addr, data := range cells {
-		if addr > 1 { // without .org code start at address 2
-			initialData[addr+2] = data
-		} else { // with .org code start at address >= 2
-			initialData[addr] = data
+	for _, entry := range cells {
+		if entry.Address == mmioIn || entry.Address == mmioOut {
+			log.Printf("Data on address %d has collision on mmio\n", entry.Address)
+			return DataMemory{}, errors.New("data address has collision on mmio")
 		}
+		initialData[entry.Address] = int(entry.Data)
 	}
 
 	if len(initialData) > MaxMemorySize {
 		initialData = initialData[:MaxMemorySize]
 	}
 
-	return DataMemory{ioController: controller, cells: initialData, regFile: rf}
+	return DataMemory{ioController: makeIOController(inputStream), cells: initialData}, nil
 }
 
 func (dataMem *DataMemory) readCell(index int) (int, error) {
-	if index == 0 {
+	if index == mmioIn {
 		log.Println("Reading from IN buffer")
 		return dataMem.ioController.read()
-	}
-	if index == 1 {
+	} else if index == mmioOut {
 		log.Println("Cannot read from OUT buffer")
 	}
 	return dataMem.cells[index], nil
 }
 
 func (dataMem *DataMemory) writeCell(index int, value int) error {
-	if index == 0 {
+	if index == mmioIn {
 		log.Println("Reading from IN buffer")
 		return errors.New("cannot write to IN buffer")
-	}
-	if index == 1 {
+	} else if index == mmioOut {
 		log.Println("Writing to OUT buffer")
 		dataMem.ioController.write(value)
+	} else {
+		dataMem.cells[index] = value
 	}
-	dataMem.cells[index] = value
 	return nil
 }
 
 func (dataMem *DataMemory) performReadSignal() error {
-	address := dataMem.regFile.leftOut
 	var err error
-	dataMem.memoryOut, err = dataMem.readCell(address)
+	dataMem.memoryOut, err = dataMem.readCell(dataMem.addressBus)
 	return err
 }
 
 func (dataMem *DataMemory) performWriteSignal() error {
-	address := dataMem.regFile.leftOut
-	value := dataMem.regFile.rightOut
-	err := dataMem.writeCell(address, value)
+	err := dataMem.writeCell(dataMem.addressBus, dataMem.dataBus)
 	return err
 }
 
@@ -77,11 +77,11 @@ type InstructionMemory struct {
 	cells []string
 }
 
-func makeInstructionMem(cells map[int]string) InstructionMemory {
+func makeInstructionMem(cells []DataEntry) InstructionMemory {
 	initialData := make([]string, MaxMemorySize)
 
-	for address, instruction := range cells {
-		initialData[address] = instruction
+	for _, entry := range cells {
+		initialData[entry.Address] = fmt.Sprintf("%032b", entry.Data)
 	}
 
 	return InstructionMemory{cells: initialData}

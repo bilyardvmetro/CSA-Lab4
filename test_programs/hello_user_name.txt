@@ -1,3 +1,4 @@
+.org 2
 .data
     in_addr:    0
     out_addr:   1
@@ -6,7 +7,7 @@
     question:   "What is your name?"
     
     buf_l:      7
-    buf:        "Hello "
+    buf:        "Hello, "
 
 ; s1 - in ptr
 ; s2 - out ptr
@@ -38,7 +39,7 @@
     addi s5, bp, -1     ; bp-1 (buf_l address) -> s5
 
     lw s6, s5, -1       ; buf_l -> s6
-    add bp, bp, s6      ; bp += 6
+    add bp, bp, s6      ; bp += 7
 
     lw s7, s1, 0
 

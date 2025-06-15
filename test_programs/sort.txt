@@ -1,4 +1,5 @@
 ; пользователь загружает в систему список чисел (формат загрузки -- по аналогии с типом строки вашего варианта), и выводит их в отсортированном формате
+.org 2
 .data
     in:     0
     out:    1
@@ -55,14 +56,14 @@ outer_loop:
     ble a3, r0, exit_outer  ; if a3 <= 0 -> exit
 
 inner_loop:
-    add t2, t2, a2         ; ptr + j
-    lw a0, t2, 0            ; a0 = arr[j]
-    lw a1, t2, 1            ; a1 = arr[j+1]
+    add t3, t2, a2         ; ptr + j
+    lw a0, t3, 0            ; a0 = arr[j]
+    lw a1, t3, 1            ; a1 = arr[j+1]
     ble a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
 
     ; swap arr[j] and arr[j+1]
-    sw a1, t2, 0
-    sw a0, t2, 1
+    sw a1, t3, 0
+    sw a0, t3, 1
 
 skip_swap:
     addi a2, a2, 1          ; j++
@@ -71,6 +72,14 @@ skip_swap:
 exit_outer:
     addi s2, s2, 1          ; i++
     ble s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
+
+output_loop:
+    beq r0, s0, end
+
+    lw a0, t2, 0
+    sw a0, t1, 0
+    addi s0, s0, -1
+    jal r0, output_loop
 
 end:
     halt

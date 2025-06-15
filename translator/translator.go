@@ -5,7 +5,6 @@ import (
 	"encoding/binary"
 	"example.com/CSA-Lab4/isa"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -69,6 +68,9 @@ var memDumpFile *os.File
 var dataMemory *os.File
 var instructionMemory *os.File
 
+var dataMemoryTxt *os.File
+var instructionMemoryTxt *os.File
+
 func makeMemDumpFile(filename string) *os.File {
 	dir := filepath.Dir(filename)
 	if dir != "." {
@@ -108,9 +110,9 @@ func makeMemoryFile(filename string) *os.File {
 	return file
 }
 
-//func writeToMemory(file *os.File, address int, val int) {
-//	fmt.Fprintf(file, "%032b:    %032b\n", address, val)
-//}
+func writeToMemory(file *os.File, address int, val int) {
+	fmt.Fprintf(file, "%032b:    %032b\n", address, val)
+}
 
 // writeDataEntriesToBinaryFile записывает срез DataEntry в бинарный файл.
 // Каждый адрес и данные записываются как 32-битные беззнаковые целые числа.
@@ -131,47 +133,6 @@ func writeDataEntryToBinaryFile(file *os.File, entry DataEntry) error {
 	}
 
 	return nil
-}
-
-// readDataEntriesFromBinaryFile читает DataEntry из бинарного файла.
-func readDataEntriesFromBinaryFile(fileName string) ([]DataEntry, error) {
-	file, err := os.Open(fileName)
-	if err != nil {
-		return nil, fmt.Errorf("не удалось открыть файл %s: %v", fileName, err)
-	}
-	defer file.Close()
-
-	// Используем тот же порядок байтов, что и при записи.
-	byteOrder := binary.LittleEndian
-	var entries []DataEntry
-
-	for {
-		var address uint32
-		var data uint32
-
-		// Читаем 32-битный адрес
-		err := binary.Read(file, byteOrder, &address)
-		if err != nil {
-			if err == io.EOF {
-				break // Достигнут конец файла
-			}
-			return nil, fmt.Errorf("ошибка чтения адреса: %v", err)
-		}
-
-		// Читаем 32-битные данные
-		err = binary.Read(file, byteOrder, &data)
-		if err != nil {
-			if err == io.EOF {
-				// Это может произойти, если файл обрезан посередине пары.
-				return nil, fmt.Errorf("неожиданный конец файла после чтения адреса. Файл может быть поврежден")
-			}
-			return nil, fmt.Errorf("ошибка чтения данных: %v", err)
-		}
-
-		entries = append(entries, DataEntry{Address: address, Data: data})
-	}
-
-	return entries, nil
 }
 
 func makeBinaryRTypeInstruction(tokens []string) string {
@@ -558,7 +519,7 @@ func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([
 			switch v := codeLine.DataValue.(type) {
 			case int:
 				writeDataToMemDump(memDumpFile, codeLine.Address, v)
-				//writeToMemory(dataMemory, codeLine.Address, v)
+				writeToMemory(dataMemoryTxt, codeLine.Address, v)
 				err := writeDataEntryToBinaryFile(dataMemory, DataEntry{uint32(codeLine.Address), uint32(v)})
 				if err != nil {
 					return nil, err
@@ -567,7 +528,7 @@ func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([
 				// Каждый символ строки
 				for i, char := range v {
 					writeDataToMemDump(memDumpFile, codeLine.Address+i, int(char))
-					//writeToMemory(dataMemory, codeLine.Address+i, int(char))
+					writeToMemory(dataMemoryTxt, codeLine.Address+i, int(char))
 					err := writeDataEntryToBinaryFile(dataMemory, DataEntry{uint32(codeLine.Address + i), uint32(char)})
 					if err != nil {
 						return nil, err
@@ -679,7 +640,7 @@ func ConvertProgramToBinary(instructions []Instruction) {
 
 		binRepresent, _ := strconv.ParseUint(binaryInstruction, 2, 32)
 
-		//writeToMemory(instructionMemory, instruction.InstructionMemAddress, int(binRepresent))
+		writeToMemory(instructionMemoryTxt, instruction.InstructionMemAddress, int(binRepresent))
 		err := writeDataEntryToBinaryFile(instructionMemory, DataEntry{
 			uint32(instruction.InstructionMemAddress),
 			uint32(binRepresent),
@@ -742,6 +703,9 @@ func main() {
 	dataMemory = makeMemoryFile("../out/" + filenameDir + filepath.Base(targetDataFile))
 	instructionMemory = makeMemoryFile("../out/" + filenameDir + filepath.Base(targetCodeFile))
 
+	dataMemoryTxt = makeMemoryFile("../out/" + filenameDir + filenameClean + "_data.txt")
+	instructionMemoryTxt = makeMemoryFile("../out/" + filenameDir + filenameClean + "_code.txt")
+
 	lines := readLines(inputFile)
 	cleaned := cleanComments(lines)
 	expanded, _ := expandMacros(cleaned)
@@ -765,13 +729,13 @@ func main() {
 
 	ConvertProgramToBinary(instructions)
 
-	entries, _ := readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetCodeFile))
-	for _, entry := range entries {
-		fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
-	}
-
-	entries, _ = readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetDataFile))
-	for _, entry := range entries {
-		fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
-	}
+	//entries, _ := readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetCodeFile))
+	//for _, entry := range entries {
+	//	fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
+	//}
+	//
+	//entries, _ = readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetDataFile))
+	//for _, entry := range entries {
+	//	fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
+	//}
 }

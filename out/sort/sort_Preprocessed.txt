@@ -1,3 +1,4 @@
+.org 2
 .data
 in:     0
 out:    1
@@ -30,17 +31,23 @@ sub a3, s0, s2
 addi a3, a3, -1
 ble a3, r0, exit_outer
 inner_loop:
-add t2, t2, a2
-lw a0, t2, 0
-lw a1, t2, 1
+add t3, t2, a2
+lw a0, t3, 0
+lw a1, t3, 1
 ble a0, a1, skip_swap
-sw a1, t2, 0
-sw a0, t2, 1
+sw a1, t3, 0
+sw a0, t3, 1
 skip_swap:
 addi a2, a2, 1
 ble a2, a3, inner_loop
 exit_outer:
 addi s2, s2, 1
 ble s2, s0, outer_loop
+output_loop:
+beq r0, s0, end
+lw a0, t2, 0
+sw a0, t1, 0
+addi s0, s0, -1
+jal r0, output_loop
 end:
 halt

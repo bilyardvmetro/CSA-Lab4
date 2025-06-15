@@ -16,10 +16,8 @@ type ALU struct {
 	nz        int
 }
 
-// TODO: убрать rf если он не понадобится
-func makeALU(rf RegisterFile) ALU {
+func makeALU() ALU {
 	return ALU{
-		//registerFile: rf,
 		aluResult: 0,
 		nz:        0,
 	}
@@ -49,6 +47,7 @@ func (alu *ALU) performOperation(signal Signal) {
 		alu.aluResult = alu.leftIn ^ alu.rightIn
 	}
 	alu.handleOverflow()
+	alu.setFlags(alu.aluResult)
 }
 
 func (alu *ALU) handleOverflow() {
