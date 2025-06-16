@@ -98,8 +98,6 @@ func main() {
 		inputFile = ""
 	}
 
-	//fmt.Println(instructionsFile, dataFile, inputFile)
-
 	logFile, err := os.OpenFile("application.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		// Если не удалось открыть файл, выводим ошибку в stderr
@@ -179,7 +177,6 @@ func runMmachine(instructions []DataEntry, data []DataEntry, inputStr string) {
 
 		if err != nil {
 			fmt.Printf("Stop Reason: %v\n", err)
-			fmt.Printf("Instruction to execute excepcted: %v\n", len(instructions))
 			fmt.Printf("Instructions executed: %v\n", instructionCounter)
 			fmt.Printf("Microprograms executed: %v\n", mcCounter)
 			fmt.Printf("Output decimal: %v\n", controlUnit.dataPath.dataMem.ioController.outBuf)
@@ -187,8 +184,6 @@ func runMmachine(instructions []DataEntry, data []DataEntry, inputStr string) {
 			for _, char := range controlUnit.dataPath.dataMem.ioController.outBuf {
 				fmt.Printf("%c", char)
 			}
-			//fmt.Printf("%v\n", dataPath.dataMem.ioController.outBuf)
-			log.Fatal(err)
 			os.Exit(0)
 		}
 	}

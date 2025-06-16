@@ -34,7 +34,7 @@ func (alu *ALU) performOperation(signal Signal) {
 	case alu_sub:
 		alu.aluResult = alu.leftIn - alu.rightIn
 	case alu_mul:
-		alu.aluResult = alu.leftIn * alu.rightIn
+		alu.aluResult = int(int32(alu.leftIn) * int32(alu.rightIn))
 	case alu_mulh:
 		alu.aluResult = (alu.leftIn * alu.rightIn) >> 32
 	case alu_div:

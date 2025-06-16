@@ -1,8 +1,9 @@
 .org 2
 .data
+    out:    1
     num1:   65536
     num2:   131072
-    res:    0
+;    res:    0
 
 .code
     lui s1, %hi(num1)
@@ -13,13 +14,14 @@
     addi s2, s2, %lo(num2)
     lw s2, s2, 0
 
-    lui t0, %hi(res)
-    addi t0, t0, %lo(res)
+    lui t0, %hi(out)
+    addi t0, t0, %lo(out)
+    lw t0, t0, 0
 
     mul s3, s1, s2
     mulh s4, s1, s2
 
     sw s3, t0, 0
-    sw s4, t0, 1
+    sw s4, t0, 0
 
     halt

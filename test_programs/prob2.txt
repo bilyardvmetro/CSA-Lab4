@@ -1,4 +1,4 @@
-; Найти разность между суммой квадратов и квадратом суммы первых ста натуральных чисел.
+; Найти разность между квадратом суммы и суммой квадратов первых ста натуральных чисел.
 .org 2
 .data
     in_addr:    0
@@ -14,6 +14,7 @@
 ; s2 - sq_sum
 ; s3 - sum_sq
 ; s4 - res
+
 ; t1 - out
 ; t2 - in
 
@@ -29,19 +30,20 @@
     addi bp, bp, %lo(limit)
     lw bp, bp, 0
 
-    lw s1, t2, 0
+    lw s1, t2, 0        ; strlen (always 1)
+    lw s1, t2, 0        ; load num
 
     bgt s1, bp, end     ; if num > limit
 
     addi a0, a0, 1
 
 loop:
-    beq a0, s1, calc
+    bgt a0, s1, calc
 
     add s2, s2, a0      ; sum += a0
 
     mul t0, a0, a0      ; a0^2
-    add s3, s3, t0      ; s3 += a0^2
+    add s3, s3, t0      ; sum_sq += a0^2
 
     addi a0, a0, 1      ; a0++
 

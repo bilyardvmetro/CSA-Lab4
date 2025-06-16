@@ -211,8 +211,15 @@ func (c *ControlUnit) selRightReg31() {
 	c.dataPath.regFile.setRightRegMux(sel_right_reg31)
 }
 
-func (c *ControlUnit) selDoubleIncIfN() {
-	if c.dataPath.alu.nz == 0b10 {
+func (c *ControlUnit) selDoubleIncIfGreater() {
+	if c.dataPath.alu.nz == 0b00 { // bgt if a>b (only nz==00)
+		c.incValue = 2
+	} else {
+		c.incValue = 1
+	}
+}
+func (c *ControlUnit) selDoubleIncIfLower() {
+	if c.dataPath.alu.nz == 0b10 { // blt if a<b (only nz==10)
 		c.incValue = 2
 	} else {
 		c.incValue = 1
@@ -250,8 +257,10 @@ func (c *ControlUnit) dispatchSignal(signal Signal) error {
 		c.latchReg31()
 	case sel_mpc_inc_one:
 		c.incValue = 1
-	case sel_mpc_inc_two_if_n:
-		c.selDoubleIncIfN()
+	case sel_mpc_inc_two_if_greater:
+		c.selDoubleIncIfGreater()
+	case sel_mpc_inc_two_if_lower:
+		c.selDoubleIncIfLower()
 	case sel_mpc_inc_two_if_z:
 		c.selDoubleIncIfZ()
 	case sel_mpc_increment, sel_mpc_look_up_index, sel_mpc_zero:

@@ -51,12 +51,13 @@ const (
 	latch_reg31 // 37
 
 	// Select MPC Signals
-	sel_mpc_inc_one       // 38 (Select mpc to increment by one)
-	sel_mpc_inc_two_if_z  // 39
-	sel_mpc_inc_two_if_n  // 40 (Select mpc to increment by two)
-	sel_mpc_increment     // 41 (General increment for mpc)
-	sel_mpc_look_up_index // 42 (Select mpc based on look up table index)
-	sel_mpc_zero          // 43 (Select mpc as zero)
+	sel_mpc_inc_one            // 38 (Select mpc to increment by one)
+	sel_mpc_inc_two_if_z       // 39
+	sel_mpc_inc_two_if_greater // 40 (Select mpc to increment by two if nz=00 )
+	sel_mpc_inc_two_if_lower   // 41 (Select mpc to increment by two if nz=10)
+	sel_mpc_increment          // 41 (General increment for mpc)
+	sel_mpc_look_up_index      // 42 (Select mpc based on look up table index)
+	sel_mpc_zero               // 43 (Select mpc as zero)
 
 	sel_left_reg // 44 (General left register select signal for calculation purposes)
 	// Left Register Select Signals (sel_left_reg0 to sel_left_reg31)
@@ -178,192 +179,147 @@ var MicroProgramMemory = MicroProgramMemoryTemplate{
 		{halt},
 		// 4 add
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_add,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 5 sub
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_sub,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 6 mul
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_mul,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 7 mulh
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_mulh,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 8 div
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_div,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 9 and
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_and,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 10 or
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_or,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 11 xor
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_xor,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 12 lui
 		{sel_data_src_cu, latch_regn, sel_mpc_zero, latch_mpc},
 		// 13 addi
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
-			sel_left_reg,
-			sel_right_reg31,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg31,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_add,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 15 ori
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
-			sel_left_reg,
-			sel_right_reg31,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg31,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_or,
-			sel_data_src_alu,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 17 lw
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
-			sel_left_reg,
-			sel_right_reg31,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg31,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_add,
-			sel_data_src_alu,
-			latch_reg31,
-			sel_mpc_increment,
-			latch_mpc,
+			sel_data_src_alu, latch_reg31,
+			sel_mpc_increment, latch_mpc,
 		},
 		{
 			sel_left_reg31,
 			read_data_mem,
-			sel_data_src_mem,
-			latch_regn,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_data_src_mem, latch_regn,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 20 sw
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
-			sel_left_reg,
-			sel_right_reg31,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg31,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_add,
-			sel_data_src_alu,
-			latch_reg31,
-			sel_mpc_increment,
-			latch_mpc,
+			sel_data_src_alu, latch_reg31,
+			sel_mpc_increment, latch_mpc,
 		},
 		{
-			sel_left_reg31,
-			sel_right_reg,
+			sel_left_reg31, sel_right_reg,
 			write_data_mem,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 23 jal
 		{
 			sel_alu_l_pc, sel_alu_r_inc,
 			alu_add,
-			sel_data_src_alu,
-			latch_regn,
+			sel_data_src_alu, latch_regn,
 			sel_mpc_increment, latch_mpc,
 		},
-		{
-			sel_data_src_cu,
-			latch_reg31,
-			sel_mpc_increment, latch_mpc,
-		},
+		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
 			sel_right_reg31, sel_alu_r_rf,
 			sel_alu_l_pc,
 			alu_add,
 			sel_pc_alu, latch_pc,
-			sel_mpc_zero, latch_mpc},
+			sel_mpc_zero, latch_mpc,
+		},
 		// 26 jalr
-		{sel_alu_l_pc, sel_alu_r_inc, alu_add, sel_data_src_alu, latch_regn, sel_mpc_increment, latch_mpc},
+		{
+			sel_alu_l_pc, sel_alu_r_inc,
+			alu_add,
+			sel_data_src_alu, latch_regn,
+			sel_mpc_increment, latch_mpc,
+		},
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
-		{sel_right_reg31, sel_alu_r_rf, sel_left_reg, sel_alu_l_rf, alu_add, sel_pc_alu, latch_pc, sel_mpc_zero, latch_mpc},
+		{
+			sel_right_reg31, sel_alu_r_rf,
+			sel_left_reg, sel_alu_l_rf,
+			alu_add,
+			sel_pc_alu, latch_pc,
+			sel_mpc_zero, latch_mpc,
+		},
 		// 29 beq
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
@@ -414,56 +370,44 @@ var MicroProgramMemory = MicroProgramMemoryTemplate{
 		},
 		// if Z
 		{sel_mpc_zero, latch_mpc},
-		// 39 ble
+		// 39 blt
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_sub,
-			sel_mpc_increment,
-			latch_mpc,
+			sel_mpc_increment, latch_mpc,
 		},
-		{sel_mpc_inc_two_if_n, sel_mpc_increment, latch_mpc},
-		// if not N
+		{sel_mpc_inc_two_if_lower, sel_mpc_increment, latch_mpc},
+		// else
 		{sel_mpc_zero, latch_mpc},
-		// if N
+		// if NZ=10
 		{
-			sel_right_reg31,
-			sel_alu_r_rf,
+			sel_right_reg31, sel_alu_r_rf,
 			sel_alu_l_pc,
 			alu_add,
-			sel_pc_alu,
-			latch_pc,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_pc_alu, latch_pc,
+			sel_mpc_zero, latch_mpc,
 		},
 		// 44 bgt
 		{sel_data_src_cu, latch_reg31, sel_mpc_increment, latch_mpc},
 		{
-			sel_left_reg,
-			sel_right_reg,
-			sel_alu_l_rf,
-			sel_alu_r_rf,
+			sel_left_reg, sel_right_reg,
+			sel_alu_l_rf, sel_alu_r_rf,
 			alu_sub,
-			sel_mpc_increment,
-			latch_mpc,
+			sel_mpc_increment, latch_mpc,
 		},
-		{sel_mpc_inc_two_if_n, sel_mpc_increment, latch_mpc},
-		// if not N
+		{sel_mpc_inc_two_if_greater, sel_mpc_increment, latch_mpc},
+		// else
+		{sel_mpc_zero, latch_mpc},
+		// if NZ=00
 		{
-			sel_right_reg31,
-			sel_alu_r_rf,
+			sel_right_reg31, sel_alu_r_rf,
 			sel_alu_l_pc,
 			alu_add,
-			sel_pc_alu,
-			latch_pc,
-			sel_mpc_zero,
-			latch_mpc,
+			sel_pc_alu, latch_pc,
+			sel_mpc_zero, latch_mpc,
 		},
-		// if N
-		{sel_mpc_zero, latch_mpc},
 	},
 }
 
@@ -486,8 +430,10 @@ func (s Signal) String() string {
 		return "sel_mpc_inc_one"
 	case sel_mpc_inc_two_if_z:
 		return "sel_mpc_inc_two_if_z"
-	case sel_mpc_inc_two_if_n:
-		return "sel_mpc_inc_two_if_n"
+	case sel_mpc_inc_two_if_greater:
+		return "sel_mpc_inc_two_if_greater"
+	case sel_mpc_inc_two_if_lower:
+		return "sel_mpc_inc_two_if_lower"
 	case sel_mpc_increment:
 		return "sel_mpc_increment"
 	case sel_mpc_look_up_index:
