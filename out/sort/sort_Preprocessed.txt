@@ -24,12 +24,13 @@ jal r0, get_arr
 stop:
 sub t2, t2, s0
 bubble_sort:
-add s2, s2, r0
+add s2, r0, r0
 outer_loop:
-add a2, a2, r0
+add a2, r0, r0
 sub a3, s0, s2
 addi a3, a3, -1
 ble a3, r0, exit_outer
+beq a3, r0, exit_outer
 inner_loop:
 add t3, t2, a2
 lw a0, t3, 0
@@ -48,6 +49,7 @@ beq r0, s0, end
 lw a0, t2, 0
 sw a0, t1, 0
 addi s0, s0, -1
+addi t2, t2, 1
 jal r0, output_loop
 end:
 halt

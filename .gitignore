@@ -1,5 +1,6 @@
 .idea
 notes.txt
+regs.txt
 /scheme/.$Machine_scheme.drawio.bkp
 /isa/testing.go
 machine/application.log

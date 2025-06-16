@@ -47,13 +47,14 @@ stop:
 ; a2 - j
 
 bubble_sort:
-    add s2, s2, r0          ; s2 = i = 0
+    add s2, r0, r0          ; s2 = i = 0
 
 outer_loop:
-    add a2, a2, r0          ; a2 = j = 0
+    add a2, r0, r0          ; a2 = j = 0
     sub a3, s0, s2          ; n - i
     addi a3, a3, -1         ; n - i - 1 -- кол-во сравнений
-    ble a3, r0, exit_outer  ; if a3 <= 0 -> exit
+    ble a3, r0, exit_outer  ; if a3 < 0 -> exit
+    beq a3, r0, exit_outer  ; if a3 = 0 -> exit
 
 inner_loop:
     add t3, t2, a2         ; ptr + j
@@ -79,6 +80,8 @@ output_loop:
     lw a0, t2, 0
     sw a0, t1, 0
     addi s0, s0, -1
+
+    addi t2, t2, 1
     jal r0, output_loop
 
 end:
