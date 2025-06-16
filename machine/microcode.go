@@ -10,7 +10,6 @@ const (
 
 	// Latch Signals
 	latch_ir  // 1 (Index Register)
-	latch_rr  // 2 (Registers Register)
 	latch_mpc // 3 (Microprogram Counter)
 	latch_pc  // 4 (Program Counter)
 
@@ -173,7 +172,7 @@ var MicroProgramMemory = MicroProgramMemoryTemplate{
 	memory: [][]Signal{
 		//0 Instruction Fetch
 		{sel_mpc_inc_one, sel_pc_inc, latch_pc, sel_mpc_increment, latch_mpc},
-		{sel_mpc_increment, latch_mpc, latch_ir, latch_rr},
+		{sel_mpc_increment, latch_mpc, latch_ir},
 		{sel_mpc_look_up_index, latch_mpc},
 		// 3 halt
 		{halt},
@@ -292,7 +291,8 @@ var MicroProgramMemory = MicroProgramMemoryTemplate{
 		},
 		// 23 jal
 		{
-			sel_alu_l_pc, sel_alu_r_inc,
+			sel_alu_l_pc,
+			sel_right_reg0, sel_alu_r_rf,
 			alu_add,
 			sel_data_src_alu, latch_regn,
 			sel_mpc_increment, latch_mpc,
@@ -307,7 +307,8 @@ var MicroProgramMemory = MicroProgramMemoryTemplate{
 		},
 		// 26 jalr
 		{
-			sel_alu_l_pc, sel_alu_r_inc,
+			sel_alu_l_pc,
+			sel_right_reg0, sel_alu_r_rf,
 			alu_add,
 			sel_data_src_alu, latch_regn,
 			sel_mpc_increment, latch_mpc,
@@ -418,8 +419,6 @@ func (s Signal) String() string {
 		return "halt"
 	case latch_ir:
 		return "latch_ir"
-	case latch_rr:
-		return "latch_rr"
 	case latch_mpc:
 		return "latch_mpc"
 	case latch_pc:

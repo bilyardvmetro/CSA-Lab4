@@ -38,7 +38,7 @@
 
     addi s5, bp, -1     ; bp-1 (buf_l address) -> s5
 
-    lw s6, s5, -1       ; buf_l -> s6
+    lw s6, s5, 0         ; buf_l -> s6
     add bp, bp, s6      ; bp += 7
 
     lw s7, s1, 0
@@ -62,6 +62,9 @@ output:
     addi s8, r0, 33     ; '!' char
     sw s8, bp, 0
     sub bp, bp, s6      ; bring buf str ptr back
+
+    addi s6, s6, 1      ; buf len ++
+    sw s6, s5, 0        ; s6 -> mem[s5]
 
     addi a0, s3, 0
     addi a1, s2, 0
@@ -93,6 +96,7 @@ loop:
     sw t2, t6, 0
     addi t1, t1, -1
 
+    addi t0, t0, 1
     jal r0, loop
 
 ret:

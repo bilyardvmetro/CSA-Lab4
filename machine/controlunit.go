@@ -26,9 +26,8 @@ type ControlUnit struct {
 	dataPath DataPath
 
 	ir                         int               // contains mpcMem index mapped on instruction
-	rr                         [3]int            // rd, rs1, rs2
+	decoderRegistersOut        [3]int            // rd, rs1, rs2
 	lookUpTable                map[[3]string]int // map {type, operation, opExtension} to mpcMem index
-	decoderRegistersOut        [3]string
 	decoderLookUpTableIndexOut int
 
 	mpcMux   Signal
@@ -63,13 +62,13 @@ func makeControlUnit(dataPath DataPath) ControlUnit {
 	}
 
 	return ControlUnit{
-		dataPath:    dataPath,
-		ir:          0,
-		rr:          [3]int{},
-		lookUpTable: instrEntriesMap,
-		incValue:    1,
-		mpc:         0,
-		ticks:       0,
+		dataPath:            dataPath,
+		ir:                  0,
+		decoderRegistersOut: [3]int{},
+		lookUpTable:         instrEntriesMap,
+		incValue:            1,
+		mpc:                 0,
+		ticks:               0,
 	}
 }
 
@@ -77,16 +76,19 @@ func (c *ControlUnit) readInstruction() string {
 	return c.dataPath.instructionMem.readInstruction(c.dataPath.pc)
 }
 
-func (c *ControlUnit) decodeInstruction() {
+func (c *ControlUnit) decodeInstruction() error {
 	instruction := c.readInstruction()
 
 	instrType := instruction[0:typeBits]
 	switch instrType {
 	case rType:
-		c.decoderRegistersOut = [3]string{
+		err := c.convertRegisterIndexesToInt([3]string{
 			instruction[typeBits : typeBits+registerBits],
 			instruction[typeBits+registerBits+operationBits : typeBits+registerBits+operationBits+registerBits],
 			instruction[typeBits+registerBits+operationBits+registerBits : typeBits+registerBits+operationBits+2*registerBits],
+		})
+		if err != nil {
+			return err
 		}
 
 		operation := instruction[typeBits+registerBits : typeBits+registerBits+operationBits]
@@ -95,74 +97,87 @@ func (c *ControlUnit) decodeInstruction() {
 
 		c.decoderLookUpTableIndexOut = c.getMpcValueByInstructionEntries(instrEntries)
 	case iType:
-		c.decoderRegistersOut = [3]string{
+		err := c.convertRegisterIndexesToInt([3]string{
 			instruction[typeBits : typeBits+registerBits],
 			instruction[typeBits+registerBits+operationBits : typeBits+registerBits+operationBits+registerBits],
 			"",
+		})
+		if err != nil {
+			return err
 		}
 		c.dataPath.immFromCU = instruction[typeBits+registerBits+operationBits+registerBits : 32]
 
 		operation := instruction[typeBits+registerBits : typeBits+registerBits+operationBits]
 		instrEntries := [3]string{instrType, operation, ""}
-
 		c.decoderLookUpTableIndexOut = c.getMpcValueByInstructionEntries(instrEntries)
 	case sType, bType:
-		c.decoderRegistersOut = [3]string{
+		err := c.convertRegisterIndexesToInt([3]string{
 			"",
 			instruction[typeBits+immLPartBits+operationBits : typeBits+immLPartBits+operationBits+registerBits],
 			instruction[typeBits+immLPartBits+operationBits+registerBits : typeBits+registerBits+operationBits+2*registerBits],
+		})
+		if err != nil {
+			return err
 		}
 		c.dataPath.immFromCU = instruction[typeBits:typeBits+immLPartBits] + instruction[typeBits+immLPartBits+operationBits+2*registerBits:32]
 
 		operation := instruction[typeBits+immLPartBits : typeBits+immLPartBits+operationBits]
 		instrEntries := [3]string{instrType, operation, ""}
-
 		c.decoderLookUpTableIndexOut = c.getMpcValueByInstructionEntries(instrEntries)
 	case uType:
-		c.decoderRegistersOut = [3]string{
+		err := c.convertRegisterIndexesToInt([3]string{
 			instruction[typeBits : typeBits+registerBits], "", "",
+		})
+		if err != nil {
+			return err
 		}
 		// fill lower 12-bits
 		c.dataPath.immFromCU = instruction[typeBits+registerBits:32] + "000000000000"
 
 		instrEntries := [3]string{instrType, "", ""}
-
 		c.decoderLookUpTableIndexOut = c.getMpcValueByInstructionEntries(instrEntries)
 	case jType:
-		c.decoderRegistersOut = [3]string{
+		err := c.convertRegisterIndexesToInt([3]string{
 			instruction[typeBits : typeBits+registerBits], "", "",
+		})
+		if err != nil {
+			return err
 		}
 		c.dataPath.immFromCU = instruction[typeBits+registerBits : 32]
 
 		instrEntries := [3]string{instrType, "", ""}
-
 		c.decoderLookUpTableIndexOut = c.getMpcValueByInstructionEntries(instrEntries)
 	}
+	return nil
 }
 
 func (c *ControlUnit) getRd() int {
-	return c.rr[0]
+	return c.decoderRegistersOut[0]
 }
 
 func (c *ControlUnit) getRs1() int {
-	return c.rr[1]
+	return c.decoderRegistersOut[1]
 }
 
 func (c *ControlUnit) getRs2() int {
-	return c.rr[2]
+	return c.decoderRegistersOut[2]
 }
 
 func (c *ControlUnit) getMpcValueByInstructionEntries(instrEntries [3]string) int {
 	return c.lookUpTable[instrEntries]
 }
 
-func (c *ControlUnit) latchIr() {
-	c.decodeInstruction()
+func (c *ControlUnit) latchIr() error {
+	err := c.decodeInstruction()
+	if err != nil {
+		return err
+	}
 	c.ir = c.decoderLookUpTableIndexOut
+	return nil
 }
 
-func (c *ControlUnit) latchRr() error {
-	for i, strRegIndex := range c.decoderRegistersOut {
+func (c *ControlUnit) convertRegisterIndexesToInt(indexesStr [3]string) error {
+	for i, strRegIndex := range indexesStr {
 		if strRegIndex == "" {
 			continue
 		}
@@ -170,7 +185,7 @@ func (c *ControlUnit) latchRr() error {
 		if err != nil {
 			return err
 		}
-		c.rr[i] = int(numRegIndex)
+		c.decoderRegistersOut[i] = int(numRegIndex)
 	}
 	return nil
 }
@@ -211,6 +226,10 @@ func (c *ControlUnit) selRightReg31() {
 	c.dataPath.regFile.setRightRegMux(sel_right_reg31)
 }
 
+func (c *ControlUnit) selRightReg0() {
+	c.dataPath.regFile.setRightRegMux(sel_right_reg0)
+}
+
 func (c *ControlUnit) selDoubleIncIfGreater() {
 	if c.dataPath.alu.nz == 0b00 { // bgt if a>b (only nz==00)
 		c.incValue = 2
@@ -241,9 +260,7 @@ func (c *ControlUnit) dispatchSignal(signal Signal) error {
 	case halt:
 		return errors.New("HALT")
 	case latch_ir:
-		c.latchIr()
-	case latch_rr:
-		err := c.latchRr()
+		err := c.latchIr()
 		if err != nil {
 			return err
 		}
@@ -273,6 +290,8 @@ func (c *ControlUnit) dispatchSignal(signal Signal) error {
 		c.selRightReg()
 	case sel_right_reg31:
 		c.selRightReg31()
+	case sel_right_reg0:
+		c.selRightReg0()
 	case sel_data_src_alu, sel_data_src_mem, sel_data_src_cu:
 		c.dataPath.selectDataSrcMux(signal)
 	case sel_pc_inc, sel_pc_alu:
