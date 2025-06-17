@@ -1,4 +1,4 @@
-module goldentest
+module example.com/CSA-Lab4/goldentest
 
 go 1.23.6
 
