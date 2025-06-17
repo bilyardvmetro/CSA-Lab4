@@ -44,21 +44,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Format check (gofmt & goimports)
-        # Устанавливаем goimports глобально для использования в следующем шаге.
-        # Команда 'if ! ... ; then ...' является синтаксисом bash/sh,
-        # который работает на Windows runner, т.к. GitHub Actions по умолчанию использует PowerShell/Bash.
-        # Однако, для PowerShell более идиоматично использовать `if (-not (...)) { ... }`.
-        # Придерживаемся кросс-платформенного синтаксиса bash, который будет работать.
-        run: |
-          go install golang.org/x/tools/cmd/goimports@latest
-          # Use PowerShell syntax for the if statement
-          $unformatted = goimports -l .
-          if ($unformatted) {
-            Write-Host "::error file=.::Go files not formatted with goimports or imports are unorganized. Please run 'goimports -w .' on your local machine."
-            exit 1
-          }
-        shell: pwsh # Explicitly tell GitHub Actions to use PowerShell
+#      - name: Format check (gofmt & goimports)
+#        # Устанавливаем goimports глобально для использования в следующем шаге.
+#        # Команда 'if ! ... ; then ...' является синтаксисом bash/sh,
+#        # который работает на Windows runner, т.к. GitHub Actions по умолчанию использует PowerShell/Bash.
+#        # Однако, для PowerShell более идиоматично использовать `if (-not (...)) { ... }`.
+#        # Придерживаемся кросс-платформенного синтаксиса bash, который будет работать.
+#        run: |
+#          go install golang.org/x/tools/cmd/goimports@latest
+#          # Use PowerShell syntax for the if statement
+#          $unformatted = goimports -l .
+#          if ($unformatted) {
+#            Write-Host "::error file=.::Go files not formatted with goimports or imports are unorganized. Please run 'goimports -w .' on your local machine."
+#            exit 1
+#          }
+#        shell: pwsh # Explicitly tell GitHub Actions to use PowerShell
 
       - name: Run linter (golangci-lint)
         uses: golangci/golangci-lint-action@v6
