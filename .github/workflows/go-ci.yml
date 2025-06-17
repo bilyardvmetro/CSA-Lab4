@@ -53,7 +53,7 @@ jobs:
           fi
 
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v8
+        uses: golangci/golangci-lint-action@v7
         with:
           version: v2.1.6
           args: ./isa ./translator ./machine ./goldentest --config=./.golangci.yml -v
