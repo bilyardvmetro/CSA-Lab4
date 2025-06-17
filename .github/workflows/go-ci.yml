@@ -18,19 +18,18 @@ jobs:
         with:
           go-version: 1.23.6
 
+      - name: Set up Go workspace (go.work)
+        run: go work sync
+
       - name: Cache Go modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/go/pkg/mod
             ~/.cache/go-build
-          key: ${{ runner.os }}-go-${{ hashFiles('isa/go.sum', 'machine/go.sum', 'translator/go.sum', 'goldentest/go.sum') }}
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum', 'go.work.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-    
-
-      - name: Set up Go workspace (go.work)
-        run: go work sync
 
       - name: Format check (gofmt)
         run: |
@@ -45,21 +44,13 @@ jobs:
         with:
           version: v1.59.0
 
-      - name: Lint isa
-        working-directory: isa
-        run: golangci-lint run --config=../.golangci.yml ./...
+      - name: Run linter (golangci-lint)
+        uses: golangci/golangci-lint-action@v6
+        with:
 
-      - name: Lint translator
-        working-directory: translator
-        run: golangci-lint run --config=../.golangci.yml ./...
-
-      - name: Lint machine
-        working-directory: machine
-        run: golangci-lint run --config=../.golangci.yml ./...
-
-      - name: Lint goldentest
-        working-directory: goldentest
-        run: golangci-lint run --config=../.golangci.yml ./...
+          version: v1.59.0
+          # Запускаем из корневого каталога для всех модулей в воркспейсе
+          args: --config=./.golangci.yml ./...
 
       - name: Run tests in goldentest module
         working-directory: goldentest
