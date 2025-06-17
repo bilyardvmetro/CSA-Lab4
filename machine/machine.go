@@ -24,7 +24,12 @@ func readDataEntriesFromBinaryFile(fileName string) ([]DataEntry, error) {
 	if err != nil {
 		return nil, fmt.Errorf("не удалось открыть файл %s: %v", fileName, err)
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(file)
 
 	// Используем тот же порядок байтов, что и при записи.
 	byteOrder := binary.LittleEndian
@@ -61,7 +66,12 @@ func readDataEntriesFromBinaryFile(fileName string) ([]DataEntry, error) {
 
 func readLines(path string) []string {
 	file, _ := os.Open(path)
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(file)
 	scanner := bufio.NewScanner(file)
 	var lines []string
 	for scanner.Scan() {
@@ -103,7 +113,12 @@ func main() {
 		// Если не удалось открыть файл, выводим ошибку в stderr
 		log.Fatalf("Ошибка при открытии файла логов: %v", err)
 	}
-	defer logFile.Close()
+	defer func(logFile *os.File) {
+		err := logFile.Close()
+		if err != nil {
+			fmt.Printf(err.Error())
+		}
+	}(logFile)
 	log.SetOutput(logFile)
 	log.SetFlags(log.Lshortfile)
 

@@ -85,16 +85,25 @@ func makeMemDumpFile(filename string) *os.File {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprintln(file, "<memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>")
+	_, err = fmt.Fprintln(file, "<memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>")
+	if err != nil {
+		log.Fatal(err)
+	}
 	return file
 }
 
 func writeDataToMemDump(file *os.File, address int, val int) {
-	fmt.Fprintf(file, "dataMem    %d:    %X    %d\n", address, val, val)
+	_, err := fmt.Fprintf(file, "dataMem    %d:    %X    %d\n", address, val, val)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func writeInstructionToMemDump(file *os.File, address int, binaryIns uint32, mnemonic string) {
-	fmt.Fprintf(file, "progMem    %d:    %08X    %s\n", address, binaryIns, mnemonic)
+	_, err := fmt.Fprintf(file, "progMem    %d:    %08X    %s\n", address, binaryIns, mnemonic)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func makeMemoryFile(filename string) *os.File {
@@ -230,7 +239,12 @@ func makeBinaryUJTypeInstruction(tokens []string) string {
 // readLines читает код из файла
 func readLines(path string) []string {
 	file, _ := os.Open(path)
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(file)
 	scanner := bufio.NewScanner(file)
 	var lines []string
 	for scanner.Scan() {
@@ -647,7 +661,10 @@ func ConvertProgramToBinary(instructions []Instruction) {
 }
 
 func writeSymTableToMemDump(tables SymbolTables) {
-	fmt.Fprintln(memDumpFile, "Таблицы символов (адресация по словам):")
+	_, err := fmt.Fprintln(memDumpFile, "Таблицы символов (адресация по словам):")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// для гарантии порядка мапы
 	dataKeys := make([]string, 0, len(tables.DataSymbols))
@@ -662,16 +679,31 @@ func writeSymTableToMemDump(tables SymbolTables) {
 	}
 	sort.Strings(codeKeys)
 
-	fmt.Fprintln(memDumpFile, "  Память данных:")
+	_, err = fmt.Fprintln(memDumpFile, "  Память данных:")
+	if err != nil {
+		log.Fatal(err)
+	}
 	for _, dataKey := range dataKeys {
-		fmt.Fprintf(memDumpFile, "    %s: %d\n", dataKey, tables.DataSymbols[dataKey])
+		_, err := fmt.Fprintf(memDumpFile, "    %s: %d\n", dataKey, tables.DataSymbols[dataKey])
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
-	fmt.Fprintln(memDumpFile, "  Память команд:")
-	for _, codeKey := range codeKeys {
-		fmt.Fprintf(memDumpFile, "    %s: %d\n", codeKey, tables.CodeSymbols[codeKey])
+	_, err = fmt.Fprintln(memDumpFile, "  Память команд:")
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Fprintln(memDumpFile, "--------------------------------------------------------")
+	for _, codeKey := range codeKeys {
+		_, err := fmt.Fprintf(memDumpFile, "    %s: %d\n", codeKey, tables.CodeSymbols[codeKey])
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	_, err = fmt.Fprintln(memDumpFile, "--------------------------------------------------------")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func write(lines []string, file string) {

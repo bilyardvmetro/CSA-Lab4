@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/hex"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -82,9 +83,17 @@ func runProgramTest(t *testing.T, program, ymlPath string) {
 		if err != nil {
 			t.Fatalf("failed to create temp input: %v", err)
 		}
-		defer os.Remove(tmpIn.Name())
+		defer func(name string) {
+			err := os.Remove(name)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}(tmpIn.Name())
 		_, _ = tmpIn.WriteString(golden.In)
-		tmpIn.Close()
+		err = tmpIn.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
 		inputPath = tmpIn.Name()
 	}
 

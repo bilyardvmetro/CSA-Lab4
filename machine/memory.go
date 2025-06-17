@@ -40,23 +40,22 @@ func makeDataMem(cells []DataEntry, inputStream string) (DataMemory, error) {
 }
 
 func (dataMem *DataMemory) readCell(index int) (int, error) {
-	if index == mmioIn {
-		//log.Println("Reading from IN buffer")
+	switch index {
+	case mmioIn:
 		return dataMem.ioController.read()
-	} else if index == mmioOut {
+	case mmioOut:
 		log.Println("Cannot read from OUT buffer")
 	}
 	return dataMem.cells[index], nil
 }
 
 func (dataMem *DataMemory) writeCell(index int, value int) error {
-	if index == mmioIn {
-		//log.Println("Reading from IN buffer")
+	switch index {
+	case mmioIn:
 		return errors.New("cannot write to IN buffer")
-	} else if index == mmioOut {
-		//log.Println("Writing to OUT buffer")
+	case mmioOut:
 		dataMem.ioController.write(value)
-	} else {
+	default:
 		dataMem.cells[index] = value
 	}
 	return nil
