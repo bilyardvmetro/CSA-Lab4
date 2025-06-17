@@ -638,4 +638,122 @@
 
 ## Тестирование
 
+### Описание алгоритмов
+
+- `cat` - печатать данные, поданные через ввод
+- `cat_macro` - печатать данные, поданные через ввод. В алгоритме присутствует примера макроса
+- `dwrod_mul` - умножение двух чисел, не помещающихся в 32-битную сетку 
+- `hello` - вывести hello world
+- `hello_user_name` - Запросить у пользователя его имя, считать его, вывести на экран приветствие
+- `prob2` - Найти разность между квадратом суммы и суммой квадратов первых ста натуральных чисел
+- `sort` - Пользователь загружает в систему список чисел, который выводится в отсортированном формате
+
+### Описание тестирования
+
 - Тестирование осуществляется при помощи golden test-ов
+- Модуль запускающий тестирование находится в [goldentest](goldentest/golden_test.go)
+- Конфигурации тестов находятся в директории [testdata](testdata)
+- Запустить тесты:
+
+```
+cd /goldentest
+go test -v
+```
+
+Составляющие тест-кейса на примере программы [prob2](test_programs/prob2.txt)
+
+```yml
+in_src: |-
+  ; Найти разность между квадратом суммы и суммой квадратов первых ста натуральных чисел.
+  .org 2
+  .data
+    in_addr:    0
+    out_addr:   1
+    limit:      46340   ; его квадрат суммы максимально занимает 32 бита
+
+  .code    
+    lui t2, %hi(in_addr)
+    addi t2, t2, %lo(in_addr)
+    lw t2, t2, 0
+...
+mem_dump: |
+  <memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
+  Таблицы символов (адресация по словам):
+    Память данных:
+      in_addr: 2
+      limit: 4
+      out_addr: 3
+    Память команд:
+      calc: 19
+      end: 22
+      loop: 13
+  --------------------------------------------------------
+  dataMem    2:    0    0
+  dataMem    3:    1    1
+  dataMem    4:    B504    46340
+  progMem    0:    08600000    lui t2, 0
+  progMem    1:    40646002    addi t2, t2, 2
+  progMem    2:    40626000    lw t2, t2, 0
+  progMem    3:    08500000    lui t1, 0
+  progMem    4:    40545003    addi t1, t1, 3
+  progMem    5:    40525000    lw t1, t1, 0
+  progMem    6:    08300000    lui bp, 0
+  ...
+out_code: |
+  000000000000600801000000026064400200000000606240030000000000500804000000035054400500000000505240060000000000300807000000043034400800000000303240090000000060c2400a0000000060c2400b0000008ac106100c000000017075410d000000057607100e00000081dbd2800f000000817b45801000000001e2e280110000000170754112000000faff0f041300000081d6d4801400000002d7f280150000008057022016000000fffffb41
+
+out_data: |
+  020000000000000003000000010000000400000004b50000
+in: |
+  100
+stdout: |
+  Stop Reason: HALT
+  Instructions executed: 618
+  Microprograms executed: 14014
+  Output decimal: [25164150]
+  Output hex: 17FF976
+```
+
+- `in_src` - исходный код программы на разработанном языке
+- `mem_dump` - дамп памяти после трансляции
+- `out_code` - содержимое бинарного файла `\<program name\>_code.bin`
+- `out_data` - содержимое бинарного файла `\<program name\>_data.bin`
+- `in` - строка на ввод процессора
+- `stdout` - вывод работы процессора
+
+Пример тестирования:
+
+```
+go test -v
+=== RUN   TestPrograms
+=== RUN   TestPrograms/cat
+=== RUN   TestPrograms/cat_macro
+=== RUN   TestPrograms/dword_mul
+=== RUN   TestPrograms/hello
+=== RUN   TestPrograms/hello_user_name
+=== RUN   TestPrograms/prob2
+=== RUN   TestPrograms/sort
+--- PASS: TestPrograms (0.37s)
+    --- PASS: TestPrograms/cat (0.05s)
+    --- PASS: TestPrograms/cat_macro (0.04s)
+    --- PASS: TestPrograms/dword_mul (0.04s)
+    --- PASS: TestPrograms/hello (0.07s)
+    --- PASS: TestPrograms/hello_user_name (0.06s)
+    --- PASS: TestPrograms/prob2 (0.06s)
+    --- PASS: TestPrograms/sort (0.05s)
+PASS
+ok      goldentest      0.558s
+```
+
+### Использование транслятора
+
+```
+translator.exe <input_file> <target_code_file> <target_data_file>
+```
+
+### Использование процессора
+
+```
+machine.exe <compiled_code> <compiled_data> Optional(<input_file>)
+```
+
