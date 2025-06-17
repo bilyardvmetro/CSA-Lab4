@@ -34,7 +34,20 @@ jobs:
         with:
           version: v1.59.0
 
-      - name: Run linter
+      - name: Lint isa
+        working-directory: isa
+        run: golangci-lint run ./...
+
+      - name: Lint translator
+        working-directory: translator
+        run: golangci-lint run ./...
+
+      - name: Lint machine
+        working-directory: machine
+        run: golangci-lint run ./...
+
+      - name: Lint goldentest
+        working-directory: goldentest
         run: golangci-lint run ./...
 
       - name: Run tests in goldentest module
