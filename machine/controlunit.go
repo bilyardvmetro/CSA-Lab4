@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"example.com/CSA-Lab4/isa"
-	"log"
 	"strconv"
 )
 
@@ -254,7 +253,7 @@ func (c *ControlUnit) selDoubleIncIfZ() {
 }
 
 func (c *ControlUnit) dispatchSignal(signal Signal) error {
-	log.Printf("Executing signal: %v", signal)
+	//log.Printf("Executing signal: %v", signal)
 
 	switch signal {
 	case halt:

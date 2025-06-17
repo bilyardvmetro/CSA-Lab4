@@ -83,7 +83,7 @@ func makeMemDumpFile(filename string) *os.File {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprintln(file, "<memory> - <address> - <HEXCODE> - <mnemonic>/<value <dec> <hex> <char>>")
+	fmt.Fprintln(file, "<memory> - <address> - <HEXCODE> - <mnemonic>/<<value_dec> <value_char>>")
 	return file
 }
 
@@ -117,8 +117,6 @@ func writeToMemory(file *os.File, address int, val int) {
 // writeDataEntriesToBinaryFile записывает срез DataEntry в бинарный файл.
 // Каждый адрес и данные записываются как 32-битные беззнаковые целые числа.
 func writeDataEntryToBinaryFile(file *os.File, entry DataEntry) error {
-	// Используем LittleEndian, как было указано в предыдущем контексте.
-	// Если порядок байтов отличается, измените на binary.BigEndian.
 	byteOrder := binary.LittleEndian
 
 	// Записываем адрес (uint32)
@@ -288,7 +286,6 @@ func expandMacros(inputLines []string) ([]string, error) {
 			if matches := macroStartRegex.FindStringSubmatch(line); len(matches) > 0 {
 				inMacro = true
 				currentMacroName = matches[1]
-				// Аргументы макроса нам не нужны здесь, они используются при вызове
 			}
 		}
 	}
@@ -358,7 +355,6 @@ func ProcessAssemblyCode(inputLines []string) (SymbolTables, []CodeLine, error) 
 	currentSection := UnknownSection
 	nextOrgAddress := -1 // Адрес, заданный последней .org
 
-	// Регулярные выражения (предполагается, что строки уже чистые)
 	orgDirectiveRegex := regexp.MustCompile(`^\.org\s+(\d+)$`)
 	dataDirectiveRegex := regexp.MustCompile(`^\.data$`)
 	codeDirectiveRegex := regexp.MustCompile(`^\.code$`)
@@ -427,7 +423,7 @@ func ProcessAssemblyCode(inputLines []string) (SymbolTables, []CodeLine, error) 
 		if currentSection == DataSection {
 			if matches := dataValueRegex.FindStringSubmatch(line); len(matches) > 0 {
 				varName := matches[1]
-				valuePart := matches[2] // Например, "11", "hello world", или "11, "hello world""
+				valuePart := matches[2]
 
 				if _, exists := symbolTables.DataSymbols[varName]; exists {
 					return SymbolTables{}, nil, fmt.Errorf("строка %d: переменная '%s' уже определена в памяти данных", lineNumber+1, varName)
@@ -507,9 +503,6 @@ func ProcessAssemblyCode(inputLines []string) (SymbolTables, []CodeLine, error) 
 // ResolveSymbols (второй проход): заменяет ссылки на символы и вычисляет PC-относительные смещения.
 func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([]Instruction, error) {
 	var instructions []Instruction
-
-	//writeToMemory(dataMemory, 0, 0)
-	//writeToMemory(dataMemory, 1, 0)
 
 	for _, codeLine := range processedCodeLines {
 		line := codeLine.OriginalLine
@@ -684,10 +677,8 @@ func main() {
 
 	args := os.Args
 
-	// Проверяем количество аргументов
 	if len(args) != 4 {
 		fmt.Println("Использование: translator.go <input_file> <target_code_file> <target_data_file>")
-		os.Exit(1) // Выходим с кодом ошибки
 	}
 
 	inputFile := args[1]
@@ -721,21 +712,11 @@ func main() {
 	writeSymTableToMemDump(symbolTables)
 
 	// Второй проход: разрешаем символы и вычисляем смещения
-	instructions, err := ResolveSymbols(codeLines, symbolTables) // Передаем codeLines
+	instructions, err := ResolveSymbols(codeLines, symbolTables)
 	if err != nil {
 		fmt.Printf("Ошибка во втором проходе: %v\n", err)
 		os.Exit(1)
 	}
 
 	ConvertProgramToBinary(instructions)
-
-	//entries, _ := readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetCodeFile))
-	//for _, entry := range entries {
-	//	fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
-	//}
-	//
-	//entries, _ = readDataEntriesFromBinaryFile("../out/" + filenameDir + filepath.Base(targetDataFile))
-	//for _, entry := range entries {
-	//	fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
-	//}
 }

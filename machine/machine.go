@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 const tickLimit = 7000
@@ -98,7 +99,8 @@ func main() {
 		inputFile = ""
 	}
 
-	logFile, err := os.OpenFile("application.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	programName := filepath.Base(instructionsFile)
+	logFile, err := os.OpenFile("../out/"+programName[:len(programName)-9]+"/"+programName[:len(programName)-9]+".log", os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		// Если не удалось открыть файл, выводим ошибку в stderr
 		log.Fatalf("Ошибка при открытии файла логов: %v", err)
