@@ -1,9 +1,9 @@
 ; пользователь загружает в систему список чисел (формат загрузки -- по аналогии с типом строки вашего варианта), и выводит их в отсортированном формате
 .org 2
 .data
-    in:     0
-    out:    1
-    arr:    65536   ; garbage
+  in:     0
+  out:    1
+  arr:    65536   ; garbage
 
 ; s0 - arr len
 ; a0 - curr el
@@ -15,74 +15,74 @@
 ; t2 - arr ptr
 
 .code
-    lui t2, %hi(arr)
-    addi t2, t2, %lo(arr)
-
-    lui t0, %hi(in)
-    addi t0, t0, %lo(in)
-    lw t0, t0, 0
-
-    lui t1, %hi(out)
-    addi t1, t1, %lo(out)
-    lw t1, t1, 0
-
-    lw s0, t0, 0
-    add s1, r0, s0
+  lui t2, %hi(arr)
+  addi t2, t2, %lo(arr)
+  
+  lui t0, %hi(in)
+  addi t0, t0, %lo(in)
+  lw t0, t0, 0
+  
+  lui t1, %hi(out)
+  addi t1, t1, %lo(out)
+  lw t1, t1, 0
+  
+  lw s0, t0, 0
+  add s1, r0, s0
 
 get_arr:
-    beq r0, s1, stop
-
-    lw a0, t0, 0
-    sw a0, t2, 0
-    addi s1, s1, -1
-
-    addi t2, t2, 1
-    jal r0, get_arr
+  beq r0, s1, stop
+  
+  lw a0, t0, 0
+  sw a0, t2, 0
+  addi s1, s1, -1
+  
+  addi t2, t2, 1
+  jal r0, get_arr
 
 stop:
-    sub t2, t2, s0          ; return arr_pointer to initial state
-
-; a1 - next el
-; s2 - i
-; a2 - j
+  sub t2, t2, s0          ; return arr_pointer to initial state
+  
+  ; a1 - next el
+  ; s2 - i
+  ; a2 - j
 
 bubble_sort:
-    add s2, r0, r0          ; s2 = i = 0
+  add s2, r0, r0          ; s2 = i = 0
 
 outer_loop:
-    add a2, r0, r0          ; a2 = j = 0
-    sub a3, s0, s2          ; n - i
-    addi a3, a3, -1         ; n - i - 1 -- кол-во сравнений
-    ble a3, r0, exit_outer  ; if a3 < 0 -> exit
-    beq a3, r0, exit_outer  ; if a3 = 0 -> exit
+  add a2, r0, r0          ; a2 = j = 0
+  sub a3, s0, s2          ; n - i
+  addi a3, a3, -1         ; n - i - 1 -- кол-во сравнений
+  ble a3, r0, exit_outer  ; if a3 < 0 -> exit
+  beq a3, r0, exit_outer  ; if a3 = 0 -> exit
 
 inner_loop:
-    add t3, t2, a2         ; ptr + j
-    lw a0, t3, 0            ; a0 = arr[j]
-    lw a1, t3, 1            ; a1 = arr[j+1]
-    ble a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
-
-    ; swap arr[j] and arr[j+1]
-    sw a1, t3, 0
-    sw a0, t3, 1
+  add t3, t2, a2         ; ptr + j
+  lw a0, t3, 0            ; a0 = arr[j]
+  lw a1, t3, 1            ; a1 = arr[j+1]
+  ble a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
+  
+  ; swap arr[j] and arr[j+1]
+  sw a1, t3, 0
+  sw a0, t3, 1
 
 skip_swap:
-    addi a2, a2, 1          ; j++
-    ble a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
+  addi a2, a2, 1          ; j++
+  ble a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
 
 exit_outer:
-    addi s2, s2, 1          ; i++
-    ble s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
+  addi s2, s2, 1          ; i++
+  ble s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
 
 output_loop:
-    beq r0, s0, end
-
-    lw a0, t2, 0
-    sw a0, t1, 0
-    addi s0, s0, -1
-
-    addi t2, t2, 1
-    jal r0, output_loop
+  beq r0, s0, end
+  
+  lw a0, t2, 0
+  sw a0, t1, 0
+  addi s0, s0, -1
+  
+  addi t2, t2, 1
+  jal r0, output_loop
 
 end:
-    halt
+  halt

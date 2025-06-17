@@ -1,0 +1,73 @@
+in_src: |-
+  .org 2
+  .data
+    out:    1
+    num1:   65536
+    num2:   131072
+    ;    res:    0
+  
+  .code
+    lui s1, %hi(num1)
+    addi s1, s1, %lo(num1)
+    lw s1, s1, 0
+    
+    lui s2, %hi(num2)
+    addi s2, s2, %lo(num2)
+    lw s2, s2, 0
+    
+    lui t0, %hi(out)
+    addi t0, t0, %lo(out)
+    lw t0, t0, 0
+    
+    mul s3, s1, s2
+    mulh s4, s1, s2
+    
+    sw s3, t0, 0
+    sw s4, t0, 0
+    
+    halt
+
+
+out_code: |
+  000000000000c0080100000003c0c4400200000000c0c240030000000000d0080400000004d0d4400500000000d0d2400600000000004008070000000240444008000000004042400900000081c6e4800a00000082c6f4800b000000004702200c000000804702200d000000fffffb41
+
+out_data: |
+  020000000100000003000000000001000400000000000200
+
+mem_dump: |
+  <memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
+  Таблицы символов (адресация по словам):
+    Память данных:
+      num1: 3
+      num2: 4
+      out: 2
+    Память команд:
+  --------------------------------------------------------
+  dataMem    2:    1    1
+  dataMem    3:    10000    65536
+  dataMem    4:    20000    131072
+  progMem    0:    08C00000    lui s1, 0
+  progMem    1:    40C4C003    addi s1, s1, 3
+  progMem    2:    40C2C000    lw s1, s1, 0
+  progMem    3:    08D00000    lui s2, 0
+  progMem    4:    40D4D004    addi s2, s2, 4
+  progMem    5:    40D2D000    lw s2, s2, 0
+  progMem    6:    08400000    lui t0, 0
+  progMem    7:    40444002    addi t0, t0, 2
+  progMem    8:    40424000    lw t0, t0, 0
+  progMem    9:    80E4C681    mul s3, s1, s2
+  progMem    10:    80F4C682    mulh s4, s1, s2
+  progMem    11:    20024700    sw s3, t0, 0
+  progMem    12:    20024780    sw s4, t0, 0
+  progMem    13:    41FBFFFF    halt
+
+
+in: |
+
+stdout: |
+  Stop Reason: HALT
+  Instructions executed: 14
+  Microprograms executed: 303
+  Output decimal: [0 2]
+  Output hex: 0 2
+log: |

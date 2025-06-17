@@ -1,0 +1,219 @@
+in_src: |-
+  .org 2
+  .data
+    in_addr:    0
+    out_addr:   1
+    
+    question_l: 18
+    question:   "What is your name?"
+    
+    buf_l:      7
+    buf:        "Hello, "
+  
+  ; s1 - in ptr
+  ; s2 - out ptr
+  
+  ; s3 - question ptr
+  
+  ; bp - buf str ptr
+  ; s5 - buf len ptr
+  ; s6 - buf len
+  
+  ; s7 - name len
+  ; s8 - name char
+  
+  .code
+    lui s1, %hi(in_addr)
+    addi s1, s1, %lo(in_addr)
+    lw s1, s1, 0
+    
+    lui s2, %hi(out_addr)
+    addi s2, s2, %lo(out_addr)
+    lw s2, s2, 0
+    
+    lui s3, %hi(question)
+    addi s3, s3, %lo(question)
+    
+    lui bp, %hi(buf)
+    addi bp, bp, %lo(buf)
+    
+    addi s5, bp, -1     ; bp-1 (buf_l address) -> s5
+    
+    lw s6, s5, 0         ; buf_l -> s6
+    add bp, bp, s6      ; bp += 7
+    
+    lw s7, s1, 0
+
+  get_name:
+    beq s7, r0, output
+    
+    lw s8, s1, 0        ; s8 <- mem[s1] from in
+    sw s8, bp, 0        ; s8 -> mem[s4] to buf
+    addi s7, s7, -1     ; name len--
+    addi bp, bp, 1      ; buf str ptr++
+    
+    addi s6, s6, 1      ; buf len ++
+    sw s6, s5, 0        ; s6 -> mem[s5]
+    
+    jal r0, get_name
+    
+    ; теперь имя лежит целиком в buf и выглядит как n, "Hello, <name>", где n - длина строки
+
+  output:
+    addi s8, r0, 33     ; '!' char
+    sw s8, bp, 0
+    sub bp, bp, s6      ; bring buf str ptr back
+    
+    addi s6, s6, 1      ; buf len ++
+    sw s6, s5, 0        ; s6 -> mem[s5]
+    
+    addi a0, s3, 0
+    addi a1, s2, 0
+    jal ra, print_pstr
+    
+    addi s8, r0, 10     ; '\n' char
+    sw s8, s2, 0
+    
+    addi a0, bp, 0
+    jal ra, print_pstr
+    
+    jal r0, end
+    
+    ; t0 - str ptr
+    ; t6 - out ptr
+    ; t1 - str len
+    ; t2 - str char
+
+  print_pstr:
+    addi t0, a0, 0
+    addi t6, a1, 0
+    
+    lw t1, t0, -1
+
+  loop:
+    beq t1, r0, ret
+    
+    lw t2, t0, 0
+    sw t2, t6, 0
+    addi t1, t1, -1
+    
+    addi t0, t0, 1
+    jal r0, loop
+
+  ret:
+    jalr r0, ra, 0
+
+  end:
+    halt
+
+
+out_code: |
+  000000000000c0080100000002c0c4400200000000c0c240030000000000d0080400000003d0d4400500000000d0d240060000000000e0080700000005e0e440080000000000300809000000183034400a000000ff3f04410b000000000013410c000000813832800d00000000c022410e000000072003100f00000000c03241100000008039022011000000ff2f254112000000013034401300000001101541140000008008032015000000f8ff0f0416000000210034411700000080390220180000008238328019000000011015411a000000800803201b00000000e074411c00000000d084411d000000050010041e0000000a0034411f00000080d9022020000000003074412100000001001004220000000a0000042300000000704540240000000080a54025000000ff4f5240260000000550021027000000004062402800000000a3022029000000ff5f54402a000000014044402b000000faff0f042c000000001008402d000000fffffb41
+
+out_data: |
+  020000000000000003000000010000000400000012000000050000005700000006000000680000000700000061000000080000007400000009000000200000000a000000690000000b000000730000000c000000200000000d000000790000000e0000006f0000000f0000007500000010000000720000001100000020000000120000006e0000001300000061000000140000006d0000001500000065000000160000003f0000001700000007000000180000004800000019000000650000001a0000006c0000001b0000006c0000001c0000006f0000001d0000002c0000001e00000020000000
+
+mem_dump: |
+  <memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
+  Таблицы символов (адресация по словам):
+    Память данных:
+      buf: 24
+      buf_l: 23
+      in_addr: 2
+      out_addr: 3
+      question: 5
+      question_l: 4
+    Память команд:
+      end: 45
+      get_name: 14
+      loop: 38
+      output: 22
+      print_pstr: 35
+      ret: 44
+  --------------------------------------------------------
+  dataMem    2:    0    0
+  dataMem    3:    1    1
+  dataMem    4:    12    18
+  dataMem    5:    57    87
+  dataMem    6:    68    104
+  dataMem    7:    61    97
+  dataMem    8:    74    116
+  dataMem    9:    20    32
+  dataMem    10:    69    105
+  dataMem    11:    73    115
+  dataMem    12:    20    32
+  dataMem    13:    79    121
+  dataMem    14:    6F    111
+  dataMem    15:    75    117
+  dataMem    16:    72    114
+  dataMem    17:    20    32
+  dataMem    18:    6E    110
+  dataMem    19:    61    97
+  dataMem    20:    6D    109
+  dataMem    21:    65    101
+  dataMem    22:    3F    63
+  dataMem    23:    7    7
+  dataMem    24:    48    72
+  dataMem    25:    65    101
+  dataMem    26:    6C    108
+  dataMem    27:    6C    108
+  dataMem    28:    6F    111
+  dataMem    29:    2C    44
+  dataMem    30:    20    32
+  progMem    0:    08C00000    lui s1, 0
+  progMem    1:    40C4C002    addi s1, s1, 2
+  progMem    2:    40C2C000    lw s1, s1, 0
+  progMem    3:    08D00000    lui s2, 0
+  progMem    4:    40D4D003    addi s2, s2, 3
+  progMem    5:    40D2D000    lw s2, s2, 0
+  progMem    6:    08E00000    lui s3, 0
+  progMem    7:    40E4E005    addi s3, s3, 5
+  progMem    8:    08300000    lui bp, 0
+  progMem    9:    40343018    addi bp, bp, 24
+  progMem    10:    41043FFF    addi s5, bp, -1
+  progMem    11:    41130000    lw s6, s5, 0
+  progMem    12:    80323881    add bp, bp, s6
+  progMem    13:    4122C000    lw s7, s1, 0
+  progMem    14:    10032007    beq s7, r0, 7
+  progMem    15:    4132C000    lw s8, s1, 0
+  progMem    16:    20023980    sw s8, bp, 0
+  progMem    17:    41252FFF    addi s7, s7, -1
+  progMem    18:    40343001    addi bp, bp, 1
+  progMem    19:    41151001    addi s6, s6, 1
+  progMem    20:    20030880    sw s6, s5, 0
+  progMem    21:    040FFFF8    jal r0, -8
+  progMem    22:    41340021    addi s8, r0, 33
+  progMem    23:    20023980    sw s8, bp, 0
+  progMem    24:    80323882    sub bp, bp, s6
+  progMem    25:    41151001    addi s6, s6, 1
+  progMem    26:    20030880    sw s6, s5, 0
+  progMem    27:    4174E000    addi a0, s3, 0
+  progMem    28:    4184D000    addi a1, s2, 0
+  progMem    29:    04100005    jal ra, 5
+  progMem    30:    4134000A    addi s8, r0, 10
+  progMem    31:    2002D980    sw s8, s2, 0
+  progMem    32:    41743000    addi a0, bp, 0
+  progMem    33:    04100001    jal ra, 1
+  progMem    34:    0400000A    jal r0, 10
+  progMem    35:    40457000    addi t0, a0, 0
+  progMem    36:    40A58000    addi t6, a1, 0
+  progMem    37:    40524FFF    lw t1, t0, -1
+  progMem    38:    10025005    beq t1, r0, 5
+  progMem    39:    40624000    lw t2, t0, 0
+  progMem    40:    2002A300    sw t2, t6, 0
+  progMem    41:    40545FFF    addi t1, t1, -1
+  progMem    42:    40444001    addi t0, t0, 1
+  progMem    43:    040FFFFA    jal r0, -6
+  progMem    44:    40081000    jalr r0, ra, 0
+  progMem    45:    41FBFFFF    halt
+
+
+in: |
+  bilyardvmetro
+stdout: |
+  Stop Reason: HALT
+  Instructions executed: 377
+  Microprograms executed: 9887
+  Output decimal: [87 104 97 116 32 105 115 32 121 111 117 114 32 110 97 109 101 63 10 72 101 108 108 111 44 32 98 105 108 121 97 114 100 118 109 101 116 114 111 33]
+  Output hex: 57 68 61 74 20 69 73 20 79 6F 75 72 20 6E 61 6D 65 3F A 48 65 6C 6C 6F 2C 20 62 69 6C 79 61 72 64 76 6D 65 74 72 6F 21
+log: |

@@ -1,26 +1,26 @@
-<memory> - <address> - <HEXCODE> - <mnemonic>/<value <dec> <hex> <char>>
+<memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
 Таблицы символов (адресация по словам):
   Память данных:
     out_addr: 2
-    str_len: 3
     str: 4
+    str_len: 3
   Память команд:
-    loop: 6
     end: 12
+    loop: 6
 --------------------------------------------------------
-dataMem    2:    1    1    
-dataMem    3:    B    11    
-dataMem    4:    68    104    h
-dataMem    5:    65    101    e
-dataMem    6:    6C    108    l
-dataMem    7:    6C    108    l
-dataMem    8:    6F    111    o
-dataMem    9:    20    32     
-dataMem    10:    77    119    w
-dataMem    11:    6F    111    o
-dataMem    12:    72    114    r
-dataMem    13:    6C    108    l
-dataMem    14:    64    100    d
+dataMem    2:    1    1
+dataMem    3:    B    11
+dataMem    4:    68    104
+dataMem    5:    65    101
+dataMem    6:    6C    108
+dataMem    7:    6C    108
+dataMem    8:    6F    111
+dataMem    9:    20    32
+dataMem    10:    77    119
+dataMem    11:    6F    111
+dataMem    12:    72    114
+dataMem    13:    6C    108
+dataMem    14:    64    100
 progMem    0:    08D00000    lui s2, 0
 progMem    1:    40D4D002    addi s2, s2, 2
 progMem    2:    40D2D000    lw s2, s2, 0

@@ -1,4 +1,4 @@
-<memory> - <address> - <HEXCODE> - <mnemonic>/<value <dec> <hex> <char>>
+<memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
 Таблицы символов (адресация по словам):
   Память данных:
     num1: 3
@@ -6,9 +6,9 @@
     out: 2
   Память команд:
 --------------------------------------------------------
-dataMem    2:    1    1    
-dataMem    3:    10000    65536    𐀀
-dataMem    4:    20000    131072    𠀀
+dataMem    2:    1    1
+dataMem    3:    10000    65536
+dataMem    4:    20000    131072
 progMem    0:    08C00000    lui s1, 0
 progMem    1:    40C4C003    addi s1, s1, 3
 progMem    2:    40C2C000    lw s1, s1, 0

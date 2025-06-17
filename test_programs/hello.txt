@@ -1,8 +1,8 @@
 .org 2
 .data
-    out_addr:   1
-    str_len:    11
-    str:        "hello world"
+  out_addr:   1
+  str_len:    11
+  str:        "hello world"
 
 
 ; s1 - in
@@ -12,25 +12,25 @@
 ; s4 - current symbol
 
 .code
-    lui s2, %hi(out_addr)
-    addi s2, s2, %lo(out_addr)
-    lw s2, s2, 0
+  lui s2, %hi(out_addr)
+  addi s2, s2, %lo(out_addr)
+  lw s2, s2, 0
+  
+  lui bp, %hi(str)
+  addi bp, bp, %lo(str)
+  
+  lw t0, bp, -1           ; mem[bp - 1] -> t0
 
-    lui bp, %hi(str)
-    addi bp, bp, %lo(str)
-
-    lw t0, bp, -1           ; mem[bp - 1] -> t0
-	
 loop:
-	beq t0, r0, end			; if t0 == 0 go to end
-
-	lw s4, bp, 0			; s4 <- mem[bp]. Символ в s4
-	sw s4, s2, 0			; s4 -> mem[s2]. Вывести символ
-
-	addi t0, t0, -1			; t0-1 -> t0
-	addi bp, bp, 1          ; bp++
-	
-	jal r0, loop
+  beq t0, r0, end			; if t0 == 0 go to end
+  
+  lw s4, bp, 0			; s4 <- mem[bp]. Символ в s4
+  sw s4, s2, 0			; s4 -> mem[s2]. Вывести символ
+  
+  addi t0, t0, -1			; t0-1 -> t0
+  addi bp, bp, 1          ; bp++
+  
+  jal r0, loop
 
 end:
-	halt
+  halt

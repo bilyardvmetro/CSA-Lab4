@@ -1,0 +1,170 @@
+in_src: |-
+  ; пользователь загружает в систему список чисел (формат загрузки -- по аналогии с типом строки вашего варианта), и выводит их в отсортированном формате
+  .org 2
+  .data
+    in:     0
+    out:    1
+    arr:    65536   ; garbage
+  
+  ; s0 - arr len
+  ; a0 - curr el
+  
+  ; s1 - tmp len
+  
+  ; t0 - in
+  ; t1 - out
+  ; t2 - arr ptr
+  
+  .code
+    lui t2, %hi(arr)
+    addi t2, t2, %lo(arr)
+    
+    lui t0, %hi(in)
+    addi t0, t0, %lo(in)
+    lw t0, t0, 0
+    
+    lui t1, %hi(out)
+    addi t1, t1, %lo(out)
+    lw t1, t1, 0
+    
+    lw s0, t0, 0
+    add s1, r0, s0
+
+  get_arr:
+    beq r0, s1, stop
+    
+    lw a0, t0, 0
+    sw a0, t2, 0
+    addi s1, s1, -1
+    
+    addi t2, t2, 1
+    jal r0, get_arr
+
+  stop:
+    sub t2, t2, s0          ; return arr_pointer to initial state
+    
+    ; a1 - next el
+    ; s2 - i
+    ; a2 - j
+
+  bubble_sort:
+    add s2, r0, r0          ; s2 = i = 0
+
+  outer_loop:
+    add a2, r0, r0          ; a2 = j = 0
+    sub a3, s0, s2          ; n - i
+    addi a3, a3, -1         ; n - i - 1 -- кол-во сравнений
+    ble a3, r0, exit_outer  ; if a3 < 0 -> exit
+    beq a3, r0, exit_outer  ; if a3 = 0 -> exit
+  
+  inner_loop:
+    add t3, t2, a2         ; ptr + j
+    lw a0, t3, 0            ; a0 = arr[j]
+    lw a1, t3, 1            ; a1 = arr[j+1]
+    ble a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
+    
+    ; swap arr[j] and arr[j+1]
+    sw a1, t3, 0
+    sw a0, t3, 1
+  
+  skip_swap:
+    addi a2, a2, 1          ; j++
+    ble a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
+  
+  exit_outer:
+    addi s2, s2, 1          ; i++
+    ble s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
+  
+  output_loop:
+    beq r0, s0, end
+    
+    lw a0, t2, 0
+    sw a0, t1, 0
+    addi s0, s0, -1
+    
+    addi t2, t2, 1
+    jal r0, output_loop
+  
+  end:
+    halt
+
+
+
+
+out_code: |
+  00000000000060080100000004606440020000000000400803000000024044400400000000404240050000000000500806000000035054400700000000505240080000000040b240090000008105c2800a000000050602100b000000004072410c000000806b02200d000000ffcfc4400e000000016064400f000000faff0f041000000082656280110000000100d28012000000010092811300000082b6a28114000000ffafa5411500000009a009101600000008a0031017000000816c7280180000000070724119000000017082411a000000027c09101b000000007c02201c000000817b02201d000000019095411e000000789df9111f00000001d0d44020000000f1d5f8112100000085050210220000000060724123000000805b022024000000ffbfb440250000000160644026000000faff0f0427000000fffffb41
+
+out_data: |
+  020000000000000003000000010000000400000000000100
+
+mem_dump: |
+  <memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
+  Таблицы символов (адресация по словам):
+    Память данных:
+      arr: 4
+      in: 2
+      out: 3
+    Память команд:
+      bubble_sort: 17
+      end: 39
+      exit_outer: 31
+      get_arr: 10
+      inner_loop: 23
+      outer_loop: 18
+      output_loop: 33
+      skip_swap: 29
+      stop: 16
+  --------------------------------------------------------
+  dataMem    2:    0    0
+  dataMem    3:    1    1
+  dataMem    4:    10000    65536
+  progMem    0:    08600000    lui t2, 0
+  progMem    1:    40646004    addi t2, t2, 4
+  progMem    2:    08400000    lui t0, 0
+  progMem    3:    40444002    addi t0, t0, 2
+  progMem    4:    40424000    lw t0, t0, 0
+  progMem    5:    08500000    lui t1, 0
+  progMem    6:    40545003    addi t1, t1, 3
+  progMem    7:    40525000    lw t1, t1, 0
+  progMem    8:    40B24000    lw s0, t0, 0
+  progMem    9:    80C20581    add s1, r0, s0
+  progMem    10:    10020605    beq r0, s1, 5
+  progMem    11:    41724000    lw a0, t0, 0
+  progMem    12:    20026B80    sw a0, t2, 0
+  progMem    13:    40C4CFFF    addi s1, s1, -1
+  progMem    14:    40646001    addi t2, t2, 1
+  progMem    15:    040FFFFA    jal r0, -6
+  progMem    16:    80626582    sub t2, t2, s0
+  progMem    17:    80D20001    add s2, r0, r0
+  progMem    18:    81920001    add a2, r0, r0
+  progMem    19:    81A2B682    sub a3, s0, s2
+  progMem    20:    41A5AFFF    addi a3, a3, -1
+  progMem    21:    1009A009    ble a3, r0, 9
+  progMem    22:    1003A008    beq a3, r0, 8
+  progMem    23:    80726C81    add t3, t2, a2
+  progMem    24:    41727000    lw a0, t3, 0
+  progMem    25:    41827001    lw a1, t3, 1
+  progMem    26:    10097C02    ble a0, a1, 2
+  progMem    27:    20027C00    sw a1, t3, 0
+  progMem    28:    20027B81    sw a0, t3, 1
+  progMem    29:    41959001    addi a2, a2, 1
+  progMem    30:    11F99D78    ble a2, a3, -8
+  progMem    31:    40D4D001    addi s2, s2, 1
+  progMem    32:    11F8D5F1    ble s2, s0, -15
+  progMem    33:    10020585    beq r0, s0, 5
+  progMem    34:    41726000    lw a0, t2, 0
+  progMem    35:    20025B80    sw a0, t1, 0
+  progMem    36:    40B4BFFF    addi s0, s0, -1
+  progMem    37:    40646001    addi t2, t2, 1
+  progMem    38:    040FFFFA    jal r0, -6
+  progMem    39:    41FBFFFF    halt
+
+in: |
+  4, 2, 1
+stdout: |
+  Stop Reason: HALT
+  Instructions executed: 96
+  Microprograms executed: 2418
+  Output decimal: [1 2 4]
+  Output hex: 1 2 4
+log: |

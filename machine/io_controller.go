@@ -67,7 +67,7 @@ func makeIOController(input string) IOController {
 
 func (controller *IOController) write(value int) {
 	controller.outBuf = append(controller.outBuf, value)
-	log.Printf("В out буфер записан символ:  %d (%c)\n", value, value)
+	log.Printf("В out буфер записан символ:  %d\n", value)
 }
 
 func (controller *IOController) read() (int, error) {
@@ -76,6 +76,6 @@ func (controller *IOController) read() (int, error) {
 	}
 	value := controller.inBuf[0]
 	controller.inBuf = controller.inBuf[1:]
-	log.Printf("Из in буфера прочитан символ: %d (%c)\n", value, value)
+	log.Printf("Из in буфера прочитан символ: %d\n", value)
 	return value, nil
 }

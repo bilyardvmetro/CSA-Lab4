@@ -1,0 +1,118 @@
+in_src: |-
+  ; Найти разность между квадратом суммы и суммой квадратов первых ста натуральных чисел.
+  .org 2
+  .data
+    in_addr:    0
+    out_addr:   1
+    limit:      46340   ; его квадрат суммы максимально занимает 32 бита
+  
+  .code
+    
+    ; s1 - input num
+    ; a0 - current num
+    ; t0 - curr sq
+    
+    ; s2 - sq_sum
+    ; s3 - sum_sq
+    ; s4 - res
+    
+    ; t1 - out
+    ; t2 - in
+    
+    lui t2, %hi(in_addr)
+    addi t2, t2, %lo(in_addr)
+    lw t2, t2, 0
+    
+    lui t1, %hi(out_addr)
+    addi t1, t1, %lo(out_addr)
+    lw t1, t1, 0
+    
+    lui bp, %hi(limit)
+    addi bp, bp, %lo(limit)
+    lw bp, bp, 0
+    
+    lw s1, t2, 0        ; strlen (always 1)
+    lw s1, t2, 0        ; load num
+    
+    bgt s1, bp, end     ; if num > limit
+    
+    addi a0, a0, 1
+
+  loop:
+    bgt a0, s1, calc
+    
+    add s2, s2, a0      ; sum += a0
+    
+    mul t0, a0, a0      ; a0^2
+    add s3, s3, t0      ; sum_sq += a0^2
+    
+    addi a0, a0, 1      ; a0++
+    
+    jal r0, loop
+
+  calc:
+    mul s2, s2, s2      ; sum = sum^2
+    
+    sub s4, s2, s3
+    sw s4, t1, 0
+
+  end:
+    halt
+
+
+
+out_code: |
+  000000000000600801000000026064400200000000606240030000000000500804000000035054400500000000505240060000000000300807000000043034400800000000303240090000000060c2400a0000000060c2400b0000008ac106100c000000017075410d000000057607100e00000081dbd2800f000000817b45801000000001e2e280110000000170754112000000faff0f041300000081d6d4801400000002d7f280150000008057022016000000fffffb41
+
+out_data: |
+  020000000000000003000000010000000400000004b50000
+
+mem_dump: |
+  <memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
+  Таблицы символов (адресация по словам):
+    Память данных:
+      in_addr: 2
+      limit: 4
+      out_addr: 3
+    Память команд:
+      calc: 19
+      end: 22
+      loop: 13
+  --------------------------------------------------------
+  dataMem    2:    0    0
+  dataMem    3:    1    1
+  dataMem    4:    B504    46340
+  progMem    0:    08600000    lui t2, 0
+  progMem    1:    40646002    addi t2, t2, 2
+  progMem    2:    40626000    lw t2, t2, 0
+  progMem    3:    08500000    lui t1, 0
+  progMem    4:    40545003    addi t1, t1, 3
+  progMem    5:    40525000    lw t1, t1, 0
+  progMem    6:    08300000    lui bp, 0
+  progMem    7:    40343004    addi bp, bp, 4
+  progMem    8:    40323000    lw bp, bp, 0
+  progMem    9:    40C26000    lw s1, t2, 0
+  progMem    10:    40C26000    lw s1, t2, 0
+  progMem    11:    1006C18A    bgt s1, bp, 10
+  progMem    12:    41757001    addi a0, a0, 1
+  progMem    13:    10077605    bgt a0, s1, 5
+  progMem    14:    80D2DB81    add s2, s2, a0
+  progMem    15:    80457B81    mul t0, a0, a0
+  progMem    16:    80E2E201    add s3, s3, t0
+  progMem    17:    41757001    addi a0, a0, 1
+  progMem    18:    040FFFFA    jal r0, -6
+  progMem    19:    80D4D681    mul s2, s2, s2
+  progMem    20:    80F2D702    sub s4, s2, s3
+  progMem    21:    20025780    sw s4, t1, 0
+  progMem    22:    41FBFFFF    halt
+
+
+in: |
+  100
+stdout: |
+  Stop Reason: HALT
+  Instructions executed: 618
+  Microprograms executed: 14014
+  Output decimal: [25164150]
+  Output hex: 17FF976
+log: |

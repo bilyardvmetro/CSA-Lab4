@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -68,8 +69,8 @@ var memDumpFile *os.File
 var dataMemory *os.File
 var instructionMemory *os.File
 
-var dataMemoryTxt *os.File
-var instructionMemoryTxt *os.File
+//var dataMemoryTxt *os.File
+//var instructionMemoryTxt *os.File
 
 func makeMemDumpFile(filename string) *os.File {
 	dir := filepath.Dir(filename)
@@ -83,12 +84,12 @@ func makeMemDumpFile(filename string) *os.File {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Fprintln(file, "<memory> - <address> - <HEXCODE> - <mnemonic>/<<value_dec> <value_char>>")
+	fmt.Fprintln(file, "<memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>")
 	return file
 }
 
 func writeDataToMemDump(file *os.File, address int, val int) {
-	fmt.Fprintf(file, "dataMem    %d:    %X    %d    %c\n", address, val, val, val)
+	fmt.Fprintf(file, "dataMem    %d:    %X    %d\n", address, val, val)
 }
 
 func writeInstructionToMemDump(file *os.File, address int, binaryIns uint32, mnemonic string) {
@@ -110,9 +111,9 @@ func makeMemoryFile(filename string) *os.File {
 	return file
 }
 
-func writeToMemory(file *os.File, address int, val int) {
-	fmt.Fprintf(file, "%032b:    %032b\n", address, val)
-}
+//func writeToMemory(file *os.File, address int, val int) {
+//	fmt.Fprintf(file, "%032b:    %032b\n", address, val)
+//}
 
 // writeDataEntriesToBinaryFile записывает срез DataEntry в бинарный файл.
 // Каждый адрес и данные записываются как 32-битные беззнаковые целые числа.
@@ -262,7 +263,6 @@ func expandMacros(inputLines []string) ([]string, error) {
 	var currentMacroName string
 	var currentMacroBody []string
 
-	// Регулярные выражения для парсинга
 	macroStartRegex := regexp.MustCompile(`%macro\s+(\w+)\(([^)]*)\)`) // %macro name(arg1, arg2, ...)
 	macroEndRegex := regexp.MustCompile(`%endmacro`)                   // %endmacro
 	macroCallRegex := regexp.MustCompile(`^(\w+)\(([^)]*)\)$`)         // name(arg1, arg2, ...)
@@ -512,7 +512,7 @@ func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([
 			switch v := codeLine.DataValue.(type) {
 			case int:
 				writeDataToMemDump(memDumpFile, codeLine.Address, v)
-				writeToMemory(dataMemoryTxt, codeLine.Address, v)
+				//writeToMemory(dataMemoryTxt, codeLine.Address, v)
 				err := writeDataEntryToBinaryFile(dataMemory, DataEntry{uint32(codeLine.Address), uint32(v)})
 				if err != nil {
 					return nil, err
@@ -521,7 +521,7 @@ func ResolveSymbols(processedCodeLines []CodeLine, symbolTables SymbolTables) ([
 				// Каждый символ строки
 				for i, char := range v {
 					writeDataToMemDump(memDumpFile, codeLine.Address+i, int(char))
-					writeToMemory(dataMemoryTxt, codeLine.Address+i, int(char))
+					//writeToMemory(dataMemoryTxt, codeLine.Address+i, int(char))
 					err := writeDataEntryToBinaryFile(dataMemory, DataEntry{uint32(codeLine.Address + i), uint32(char)})
 					if err != nil {
 						return nil, err
@@ -614,7 +614,7 @@ func ConvertProgramToBinary(instructions []Instruction) {
 		for i := range tokens {
 			tokens[i] = strings.Trim(tokens[i], ",")
 		}
-		fmt.Println(tokens)
+		//fmt.Println(tokens)
 
 		var binaryInstruction string
 
@@ -633,7 +633,7 @@ func ConvertProgramToBinary(instructions []Instruction) {
 
 		binRepresent, _ := strconv.ParseUint(binaryInstruction, 2, 32)
 
-		writeToMemory(instructionMemoryTxt, instruction.InstructionMemAddress, int(binRepresent))
+		//writeToMemory(instructionMemoryTxt, instruction.InstructionMemAddress, int(binRepresent))
 		err := writeDataEntryToBinaryFile(instructionMemory, DataEntry{
 			uint32(instruction.InstructionMemAddress),
 			uint32(binRepresent),
@@ -647,16 +647,30 @@ func ConvertProgramToBinary(instructions []Instruction) {
 
 func writeSymTableToMemDump(tables SymbolTables) {
 	fmt.Fprintln(memDumpFile, "Таблицы символов (адресация по словам):")
-	fmt.Fprintln(memDumpFile, "  Память данных:")
-	for symbol, address := range tables.DataSymbols {
-		fmt.Fprintf(memDumpFile, "    %s: %d\n", symbol, address)
+
+	// для гарантии порядка мапы
+	dataKeys := make([]string, 0, len(tables.DataSymbols))
+	for key := range tables.DataSymbols {
+		dataKeys = append(dataKeys, key)
 	}
+	sort.Strings(dataKeys)
+
+	codeKeys := make([]string, 0, len(tables.CodeSymbols))
+	for key := range tables.CodeSymbols {
+		codeKeys = append(codeKeys, key)
+	}
+	sort.Strings(codeKeys)
+
+	fmt.Fprintln(memDumpFile, "  Память данных:")
+	for _, dataKey := range dataKeys {
+		fmt.Fprintf(memDumpFile, "    %s: %d\n", dataKey, tables.DataSymbols[dataKey])
+	}
+
 	fmt.Fprintln(memDumpFile, "  Память команд:")
-	for symbol, address := range tables.CodeSymbols {
-		fmt.Fprintf(memDumpFile, "    %s: %d\n", symbol, address)
+	for _, codeKey := range codeKeys {
+		fmt.Fprintf(memDumpFile, "    %s: %d\n", codeKey, tables.CodeSymbols[codeKey])
 	}
 	fmt.Fprintln(memDumpFile, "--------------------------------------------------------")
-	//fmt.Fprintln(memDumpFile, "dataMem    0: IN_BUF\ndataMem    1: OUT_BUF")
 }
 
 func write(lines []string, file string) {
@@ -694,8 +708,8 @@ func main() {
 	dataMemory = makeMemoryFile("../out/" + filenameDir + filepath.Base(targetDataFile))
 	instructionMemory = makeMemoryFile("../out/" + filenameDir + filepath.Base(targetCodeFile))
 
-	dataMemoryTxt = makeMemoryFile("../out/" + filenameDir + filenameClean + "_data.txt")
-	instructionMemoryTxt = makeMemoryFile("../out/" + filenameDir + filenameClean + "_code.txt")
+	//dataMemoryTxt = makeMemoryFile("../out/" + filenameDir + filenameClean + "_data.txt")
+	//instructionMemoryTxt = makeMemoryFile("../out/" + filenameDir + filenameClean + "_code.txt")
 
 	lines := readLines(inputFile)
 	cleaned := cleanComments(lines)

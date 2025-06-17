@@ -1,0 +1,94 @@
+in_src: |-
+  .org 2
+  .data
+    out_addr:   1
+    str_len:    11
+    str:        "hello world"
+  
+  
+  ; s1 - in
+  ; s2 - out
+  ; bp - str pointer
+  ; t0 - str len
+  ; s4 - current symbol
+  
+  .code
+    lui s2, %hi(out_addr)
+    addi s2, s2, %lo(out_addr)
+    lw s2, s2, 0
+    
+    lui bp, %hi(str)
+    addi bp, bp, %lo(str)
+    
+    lw t0, bp, -1           ; mem[bp - 1] -> t0
+
+  loop:
+    beq t0, r0, end			; if t0 == 0 go to end
+    
+    lw s4, bp, 0			; s4 <- mem[bp]. Символ в s4
+    sw s4, s2, 0			; s4 -> mem[s2]. Вывести символ
+    
+    addi t0, t0, -1			; t0-1 -> t0
+    addi bp, bp, 1          ; bp++
+    
+    jal r0, loop
+
+  end:
+    halt
+
+
+
+out_code: |
+  000000000000d0080100000002d0d4400200000000d0d2400300000000003008040000000430344005000000ff3f42400600000005400210070000000030f2400800000080d7022009000000ff4f44400a000000013034400b000000faff0f040c000000fffffb41
+
+out_data: |
+  0200000001000000030000000b00000004000000680000000500000065000000060000006c000000070000006c000000080000006f00000009000000200000000a000000770000000b0000006f0000000c000000720000000d0000006c0000000e00000064000000
+
+mem_dump: |
+  <memory> - <address> - <HEXCODE> - <mnemonic>/<value_dec>>
+  Таблицы символов (адресация по словам):
+    Память данных:
+      out_addr: 2
+      str: 4
+      str_len: 3
+    Память команд:
+      end: 12
+      loop: 6
+  --------------------------------------------------------
+  dataMem    2:    1    1
+  dataMem    3:    B    11
+  dataMem    4:    68    104
+  dataMem    5:    65    101
+  dataMem    6:    6C    108
+  dataMem    7:    6C    108
+  dataMem    8:    6F    111
+  dataMem    9:    20    32
+  dataMem    10:    77    119
+  dataMem    11:    6F    111
+  dataMem    12:    72    114
+  dataMem    13:    6C    108
+  dataMem    14:    64    100
+  progMem    0:    08D00000    lui s2, 0
+  progMem    1:    40D4D002    addi s2, s2, 2
+  progMem    2:    40D2D000    lw s2, s2, 0
+  progMem    3:    08300000    lui bp, 0
+  progMem    4:    40343004    addi bp, bp, 4
+  progMem    5:    40423FFF    lw t0, bp, -1
+  progMem    6:    10024005    beq t0, r0, 5
+  progMem    7:    40F23000    lw s4, bp, 0
+  progMem    8:    2002D780    sw s4, s2, 0
+  progMem    9:    40444FFF    addi t0, t0, -1
+  progMem    10:    40343001    addi bp, bp, 1
+  progMem    11:    040FFFFA    jal r0, -6
+  progMem    12:    41FBFFFF    halt
+
+
+in: |
+
+stdout: |
+  Stop Reason: HALT
+  Instructions executed: 74
+  Microprograms executed: 1924
+  Output decimal: [104 101 108 108 111 32 119 111 114 108 100]
+  Output hex: 68 65 6C 6C 6F 20 77 6F 72 6C 64
+log: |

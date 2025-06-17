@@ -107,7 +107,7 @@ func main() {
 	}
 	defer logFile.Close()
 	log.SetOutput(logFile)
-	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+	log.SetFlags(log.Lshortfile)
 
 	instructions := make([]DataEntry, 0)
 	data := make([]DataEntry, 0)
@@ -182,9 +182,9 @@ func runMmachine(instructions []DataEntry, data []DataEntry, inputStr string) {
 			fmt.Printf("Instructions executed: %v\n", instructionCounter)
 			fmt.Printf("Microprograms executed: %v\n", mcCounter)
 			fmt.Printf("Output decimal: %v\n", controlUnit.dataPath.dataMem.ioController.outBuf)
-			fmt.Printf("Output string: ")
+			fmt.Printf("Output hex: ")
 			for _, char := range controlUnit.dataPath.dataMem.ioController.outBuf {
-				fmt.Printf("%c", char)
+				fmt.Printf("%X ", char)
 			}
 			os.Exit(0)
 		}
