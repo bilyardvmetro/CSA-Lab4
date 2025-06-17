@@ -4,7 +4,8 @@ run:
 linters:
   enable:
     - govet
-    - gofmt
-    - goimports
     - staticcheck
+    - gosimple
+    - stylecheck
+    - unconvert
 version: "2"
