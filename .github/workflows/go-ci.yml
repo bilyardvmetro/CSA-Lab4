@@ -27,15 +27,25 @@ jobs:
           go mod tidy -C ./machine
           go mod tidy -C ./isa
 
-      - name: Set execute permissions for machine.exe
+      - name: Build machine module
+        # NEW: Builds the machine.exe binary
+        working-directory: ./machine
+        run: go build -o machine
+
+      - name: Set execute permissions for machine
         # NEW: Grants execute permissions on Linux
         working-directory: ./machine
-        run: chmod +x machine.exe
+        run: chmod +x machine
 
-      - name: Set execute permissions for translator.exe
+      - name: Build translator module
+        # Builds the translator.exe binary
+        working-directory: ./translator
+        run: go build -o translator
+
+      - name: Set execute permissions for translator
         # Grants execute permissions on Linux
         working-directory: ./translator
-        run: chmod +x translator.exe
+        run: chmod +x translator
 
       - name: Set up Go workspace (go.work)
         # Запускаем go work sync из корневой директории, где находится go.work
