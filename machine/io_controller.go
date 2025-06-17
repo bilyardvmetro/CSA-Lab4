@@ -54,7 +54,7 @@ func parsePString(input string) []int {
 func makeIOController(input string) IOController {
 	if input == "" {
 		return IOController{
-			inBuf:  nil,
+			inBuf:  make([]int, 0),
 			outBuf: make([]int, 0),
 		}
 	}
@@ -71,7 +71,7 @@ func (controller *IOController) write(value int) {
 }
 
 func (controller *IOController) read() (int, error) {
-	if controller.inBuf == nil || len(controller.inBuf) == 0 {
+	if len(controller.inBuf) == 0 {
 		return 0, errors.New("попытка прочитать данные из пустого буфера")
 	}
 	value := controller.inBuf[0]

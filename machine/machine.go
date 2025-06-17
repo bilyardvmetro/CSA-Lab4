@@ -95,8 +95,6 @@ func main() {
 		if len(input) != 0 {
 			inputStr = input[0]
 		}
-	} else {
-		inputFile = ""
 	}
 
 	programName := filepath.Base(instructionsFile)
@@ -113,16 +111,10 @@ func main() {
 	data := make([]DataEntry, 0)
 
 	instructionsEntries, _ := readDataEntriesFromBinaryFile(instructionsFile)
-	for _, entry := range instructionsEntries {
-		instructions = append(instructions, entry)
-		//fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
-	}
+	instructions = append(instructions, instructionsEntries...)
 
 	dataEntries, _ := readDataEntriesFromBinaryFile(dataFile)
-	for _, entry := range dataEntries {
-		data = append(data, entry)
-		//fmt.Printf("%d: %032b\n", entry.Address, entry.Data)
-	}
+	data = append(data, dataEntries...)
 
 	//for i, s := range instructions {
 	//	fmt.Printf("%d %d: %032b\n", i, s.Address, s.Data)

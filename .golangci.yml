@@ -1,5 +1,6 @@
 run:
   timeout: 2m
+  silent: false
 
 linters:
   enable:

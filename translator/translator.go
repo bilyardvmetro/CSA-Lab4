@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"encoding/binary"
-	"example.com/CSA-Lab4/isa"
 	"fmt"
 	"log"
 	"os"
@@ -12,6 +11,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"example.com/CSA-Lab4/isa"
 )
 
 // MacroDefinition хранит имя макроса и его тело

@@ -2,8 +2,9 @@ package main
 
 import (
 	"errors"
-	"example.com/CSA-Lab4/isa"
 	"strconv"
+
+	"example.com/CSA-Lab4/isa"
 )
 
 const (

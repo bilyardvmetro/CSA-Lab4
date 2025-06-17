@@ -3,12 +3,13 @@ package main
 import (
 	"bytes"
 	"encoding/hex"
-	"gopkg.in/yaml.v3"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"gopkg.in/yaml.v3"
 )
 
 type GoldenCase struct {
