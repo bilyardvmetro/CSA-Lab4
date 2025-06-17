@@ -63,7 +63,7 @@ func runProgramTest(t *testing.T, program, ymlPath string) {
 	}
 
 	// === Run translator ===
-	translator := filepath.Join("..", "translator", "translator")
+	translator := filepath.Join("..", "translator", "translator.exe")
 	cmdTranslator := exec.Command(translator, srcPath, codePath, dataPath)
 	cmdTranslator.Stdout = os.Stdout
 	cmdTranslator.Stderr = os.Stderr
@@ -95,7 +95,7 @@ func runProgramTest(t *testing.T, program, ymlPath string) {
 	}
 
 	var stdout bytes.Buffer
-	cmdMachine := exec.Command(filepath.Join("..", "machine", "machine"), args...)
+	cmdMachine := exec.Command(filepath.Join("..", "machine", "machine.exe"), args...)
 	cmdMachine.Stdout = &stdout
 	cmdMachine.Stderr = os.Stderr
 	if err := cmdMachine.Run(); err != nil {
