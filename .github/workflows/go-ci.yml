@@ -27,6 +27,16 @@ jobs:
           go mod tidy -C ./machine
           go mod tidy -C ./isa
 
+      - name: Set execute permissions for machine.exe
+        # NEW: Grants execute permissions on Linux
+        working-directory: ./machine
+        run: chmod +x machine.exe
+
+      - name: Set execute permissions for translator.exe
+        # Grants execute permissions on Linux
+        working-directory: ./translator
+        run: chmod +x translator.exe
+
       - name: Set up Go workspace (go.work)
         # Запускаем go work sync из корневой директории, где находится go.work
         # working-directory не нужен, если команда выполняется из корня репозитория
