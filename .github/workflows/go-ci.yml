@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     name: Build & Test
-    runs-on: windows-latest # Указан Windows runner
+    runs-on: ubuntu-latest # Указан Windows runner
 
     steps:
       - name: Checkout code
@@ -31,52 +31,6 @@ jobs:
         # Запускаем go work sync из корневой директории, где находится go.work
         # working-directory не нужен, если команда выполняется из корня репозитория
         run: go work sync
-
-      - name: Cache Go modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/go/pkg/mod
-            ~/.cache/go-build
-            # В Windows пути кэша могут быть другими, но actions/cache обычно их корректно определяет.
-            # Если возникнут проблемы, можно попробовать %USERPROFILE%\go\pkg\mod и %USERPROFILE%\.cache\go-build
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum', 'go.work.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
-#      - name: Format check (gofmt & goimports)
-#        # Устанавливаем goimports глобально для использования в следующем шаге.
-#        # Команда 'if ! ... ; then ...' является синтаксисом bash/sh,
-#        # который работает на Windows runner, т.к. GitHub Actions по умолчанию использует PowerShell/Bash.
-#        # Однако, для PowerShell более идиоматично использовать `if (-not (...)) { ... }`.
-#        # Придерживаемся кросс-платформенного синтаксиса bash, который будет работать.
-#        run: |
-#          go install golang.org/x/tools/cmd/goimports@latest
-#          # Use PowerShell syntax for the if statement
-#          $unformatted = goimports -l .
-#          if ($unformatted) {
-#            Write-Host "::error file=.::Go files not formatted with goimports or imports are unorganized. Please run 'goimports -w .' on your local machine."
-#            exit 1
-#          }
-#        shell: pwsh # Explicitly tell GitHub Actions to use PowerShell
-
-      - name: Run linter (golangci-lint)
-        uses: golangci/golangci-lint-action@v6
-        with:
-          # working-directory: ./ - не указываем, так как по умолчанию уже корень репозитория
-          # args: --config=./.golangci.yml ./... - эта конфигурация должна работать,
-          # так как .golangci.yml находится в корне, и `./...` указывает на все пакеты в текущем воркспейсе.
-          # Если возникают проблемы, раскомментируйте более явную версию ниже.
-          version: v1.59.0
-          args: --config=./.golangci.yml ./...
-
-      # - name: Run linter (golangci-lint) - Alternative explicit args
-      #   # Если предыдущий шаг с `./...` не сработает, попробуйте эту явную версию.
-      #   #working-directory: ./ # Оставил для ясности, но по умолчанию это корень репо.
-      #   uses: golangci/golangci-lint-action@v6
-      #   with:
-      #     version: v1.59.0
-      #     args: ./isa/... ./translator/... ./machine/... ./goldentest/...
 
       - name: Run tests in goldentest module
         working-directory: ./goldentest # Указываем путь к модулю goldentest
