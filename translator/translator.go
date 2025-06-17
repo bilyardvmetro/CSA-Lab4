@@ -708,12 +708,25 @@ func writeSymTableToMemDump(tables SymbolTables) {
 
 func write(lines []string, file string) {
 	out, _ := os.Create(file)
-	defer out.Close()
+	defer func(out *os.File) {
+		err := out.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(out)
 	w := bufio.NewWriter(out)
-	defer w.Flush()
+	defer func(w *bufio.Writer) {
+		err := w.Flush()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(w)
 
 	for _, line := range lines {
-		fmt.Fprintf(w, "%s\n", line)
+		_, err := fmt.Fprintf(w, "%s\n", line)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 

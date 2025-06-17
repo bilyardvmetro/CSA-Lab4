@@ -116,7 +116,7 @@ func main() {
 	defer func(logFile *os.File) {
 		err := logFile.Close()
 		if err != nil {
-			fmt.Printf(err.Error())
+			log.Fatal(err)
 		}
 	}(logFile)
 	log.SetOutput(logFile)
