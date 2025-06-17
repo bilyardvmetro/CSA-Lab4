@@ -23,22 +23,22 @@ jobs:
 
       - name: Go Mod Tidy for goldentest module
         # Выполняем go mod tidy непосредственно в директории goldentest
-        working-directory: ./CSA-Lab4/goldentest
+        working-directory: ./goldentest
         run: go mod tidy
 
       - name: Go Mod Tidy for translator module
         # Выполняем go mod tidy непосредственно в директории goldentest
-        working-directory: ./CSA-Lab4/translator
+        working-directory: ./translator
         run: go mod tidy
 
       - name: Go Mod Tidy for machine module
         # Выполняем go mod tidy непосредственно в директории goldentest
-        working-directory: ./CSA-Lab4/machine
+        working-directory: ./machine
         run: go mod tidy
 
       - name: Go Mod Tidy for isa module
         # Выполняем go mod tidy непосредственно в директории goldentest
-        working-directory: ./CSA-Lab4/isa
+        working-directory: ./isa
         run: go mod tidy
 
       - name: Cache Go modules
