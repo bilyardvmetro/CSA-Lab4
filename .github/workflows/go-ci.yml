@@ -21,15 +21,35 @@ jobs:
       - name: Set up Go workspace (go.work)
         run: go work sync
 
-#      - name: Cache Go modules
-#        uses: actions/cache@v4
-#        with:
-#          path: |
-#            ~/go/pkg/mod
-#            ~/.cache/go-build
-#          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum', 'go.work.sum') }}
-#          restore-keys: |
-#            ${{ runner.os }}-go-
+      - name: Go Mod Tidy for goldentest module
+        # Выполняем go mod tidy непосредственно в директории goldentest
+        working-directory: ./CSA-Lab4/goldentest
+        run: go mod tidy
+
+      - name: Go Mod Tidy for translator module
+        # Выполняем go mod tidy непосредственно в директории goldentest
+        working-directory: ./CSA-Lab4/translator
+        run: go mod tidy
+
+      - name: Go Mod Tidy for machine module
+        # Выполняем go mod tidy непосредственно в директории goldentest
+        working-directory: ./CSA-Lab4/machine
+        run: go mod tidy
+
+      - name: Go Mod Tidy for isa module
+        # Выполняем go mod tidy непосредственно в директории goldentest
+        working-directory: ./CSA-Lab4/isa
+        run: go mod tidy
+
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum', 'go.work.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
 
       - name: Format check (gofmt)
         run: |
