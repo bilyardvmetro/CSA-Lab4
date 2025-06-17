@@ -59,19 +59,19 @@ jobs:
             exit 1
           fi
 
-#      - name: Run linter (golangci-lint)
-#        uses: golangci/golangci-lint-action@v6
-#        with:
-#          version: v1.59.0
-#          # Запускаем из корневого каталога для всех модулей в воркспейсе
-#          args: --config=./.golangci.yml ./...
-
-      - name: Run golangci-lint
+      - name: Run linter (golangci-lint)
         uses: golangci/golangci-lint-action@v6
         with:
-          working-directory: ./
-          args: ./isa/... ./translator/... ./machine/... ./goldentest/...
-          version: v1.59
+          version: v1.59.0
+          # Запускаем из корневого каталога для всех модулей в воркспейсе
+          args: --config=./.golangci.yml ./...
+
+#      - name: Run golangci-lint
+#        uses: golangci/golangci-lint-action@v6
+#        with:
+#          working-directory: ./
+#          args: ./isa/... ./translator/... ./machine/... ./goldentest/...
+#          version: v1.59
 
       - name: Run tests in goldentest module
         working-directory: goldentest
