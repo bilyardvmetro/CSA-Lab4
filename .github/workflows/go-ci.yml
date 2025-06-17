@@ -18,6 +18,17 @@ jobs:
         with:
           go-version: 1.23.6
 
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('isa/go.sum', 'machine/go.sum', 'translator/go.sum', 'goldentest/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+    
+
       - name: Set up Go workspace (go.work)
         run: go work sync
 
