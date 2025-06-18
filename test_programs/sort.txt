@@ -53,14 +53,14 @@ outer_loop:
   add a2, r0, r0          ; a2 = j = 0
   sub a3, s0, s2          ; n - i
   addi a3, a3, -1         ; n - i - 1 -- кол-во сравнений
-  ble a3, r0, exit_outer  ; if a3 < 0 -> exit
+  blt a3, r0, exit_outer  ; if a3 < 0 -> exit
   beq a3, r0, exit_outer  ; if a3 = 0 -> exit
 
 inner_loop:
   add t3, t2, a2         ; ptr + j
   lw a0, t3, 0            ; a0 = arr[j]
   lw a1, t3, 1            ; a1 = arr[j+1]
-  ble a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
+  blt a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
   
   ; swap arr[j] and arr[j+1]
   sw a1, t3, 0
@@ -68,11 +68,11 @@ inner_loop:
 
 skip_swap:
   addi a2, a2, 1          ; j++
-  ble a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
+  blt a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
 
 exit_outer:
   addi s2, s2, 1          ; i++
-  ble s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
+  blt s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
 
 output_loop:
   beq r0, s0, end

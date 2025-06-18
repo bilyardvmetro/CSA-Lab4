@@ -54,14 +54,14 @@ in_src: |-
     add a2, r0, r0          ; a2 = j = 0
     sub a3, s0, s2          ; n - i
     addi a3, a3, -1         ; n - i - 1 -- кол-во сравнений
-    ble a3, r0, exit_outer  ; if a3 < 0 -> exit
+    blt a3, r0, exit_outer  ; if a3 < 0 -> exit
     beq a3, r0, exit_outer  ; if a3 = 0 -> exit
   
   inner_loop:
     add t3, t2, a2         ; ptr + j
     lw a0, t3, 0            ; a0 = arr[j]
     lw a1, t3, 1            ; a1 = arr[j+1]
-    ble a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
+    blt a0, a1, skip_swap   ; if arr[j] < arr [j+1] -> skip swap
     
     ; swap arr[j] and arr[j+1]
     sw a1, t3, 0
@@ -69,11 +69,11 @@ in_src: |-
   
   skip_swap:
     addi a2, a2, 1          ; j++
-    ble a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
+    blt a2, a3, inner_loop  ; if j < n - i - 1 -> ANOTHER ONE
   
   exit_outer:
     addi s2, s2, 1          ; i++
-    ble s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
+    blt s2, s0, outer_loop  ; if i < n -> ANOTHER ONE
   
   output_loop:
     beq r0, s0, end
@@ -139,18 +139,18 @@ mem_dump: |
   progMem    18:    81920001    add a2, r0, r0
   progMem    19:    81A2B682    sub a3, s0, s2
   progMem    20:    41A5AFFF    addi a3, a3, -1
-  progMem    21:    1009A009    ble a3, r0, 9
+  progMem    21:    1009A009    blt a3, r0, 9
   progMem    22:    1003A008    beq a3, r0, 8
   progMem    23:    80726C81    add t3, t2, a2
   progMem    24:    41727000    lw a0, t3, 0
   progMem    25:    41827001    lw a1, t3, 1
-  progMem    26:    10097C02    ble a0, a1, 2
+  progMem    26:    10097C02    blt a0, a1, 2
   progMem    27:    20027C00    sw a1, t3, 0
   progMem    28:    20027B81    sw a0, t3, 1
   progMem    29:    41959001    addi a2, a2, 1
-  progMem    30:    11F99D78    ble a2, a3, -8
+  progMem    30:    11F99D78    blt a2, a3, -8
   progMem    31:    40D4D001    addi s2, s2, 1
-  progMem    32:    11F8D5F1    ble s2, s0, -15
+  progMem    32:    11F8D5F1    blt s2, s0, -15
   progMem    33:    10020585    beq r0, s0, 5
   progMem    34:    41726000    lw a0, t2, 0
   progMem    35:    20025B80    sw a0, t1, 0

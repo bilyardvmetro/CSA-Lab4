@@ -57,7 +57,7 @@ func makeControlUnit(dataPath DataPath) ControlUnit {
 		isa.InstructionMap[isa.JALR]: 26,
 		isa.InstructionMap[isa.BEQ]:  29,
 		isa.InstructionMap[isa.BNE]:  34,
-		isa.InstructionMap[isa.BLE]:  39,
+		isa.InstructionMap[isa.BLT]:  39,
 		isa.InstructionMap[isa.BGT]:  44,
 	}
 

@@ -60,7 +60,7 @@ const (
 	BEQ = "beq"
 	BNE = "bne"
 	BGT = "bgt"
-	BLE = "ble"
+	BLT = "blt"
 
 	// U-Type
 	LUI = "lui"
@@ -92,7 +92,7 @@ var InstructionMap = map[string][3]string{
 	BEQ: {"0001000", "001", ""},
 	BNE: {"0001000", "010", ""},
 	BGT: {"0001000", "011", ""},
-	BLE: {"0001000", "100", ""},
+	BLT: {"0001000", "100", ""},
 	// U-Type
 	LUI: {"0000100", "", ""},
 	// J-Type

@@ -64,7 +64,7 @@ var loRegex = regexp.MustCompile(`%lo\((\w+)\)`)
 // Регулярные выражения для control-flow инструкций
 var jalRegex = regexp.MustCompile(`(?i)^(jal)\s+([a-zA-Z0-9_]+),\s*(\w+)$`)
 var jalrRegex = regexp.MustCompile(`(?i)^(jalr)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
-var branchRegex = regexp.MustCompile(`(?i)^(beq|bne|bgt|ble)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
+var branchRegex = regexp.MustCompile(`(?i)^(beq|bne|bgt|blt)\s+([a-zA-Z0-9_]+,\s*[a-zA-Z0-9_]+,\s*)(\w+)$`)
 
 var memDumpFile *os.File
 var dataMemory *os.File
@@ -638,7 +638,7 @@ func ConvertProgramToBinary(instructions []Instruction) {
 			binaryInstruction = makeBinaryRTypeInstruction(tokens)
 		case isa.LW, isa.ORI, isa.ADDI, isa.JALR, isa.HALT:
 			binaryInstruction = makeBinaryITypeInstruction(tokens)
-		case isa.SW, isa.BEQ, isa.BNE, isa.BGT, isa.BLE:
+		case isa.SW, isa.BEQ, isa.BNE, isa.BGT, isa.BLT:
 			binaryInstruction = makeBinarySBTypeInstructions(tokens)
 		case isa.LUI, isa.JAL:
 			binaryInstruction = makeBinaryUJTypeInstruction(tokens)
