@@ -108,7 +108,7 @@ func main() {
 	}
 
 	programName := filepath.Base(instructionsFile)
-	logFile, err := os.OpenFile("../out/"+programName[:len(programName)-9]+"/"+programName[:len(programName)-9]+".log", os.O_CREATE|os.O_WRONLY, 0644)
+	logFile, err := os.OpenFile("../out/"+programName[:len(programName)-9]+"/"+programName[:len(programName)-9]+".log", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
 		// Если не удалось открыть файл, выводим ошибку в stderr
 		log.Fatalf("Ошибка при открытии файла логов: %v", err)
@@ -178,11 +178,11 @@ func runMmachine(instructions []DataEntry, data []DataEntry, inputStr string) {
 
 		mcExecuted, err := controlUnit.executeMicroProgram()
 		mcCounter += mcExecuted
-		log.Printf(
-			"Machine state: IR(%d); MPC(%d); PC(%d); NZ(%02b); Ticks(%d); Mc executed(%d)\nRegisters%v",
-			controlUnit.ir, controlUnit.mpc, controlUnit.dataPath.pc, controlUnit.dataPath.alu.nz, controlUnit.ticks,
-			mcCounter, controlUnit.dataPath.regFile.registers,
-		)
+		//log.Printf(
+		//	"Machine state: IR(%d); MPC(%d); PC(%d); NZ(%02b); Ticks(%d); Mc executed(%d)\nRegisters%v",
+		//	controlUnit.ir, controlUnit.mpc, controlUnit.dataPath.pc, controlUnit.dataPath.alu.nz, controlUnit.ticks,
+		//	mcCounter, controlUnit.dataPath.regFile.registers,
+		//)
 
 		if err != nil {
 			fmt.Printf("Stop Reason: %v\n", err)

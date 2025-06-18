@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"log"
 	"strconv"
 
 	"example.com/CSA-Lab4/isa"
@@ -78,6 +79,7 @@ func (c *ControlUnit) readInstruction() string {
 
 func (c *ControlUnit) decodeInstruction() error {
 	instruction := c.readInstruction()
+	log.Printf("Executing: instruction on pc=%d", c.dataPath.pc)
 
 	instrType := instruction[0:typeBits]
 	switch instrType {
@@ -198,6 +200,10 @@ func (c *ControlUnit) latchMpc() {
 		c.mpc = c.ir
 	case sel_mpc_zero:
 		c.mpc = 0
+		log.Printf(
+			"Machine state: IR(%d); MPC(%d); PC(%d); NZ(%02b); Ticks(%d)\nRegisters%v",
+			c.ir, c.mpc, c.dataPath.pc, c.dataPath.alu.nz, c.ticks, c.dataPath.regFile.registers,
+		)
 	}
 }
 
@@ -237,6 +243,7 @@ func (c *ControlUnit) selDoubleIncIfGreater() {
 		c.incValue = 1
 	}
 }
+
 func (c *ControlUnit) selDoubleIncIfLower() {
 	if c.dataPath.alu.nz == 0b10 { // blt if a<b (only nz==10)
 		c.incValue = 2

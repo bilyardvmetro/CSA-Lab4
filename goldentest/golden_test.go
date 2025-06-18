@@ -47,7 +47,7 @@ func runProgramTest(t *testing.T, program, ymlPath string) {
 
 	codePath := filepath.Join(outDir, program+"_code.bin")
 	dataPath := filepath.Join(outDir, program+"_data.bin")
-	//logPath := filepath.Join(outDir, program+".log")
+	logPath := filepath.Join(outDir, program+".log")
 	srcPath := filepath.Join("..", "test_programs", program+".txt")
 
 	var golden GoldenCase
@@ -119,15 +119,15 @@ func runProgramTest(t *testing.T, program, ymlPath string) {
 	}
 
 	// === Compare log ===
-	//logBytes, err := os.ReadFile(logPath)
-	//if err != nil {
-	//	t.Fatalf("failed to read log: %v", err)
-	//}
-	//gotLog := normalize(string(logBytes))
-	//wantLog := normalize(golden.Log)
-	//if gotLog != wantLog {
-	//	t.Errorf("log mismatch\nExpected:\n%s\nGot:\n%s", wantLog, gotLog)
-	//}
+	logBytes, err := os.ReadFile(logPath)
+	if err != nil {
+		t.Fatalf("failed to read log: %v", err)
+	}
+	gotLog := normalize(string(logBytes))
+	wantLog := normalize(golden.Log)
+	if gotLog != wantLog {
+		t.Errorf("log mismatch\nExpected:\n%s\nGot:\n%s", wantLog, gotLog)
+	}
 
 	// === Compare memory dump, if provided ===
 	if strings.TrimSpace(golden.MemDump) != "" {

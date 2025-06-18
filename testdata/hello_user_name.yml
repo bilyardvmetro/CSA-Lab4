@@ -217,3 +217,1186 @@ stdout: |
   Output decimal: [87 104 97 116 32 105 115 32 121 111 117 114 32 110 97 109 101 63 10 72 101 108 108 111 44 32 98 105 108 121 97 114 100 118 109 101 116 114 111 33]
   Output hex: 57 68 61 74 20 69 73 20 79 6F 75 72 20 6E 61 6D 65 3F A 48 65 6C 6C 6F 2C 20 62 69 6C 79 61 72 64 76 6D 65 74 72 6F 21
 log: |
+  controlunit.go:82: Executing: instruction on pc=1
+  controlunit.go:203: Machine state: IR(12); MPC(0); PC(1); NZ(00); Ticks(3)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=2
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(2); NZ(00); Ticks(8)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2]
+  controlunit.go:82: Executing: instruction on pc=3
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(3); NZ(00); Ticks(14)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2]
+  controlunit.go:82: Executing: instruction on pc=4
+  controlunit.go:203: Machine state: IR(12); MPC(0); PC(4); NZ(00); Ticks(18)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2]
+  controlunit.go:82: Executing: instruction on pc=5
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(5); NZ(00); Ticks(23)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3]
+  controlunit.go:82: Executing: instruction on pc=6
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(6); NZ(00); Ticks(29)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3]
+  controlunit.go:82: Executing: instruction on pc=7
+  controlunit.go:203: Machine state: IR(12); MPC(0); PC(7); NZ(00); Ticks(33)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3]
+  controlunit.go:82: Executing: instruction on pc=8
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(8); NZ(00); Ticks(38)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 1 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=9
+  controlunit.go:203: Machine state: IR(12); MPC(0); PC(9); NZ(00); Ticks(42)
+  Registers[0 0 0 0 0 0 0 0 0 0 0 0 0 1 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=10
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(10); NZ(00); Ticks(47)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 24]
+  controlunit.go:82: Executing: instruction on pc=11
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(11); NZ(00); Ticks(52)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=12
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(12); NZ(00); Ticks(58)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 7 0 0 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=13
+  controlunit.go:203: Machine state: IR(4); MPC(0); PC(13); NZ(00); Ticks(62)
+  Registers[0 0 0 31 0 0 0 0 0 0 0 0 0 1 5 0 23 7 0 0 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=14
+  io_controller.go:79: Из in буфера прочитан символ: 13
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(14); NZ(01); Ticks(68)
+  Registers[0 0 0 31 0 0 0 0 0 0 0 0 0 1 5 0 23 7 13 0 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(75)
+  Registers[0 0 0 31 0 0 0 0 0 0 0 0 0 1 5 0 23 7 13 0 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 98
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(81)
+  Registers[0 0 0 31 0 0 0 0 0 0 0 0 0 1 5 0 23 7 13 98 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(87)
+  Registers[0 0 0 31 0 0 0 0 0 0 0 0 0 1 5 0 23 7 13 98 0 0 0 0 0 0 0 0 0 0 0 31]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(92)
+  Registers[0 0 0 31 0 0 0 0 0 0 0 0 0 1 5 0 23 7 12 98 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(97)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 7 12 98 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(102)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 8 12 98 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(108)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 8 12 98 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(114)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 8 12 98 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(121)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 8 12 98 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 105
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(127)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 8 12 105 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(133)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 8 12 105 0 0 0 0 0 0 0 0 0 0 0 32]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(138)
+  Registers[0 0 0 32 0 0 0 0 0 0 0 0 0 1 5 0 23 8 11 105 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(143)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 8 11 105 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(148)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 9 11 105 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(154)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 9 11 105 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(160)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 9 11 105 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(167)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 9 11 105 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 108
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(173)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 9 11 108 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(179)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 9 11 108 0 0 0 0 0 0 0 0 0 0 0 33]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(184)
+  Registers[0 0 0 33 0 0 0 0 0 0 0 0 0 1 5 0 23 9 10 108 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(189)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 9 10 108 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(194)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 10 10 108 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(200)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 10 10 108 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(206)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 10 10 108 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(213)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 10 10 108 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 121
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(219)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 10 10 121 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(225)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 10 10 121 0 0 0 0 0 0 0 0 0 0 0 34]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(230)
+  Registers[0 0 0 34 0 0 0 0 0 0 0 0 0 1 5 0 23 10 9 121 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(235)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 10 9 121 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(240)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 11 9 121 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(246)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 11 9 121 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(252)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 11 9 121 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(259)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 11 9 121 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 97
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(265)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 11 9 97 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(271)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 11 9 97 0 0 0 0 0 0 0 0 0 0 0 35]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(276)
+  Registers[0 0 0 35 0 0 0 0 0 0 0 0 0 1 5 0 23 11 8 97 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(281)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 11 8 97 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(286)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 12 8 97 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(292)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 12 8 97 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(298)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 12 8 97 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(305)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 12 8 97 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 114
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(311)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 12 8 114 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(317)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 12 8 114 0 0 0 0 0 0 0 0 0 0 0 36]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(322)
+  Registers[0 0 0 36 0 0 0 0 0 0 0 0 0 1 5 0 23 12 7 114 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(327)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 12 7 114 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(332)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 13 7 114 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(338)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 13 7 114 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(344)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 13 7 114 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(351)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 13 7 114 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 100
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(357)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 13 7 100 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(363)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 13 7 100 0 0 0 0 0 0 0 0 0 0 0 37]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(368)
+  Registers[0 0 0 37 0 0 0 0 0 0 0 0 0 1 5 0 23 13 6 100 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(373)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 13 6 100 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(378)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 14 6 100 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(384)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 14 6 100 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(390)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 14 6 100 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(397)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 14 6 100 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 118
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(403)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 14 6 118 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(409)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 14 6 118 0 0 0 0 0 0 0 0 0 0 0 38]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(414)
+  Registers[0 0 0 38 0 0 0 0 0 0 0 0 0 1 5 0 23 14 5 118 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(419)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 14 5 118 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(424)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 15 5 118 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(430)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 15 5 118 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(436)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 15 5 118 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(443)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 15 5 118 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 109
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(449)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 15 5 109 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(455)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 15 5 109 0 0 0 0 0 0 0 0 0 0 0 39]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(460)
+  Registers[0 0 0 39 0 0 0 0 0 0 0 0 0 1 5 0 23 15 4 109 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(465)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 15 4 109 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(470)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 16 4 109 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(476)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 16 4 109 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(482)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 16 4 109 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(489)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 16 4 109 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 101
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(495)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 16 4 101 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(501)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 16 4 101 0 0 0 0 0 0 0 0 0 0 0 40]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(506)
+  Registers[0 0 0 40 0 0 0 0 0 0 0 0 0 1 5 0 23 16 3 101 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(511)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 16 3 101 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(516)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 17 3 101 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(522)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 17 3 101 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(528)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 17 3 101 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(535)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 17 3 101 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 116
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(541)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 17 3 116 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(547)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 17 3 116 0 0 0 0 0 0 0 0 0 0 0 41]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(552)
+  Registers[0 0 0 41 0 0 0 0 0 0 0 0 0 1 5 0 23 17 2 116 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(557)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 17 2 116 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(562)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 18 2 116 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(568)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 18 2 116 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(574)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 18 2 116 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(581)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 18 2 116 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 114
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(587)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 18 2 114 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(593)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 18 2 114 0 0 0 0 0 0 0 0 0 0 0 42]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(00); Ticks(598)
+  Registers[0 0 0 42 0 0 0 0 0 0 0 0 0 1 5 0 23 18 1 114 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(603)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 18 1 114 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(608)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 19 1 114 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(614)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 19 1 114 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(620)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 19 1 114 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(15); NZ(00); Ticks(627)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 19 1 114 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=16
+  io_controller.go:79: Из in буфера прочитан символ: 111
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(16); NZ(01); Ticks(633)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 19 1 111 0 0 0 0 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=17
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(17); NZ(00); Ticks(639)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 19 1 111 0 0 0 0 0 0 0 0 0 0 0 43]
+  controlunit.go:82: Executing: instruction on pc=18
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(18); NZ(01); Ticks(644)
+  Registers[0 0 0 43 0 0 0 0 0 0 0 0 0 1 5 0 23 19 0 111 0 0 0 0 0 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=19
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(19); NZ(00); Ticks(649)
+  Registers[0 0 0 44 0 0 0 0 0 0 0 0 0 1 5 0 23 19 0 111 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=20
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(20); NZ(00); Ticks(654)
+  Registers[0 0 0 44 0 0 0 0 0 0 0 0 0 1 5 0 23 20 0 111 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=21
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(21); NZ(00); Ticks(660)
+  Registers[0 0 0 44 0 0 0 0 0 0 0 0 0 1 5 0 23 20 0 111 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=22
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(14); NZ(00); Ticks(666)
+  Registers[0 0 0 44 0 0 0 0 0 0 0 0 0 1 5 0 23 20 0 111 0 0 0 0 0 0 0 0 0 0 0 -8]
+  controlunit.go:82: Executing: instruction on pc=15
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(22); NZ(00); Ticks(673)
+  Registers[0 0 0 44 0 0 0 0 0 0 0 0 0 1 5 0 23 20 0 111 0 0 0 0 0 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=23
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(23); NZ(00); Ticks(678)
+  Registers[0 0 0 44 0 0 0 0 0 0 0 0 0 1 5 0 23 20 0 33 0 0 0 0 0 0 0 0 0 0 0 33]
+  controlunit.go:82: Executing: instruction on pc=24
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(24); NZ(00); Ticks(684)
+  Registers[0 0 0 44 0 0 0 0 0 0 0 0 0 1 5 0 23 20 0 33 0 0 0 0 0 0 0 0 0 0 0 44]
+  controlunit.go:82: Executing: instruction on pc=25
+  controlunit.go:203: Machine state: IR(5); MPC(0); PC(25); NZ(00); Ticks(688)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 20 0 33 0 0 0 0 0 0 0 0 0 0 0 44]
+  controlunit.go:82: Executing: instruction on pc=26
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(26); NZ(00); Ticks(693)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 21 0 33 0 0 0 0 0 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=27
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(27); NZ(00); Ticks(699)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 21 0 33 0 0 0 0 0 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=28
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(28); NZ(00); Ticks(704)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 21 0 33 0 0 0 5 0 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=29
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(29); NZ(00); Ticks(709)
+  Registers[0 0 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=30
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(35); NZ(00); Ticks(715)
+  Registers[0 30 0 24 0 0 0 0 0 0 0 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=36
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(36); NZ(00); Ticks(720)
+  Registers[0 30 0 24 5 0 0 0 0 0 0 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=37
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(37); NZ(00); Ticks(725)
+  Registers[0 30 0 24 5 0 0 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=38
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(38); NZ(00); Ticks(731)
+  Registers[0 30 0 24 5 18 0 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 4]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(738)
+  Registers[0 30 0 24 5 18 0 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(744)
+  Registers[0 30 0 24 5 18 87 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  87
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(750)
+  Registers[0 30 0 24 5 18 87 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(755)
+  Registers[0 30 0 24 5 17 87 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(760)
+  Registers[0 30 0 24 6 17 87 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(766)
+  Registers[0 30 0 24 6 17 87 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(773)
+  Registers[0 30 0 24 6 17 87 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(779)
+  Registers[0 30 0 24 6 17 104 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 6]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  104
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(785)
+  Registers[0 30 0 24 6 17 104 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(790)
+  Registers[0 30 0 24 6 16 104 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(795)
+  Registers[0 30 0 24 7 16 104 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(801)
+  Registers[0 30 0 24 7 16 104 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(808)
+  Registers[0 30 0 24 7 16 104 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(814)
+  Registers[0 30 0 24 7 16 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 7]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  97
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(820)
+  Registers[0 30 0 24 7 16 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(825)
+  Registers[0 30 0 24 7 15 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(830)
+  Registers[0 30 0 24 8 15 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(836)
+  Registers[0 30 0 24 8 15 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(843)
+  Registers[0 30 0 24 8 15 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(849)
+  Registers[0 30 0 24 8 15 116 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 8]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  116
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(855)
+  Registers[0 30 0 24 8 15 116 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(860)
+  Registers[0 30 0 24 8 14 116 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(865)
+  Registers[0 30 0 24 9 14 116 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(871)
+  Registers[0 30 0 24 9 14 116 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(878)
+  Registers[0 30 0 24 9 14 116 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(884)
+  Registers[0 30 0 24 9 14 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 9]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  32
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(890)
+  Registers[0 30 0 24 9 14 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(895)
+  Registers[0 30 0 24 9 13 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(900)
+  Registers[0 30 0 24 10 13 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(906)
+  Registers[0 30 0 24 10 13 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(913)
+  Registers[0 30 0 24 10 13 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(919)
+  Registers[0 30 0 24 10 13 105 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 10]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  105
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(925)
+  Registers[0 30 0 24 10 13 105 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(930)
+  Registers[0 30 0 24 10 12 105 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(935)
+  Registers[0 30 0 24 11 12 105 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(941)
+  Registers[0 30 0 24 11 12 105 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(948)
+  Registers[0 30 0 24 11 12 105 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(954)
+  Registers[0 30 0 24 11 12 115 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 11]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  115
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(960)
+  Registers[0 30 0 24 11 12 115 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(965)
+  Registers[0 30 0 24 11 11 115 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(970)
+  Registers[0 30 0 24 12 11 115 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(976)
+  Registers[0 30 0 24 12 11 115 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(983)
+  Registers[0 30 0 24 12 11 115 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(989)
+  Registers[0 30 0 24 12 11 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 12]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  32
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(995)
+  Registers[0 30 0 24 12 11 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1000)
+  Registers[0 30 0 24 12 10 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1005)
+  Registers[0 30 0 24 13 10 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1011)
+  Registers[0 30 0 24 13 10 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1018)
+  Registers[0 30 0 24 13 10 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1024)
+  Registers[0 30 0 24 13 10 121 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 13]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  121
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1030)
+  Registers[0 30 0 24 13 10 121 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1035)
+  Registers[0 30 0 24 13 9 121 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1040)
+  Registers[0 30 0 24 14 9 121 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1046)
+  Registers[0 30 0 24 14 9 121 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1053)
+  Registers[0 30 0 24 14 9 121 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1059)
+  Registers[0 30 0 24 14 9 111 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 14]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  111
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1065)
+  Registers[0 30 0 24 14 9 111 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1070)
+  Registers[0 30 0 24 14 8 111 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1075)
+  Registers[0 30 0 24 15 8 111 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1081)
+  Registers[0 30 0 24 15 8 111 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1088)
+  Registers[0 30 0 24 15 8 111 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1094)
+  Registers[0 30 0 24 15 8 117 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 15]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  117
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1100)
+  Registers[0 30 0 24 15 8 117 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1105)
+  Registers[0 30 0 24 15 7 117 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1110)
+  Registers[0 30 0 24 16 7 117 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1116)
+  Registers[0 30 0 24 16 7 117 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1123)
+  Registers[0 30 0 24 16 7 117 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1129)
+  Registers[0 30 0 24 16 7 114 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 16]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  114
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1135)
+  Registers[0 30 0 24 16 7 114 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1140)
+  Registers[0 30 0 24 16 6 114 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1145)
+  Registers[0 30 0 24 17 6 114 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1151)
+  Registers[0 30 0 24 17 6 114 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1158)
+  Registers[0 30 0 24 17 6 114 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1164)
+  Registers[0 30 0 24 17 6 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 17]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  32
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1170)
+  Registers[0 30 0 24 17 6 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1175)
+  Registers[0 30 0 24 17 5 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1180)
+  Registers[0 30 0 24 18 5 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1186)
+  Registers[0 30 0 24 18 5 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1193)
+  Registers[0 30 0 24 18 5 32 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1199)
+  Registers[0 30 0 24 18 5 110 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 18]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  110
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1205)
+  Registers[0 30 0 24 18 5 110 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1210)
+  Registers[0 30 0 24 18 4 110 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1215)
+  Registers[0 30 0 24 19 4 110 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1221)
+  Registers[0 30 0 24 19 4 110 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1228)
+  Registers[0 30 0 24 19 4 110 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1234)
+  Registers[0 30 0 24 19 4 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 19]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  97
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1240)
+  Registers[0 30 0 24 19 4 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1245)
+  Registers[0 30 0 24 19 3 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1250)
+  Registers[0 30 0 24 20 3 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1256)
+  Registers[0 30 0 24 20 3 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1263)
+  Registers[0 30 0 24 20 3 97 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1269)
+  Registers[0 30 0 24 20 3 109 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 20]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  109
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1275)
+  Registers[0 30 0 24 20 3 109 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1280)
+  Registers[0 30 0 24 20 2 109 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1285)
+  Registers[0 30 0 24 21 2 109 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1291)
+  Registers[0 30 0 24 21 2 109 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1298)
+  Registers[0 30 0 24 21 2 109 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1304)
+  Registers[0 30 0 24 21 2 101 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 21]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  101
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1310)
+  Registers[0 30 0 24 21 2 101 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1315)
+  Registers[0 30 0 24 21 1 101 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1320)
+  Registers[0 30 0 24 22 1 101 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1326)
+  Registers[0 30 0 24 22 1 101 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1333)
+  Registers[0 30 0 24 22 1 101 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1339)
+  Registers[0 30 0 24 22 1 63 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 22]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  63
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1345)
+  Registers[0 30 0 24 22 1 63 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(01); Ticks(1350)
+  Registers[0 30 0 24 22 0 63 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1355)
+  Registers[0 30 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1361)
+  Registers[0 30 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(44); NZ(00); Ticks(1368)
+  Registers[0 30 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=45
+  controlunit.go:203: Machine state: IR(26); MPC(0); PC(30); NZ(00); Ticks(1374)
+  Registers[0 30 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 33 0 0 0 5 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=31
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(31); NZ(00); Ticks(1379)
+  Registers[0 30 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 5 1 0 0 0 0 0 0 10]
+  controlunit.go:82: Executing: instruction on pc=32
+  io_controller.go:70: В out буфер записан символ:  10
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(32); NZ(00); Ticks(1385)
+  Registers[0 30 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 5 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=33
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(33); NZ(00); Ticks(1390)
+  Registers[0 30 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=34
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(35); NZ(00); Ticks(1396)
+  Registers[0 34 0 24 23 0 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=36
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(36); NZ(00); Ticks(1401)
+  Registers[0 34 0 24 24 0 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=37
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(37); NZ(00); Ticks(1406)
+  Registers[0 34 0 24 24 0 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=38
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(38); NZ(00); Ticks(1412)
+  Registers[0 34 0 24 24 21 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 23]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1419)
+  Registers[0 34 0 24 24 21 63 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1425)
+  Registers[0 34 0 24 24 21 72 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 24]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  72
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1431)
+  Registers[0 34 0 24 24 21 72 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1436)
+  Registers[0 34 0 24 24 20 72 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1441)
+  Registers[0 34 0 24 25 20 72 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1447)
+  Registers[0 34 0 24 25 20 72 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1454)
+  Registers[0 34 0 24 25 20 72 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1460)
+  Registers[0 34 0 24 25 20 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 25]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  101
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1466)
+  Registers[0 34 0 24 25 20 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1471)
+  Registers[0 34 0 24 25 19 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1476)
+  Registers[0 34 0 24 26 19 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1482)
+  Registers[0 34 0 24 26 19 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1489)
+  Registers[0 34 0 24 26 19 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1495)
+  Registers[0 34 0 24 26 19 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 26]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  108
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1501)
+  Registers[0 34 0 24 26 19 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1506)
+  Registers[0 34 0 24 26 18 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1511)
+  Registers[0 34 0 24 27 18 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1517)
+  Registers[0 34 0 24 27 18 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1524)
+  Registers[0 34 0 24 27 18 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1530)
+  Registers[0 34 0 24 27 18 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 27]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  108
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1536)
+  Registers[0 34 0 24 27 18 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1541)
+  Registers[0 34 0 24 27 17 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1546)
+  Registers[0 34 0 24 28 17 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1552)
+  Registers[0 34 0 24 28 17 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1559)
+  Registers[0 34 0 24 28 17 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1565)
+  Registers[0 34 0 24 28 17 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 28]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  111
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1571)
+  Registers[0 34 0 24 28 17 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1576)
+  Registers[0 34 0 24 28 16 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1581)
+  Registers[0 34 0 24 29 16 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1587)
+  Registers[0 34 0 24 29 16 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1594)
+  Registers[0 34 0 24 29 16 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1600)
+  Registers[0 34 0 24 29 16 44 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 29]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  44
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1606)
+  Registers[0 34 0 24 29 16 44 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1611)
+  Registers[0 34 0 24 29 15 44 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1616)
+  Registers[0 34 0 24 30 15 44 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1622)
+  Registers[0 34 0 24 30 15 44 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1629)
+  Registers[0 34 0 24 30 15 44 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1635)
+  Registers[0 34 0 24 30 15 32 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 30]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  32
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1641)
+  Registers[0 34 0 24 30 15 32 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1646)
+  Registers[0 34 0 24 30 14 32 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1651)
+  Registers[0 34 0 24 31 14 32 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1657)
+  Registers[0 34 0 24 31 14 32 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1664)
+  Registers[0 34 0 24 31 14 32 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1670)
+  Registers[0 34 0 24 31 14 98 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 31]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  98
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1676)
+  Registers[0 34 0 24 31 14 98 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1681)
+  Registers[0 34 0 24 31 13 98 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1686)
+  Registers[0 34 0 24 32 13 98 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1692)
+  Registers[0 34 0 24 32 13 98 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1699)
+  Registers[0 34 0 24 32 13 98 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1705)
+  Registers[0 34 0 24 32 13 105 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 32]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  105
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1711)
+  Registers[0 34 0 24 32 13 105 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1716)
+  Registers[0 34 0 24 32 12 105 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1721)
+  Registers[0 34 0 24 33 12 105 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1727)
+  Registers[0 34 0 24 33 12 105 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1734)
+  Registers[0 34 0 24 33 12 105 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1740)
+  Registers[0 34 0 24 33 12 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 33]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  108
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1746)
+  Registers[0 34 0 24 33 12 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1751)
+  Registers[0 34 0 24 33 11 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1756)
+  Registers[0 34 0 24 34 11 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1762)
+  Registers[0 34 0 24 34 11 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1769)
+  Registers[0 34 0 24 34 11 108 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1775)
+  Registers[0 34 0 24 34 11 121 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 34]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  121
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1781)
+  Registers[0 34 0 24 34 11 121 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1786)
+  Registers[0 34 0 24 34 10 121 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1791)
+  Registers[0 34 0 24 35 10 121 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1797)
+  Registers[0 34 0 24 35 10 121 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1804)
+  Registers[0 34 0 24 35 10 121 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1810)
+  Registers[0 34 0 24 35 10 97 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 35]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  97
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1816)
+  Registers[0 34 0 24 35 10 97 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1821)
+  Registers[0 34 0 24 35 9 97 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1826)
+  Registers[0 34 0 24 36 9 97 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1832)
+  Registers[0 34 0 24 36 9 97 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1839)
+  Registers[0 34 0 24 36 9 97 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1845)
+  Registers[0 34 0 24 36 9 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 36]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  114
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1851)
+  Registers[0 34 0 24 36 9 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1856)
+  Registers[0 34 0 24 36 8 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1861)
+  Registers[0 34 0 24 37 8 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1867)
+  Registers[0 34 0 24 37 8 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1874)
+  Registers[0 34 0 24 37 8 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1880)
+  Registers[0 34 0 24 37 8 100 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 37]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  100
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1886)
+  Registers[0 34 0 24 37 8 100 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1891)
+  Registers[0 34 0 24 37 7 100 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1896)
+  Registers[0 34 0 24 38 7 100 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1902)
+  Registers[0 34 0 24 38 7 100 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1909)
+  Registers[0 34 0 24 38 7 100 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1915)
+  Registers[0 34 0 24 38 7 118 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 38]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  118
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1921)
+  Registers[0 34 0 24 38 7 118 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1926)
+  Registers[0 34 0 24 38 6 118 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1931)
+  Registers[0 34 0 24 39 6 118 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1937)
+  Registers[0 34 0 24 39 6 118 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1944)
+  Registers[0 34 0 24 39 6 118 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1950)
+  Registers[0 34 0 24 39 6 109 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 39]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  109
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1956)
+  Registers[0 34 0 24 39 6 109 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1961)
+  Registers[0 34 0 24 39 5 109 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(1966)
+  Registers[0 34 0 24 40 5 109 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(1972)
+  Registers[0 34 0 24 40 5 109 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(1979)
+  Registers[0 34 0 24 40 5 109 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(1985)
+  Registers[0 34 0 24 40 5 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 40]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  101
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(1991)
+  Registers[0 34 0 24 40 5 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(1996)
+  Registers[0 34 0 24 40 4 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(2001)
+  Registers[0 34 0 24 41 4 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(2007)
+  Registers[0 34 0 24 41 4 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(2014)
+  Registers[0 34 0 24 41 4 101 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(2020)
+  Registers[0 34 0 24 41 4 116 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 41]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  116
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(2026)
+  Registers[0 34 0 24 41 4 116 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(2031)
+  Registers[0 34 0 24 41 3 116 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(2036)
+  Registers[0 34 0 24 42 3 116 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(2042)
+  Registers[0 34 0 24 42 3 116 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(2049)
+  Registers[0 34 0 24 42 3 116 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(2055)
+  Registers[0 34 0 24 42 3 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 42]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  114
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(2061)
+  Registers[0 34 0 24 42 3 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(2066)
+  Registers[0 34 0 24 42 2 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(2071)
+  Registers[0 34 0 24 43 2 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(2077)
+  Registers[0 34 0 24 43 2 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(2084)
+  Registers[0 34 0 24 43 2 114 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(2090)
+  Registers[0 34 0 24 43 2 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 43]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  111
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(2096)
+  Registers[0 34 0 24 43 2 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(00); Ticks(2101)
+  Registers[0 34 0 24 43 1 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(2106)
+  Registers[0 34 0 24 44 1 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(2112)
+  Registers[0 34 0 24 44 1 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(39); NZ(00); Ticks(2119)
+  Registers[0 34 0 24 44 1 111 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=40
+  controlunit.go:203: Machine state: IR(17); MPC(0); PC(40); NZ(00); Ticks(2125)
+  Registers[0 34 0 24 44 1 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 44]
+  controlunit.go:82: Executing: instruction on pc=41
+  io_controller.go:70: В out буфер записан символ:  33
+  controlunit.go:203: Machine state: IR(20); MPC(0); PC(41); NZ(00); Ticks(2131)
+  Registers[0 34 0 24 44 1 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=42
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(42); NZ(01); Ticks(2136)
+  Registers[0 34 0 24 44 0 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -1]
+  controlunit.go:82: Executing: instruction on pc=43
+  controlunit.go:203: Machine state: IR(13); MPC(0); PC(43); NZ(00); Ticks(2141)
+  Registers[0 34 0 24 45 0 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 1]
+  controlunit.go:82: Executing: instruction on pc=44
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(38); NZ(00); Ticks(2147)
+  Registers[0 34 0 24 45 0 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 -6]
+  controlunit.go:82: Executing: instruction on pc=39
+  controlunit.go:203: Machine state: IR(29); MPC(0); PC(44); NZ(00); Ticks(2154)
+  Registers[0 34 0 24 45 0 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 5]
+  controlunit.go:82: Executing: instruction on pc=45
+  controlunit.go:203: Machine state: IR(26); MPC(0); PC(34); NZ(00); Ticks(2160)
+  Registers[0 34 0 24 45 0 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 0]
+  controlunit.go:82: Executing: instruction on pc=35
+  controlunit.go:203: Machine state: IR(23); MPC(0); PC(45); NZ(00); Ticks(2166)
+  Registers[0 34 0 24 45 0 33 0 0 0 1 0 0 1 5 0 23 21 0 10 0 0 0 24 1 0 0 0 0 0 0 10]
+  controlunit.go:82: Executing: instruction on pc=46
